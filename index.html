@@ -1,24 +1,3 @@
-Ah, you’re hosting your code on **GitHub Pages** (or viewing it directly inside a GitHub repository)!
-
-When your HTML code is live on GitHub, it can no longer look at your local laptop folders. It can only see files that have been explicitly uploaded to your GitHub repository.
-
-Here is how you can easily fix this so your image displays perfectly on your live site:
-
-### The Fix: Upload the Image to GitHub
-
-1. Go to your repository on **GitHub.com**.
-2. Click on the **"Add file"** button near the top right of your repository's file list, then select **"Upload files"**.
-3. Drag and drop your **`Iphone 13 plain.jpg`** file directly from your laptop into the box.
-4. Scroll to the bottom and click **"Commit changes"** (this saves the file to your repository).
-5. **Crucial Step:** Make sure the filename in GitHub is spelled *exactly* like it is in the code. If GitHub renames it to lowercase (like `iphone-13-plain.jpg` or `iphone 13 plain.jpg`), it will break because GitHub is strictly case-sensitive.
-
----
-
-### The Complete Code (Restored with all iPhone models)
-
-Here is your complete, beautiful web shop code containing all your inventory items from iPhone 13 to iPhone 17. Once you upload your `Iphone 13 plain.jpg` file to the same repository on GitHub, all the iPhone 13 variants will display that image flawlessly.
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,13 +12,13 @@ Here is your complete, beautiful web shop code containing all your inventory ite
 <style>
 /* --- COLOR PALETTE & GLOBAL VARIABLES --- */
 :root {
---bg-palazzo-pink: #FFF0F2; /* Sun-bleached Mediterranean pink palace walls */
---main-baby-pink: #FFC0CB; /* Classic sweet coquette baby pink */
---terracotta-gold: #E89E9B; /* Warm Mediterranean tile gold-blush */
---deep-amalfi-rose: #C36A7A; /* Deep rich rose accent for typography */
---text-olive-charcoal: #4A3E40; /* Soft dark earthy charcoal with a hint of warm tone */
+--bg-palazzo-pink: #FFF0F2;
+--main-baby-pink: #FFC0CB;
+--terracotta-gold: #E89E9B;
+--deep-amalfi-rose: #C36A7A;
+--text-olive-charcoal: #4A3E40;
 --pure-white: #FFFFFF;
---sale-red: #D9383A; /* Beautiful rich red for the sale badge */
+--sale-red: #D9383A;
 }
 
 * {
@@ -53,7 +32,6 @@ body {
 background-color: var(--bg-palazzo-pink);
 color: var(--text-olive-charcoal);
 overflow-x: hidden;
-/* Mediterranean Majolica Tile Motif */
 background-image:
 radial-gradient(circle at 50% 50%, rgba(255, 192, 203, 0.15) 20%, transparent 20%, transparent 80%, rgba(255, 192, 203, 0.15) 80%),
 radial-gradient(circle at 0% 0%, rgba(232, 158, 155, 0.1) 40%, transparent 40%),
@@ -72,7 +50,6 @@ border-bottom: 3px double var(--main-baby-pink);
 position: relative;
 }
 
-/* Architectural Arch motif behind the header */
 header::before {
 content: '';
 position: absolute;
@@ -156,7 +133,7 @@ margin-top: 10px;
 letter-spacing: 8px;
 }
 
-/* --- PRODUCTS MODULE (Mediterranean Arched Cards) --- */
+/* --- PRODUCTS CARD DESIGN --- */
 .products-grid {
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -166,14 +143,15 @@ margin-bottom: 60px;
 
 .product-card {
 background-color: var(--pure-white);
-border-radius: 120px 120px 20px 20px; /* Palazzo Villa Arch style top */
+border-radius: 120px 120px 20px 20px;
 overflow: hidden;
 box-shadow: 0 10px 30px rgba(232, 158, 155, 0.15);
 border: 1px solid rgba(255, 192, 203, 0.4);
-transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+transition: transform 0.4s ease, box-shadow 0.4s ease;
 display: flex;
 flex-direction: column;
 position: relative;
+cursor: pointer;
 }
 
 .product-card:hover {
@@ -181,7 +159,6 @@ transform: translateY(-8px);
 box-shadow: 0 16px 35px rgba(195, 106, 122, 0.25);
 }
 
-/* --- FLOATING SALE BADGE --- */
 .sale-badge {
 position: absolute;
 top: 25px;
@@ -195,7 +172,6 @@ padding: 4px 14px;
 border-radius: 20px;
 letter-spacing: 1px;
 z-index: 10;
-box-shadow: 0 4px 10px rgba(217, 56, 58, 0.3);
 text-transform: uppercase;
 }
 
@@ -215,20 +191,6 @@ border-bottom: 1px dashed var(--main-baby-pink);
 width: 100%;
 height: 100%;
 object-fit: cover;
-}
-
-/* Ribbon Tie overlay on the arches */
-.product-preview::before {
-content: '୨୧';
-position: absolute;
-top: 25px;
-font-size: 1.5rem;
-color: var(--main-baby-pink);
-background: var(--pure-white);
-padding: 2px 10px;
-border-radius: 20px;
-box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-z-index: 2;
 }
 
 .product-details {
@@ -268,20 +230,103 @@ margin-bottom: 6px;
 
 .product-cost {
 color: var(--deep-amalfi-rose);
-font-family: 'Poppins', sans-serif;
 font-weight: 600;
 font-size: 1.3rem;
 }
 
 .product-original-cost {
 color: #A09596;
-font-family: 'Poppins', sans-serif;
 font-size: 1rem;
 text-decoration: line-through;
-font-weight: 400;
 }
 
-/* --- MEDITERRANEAN RIBBON BUTTON --- */
+.view-samples-hint {
+font-size: 0.7rem;
+color: var(--deep-amalfi-rose);
+margin-top: 8px;
+letter-spacing: 1px;
+text-transform: uppercase;
+font-weight: 600;
+}
+
+/* --- LIGHTBOX SAMPLE POPUP --- */
+.modal-overlay {
+display: none;
+position: fixed;
+top: 0; left: 0; width: 100%; height: 100%;
+background-color: rgba(74, 62, 64, 0.85);
+z-index: 1000;
+justify-content: center;
+align-items: center;
+padding: 20px;
+backdrop-filter: blur(5px);
+}
+
+.modal-card {
+background-color: var(--pure-white);
+border-radius: 30px;
+max-width: 700px;
+width: 100%;
+padding: 30px;
+box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+position: relative;
+text-align: center;
+border: 2px solid var(--main-baby-pink);
+animation: scaleUp 0.3s ease-out;
+}
+
+@keyframes scaleUp {
+from { transform: scale(0.9); opacity: 0; }
+to { transform: scale(1); opacity: 1; }
+}
+
+.close-modal-btn {
+position: absolute;
+top: 15px; right: 20px;
+font-size: 2rem;
+cursor: pointer;
+color: var(--deep-amalfi-rose);
+font-weight: 300;
+line-height: 1;
+}
+
+.modal-title {
+font-family: 'Cinzel', serif;
+font-size: 1.5rem;
+color: var(--text-olive-charcoal);
+margin-bottom: 5px;
+}
+
+.modal-subtitle {
+font-size: 0.8rem;
+color: var(--terracotta-gold);
+margin-bottom: 20px;
+}
+
+.samples-gallery-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+gap: 15px;
+max-height: 400px;
+overflow-y: auto;
+padding: 5px;
+}
+
+.gallery-sample-item {
+width: 100%;
+aspect-ratio: 1 / 1;
+object-fit: cover;
+border-radius: 15px;
+border: 1px solid rgba(255, 192, 203, 0.5);
+box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+transition: transform 0.2s;
+}
+
+.gallery-sample-item:hover {
+transform: scale(1.05);
+}
+
+/* --- GLOBAL ORDER BUTTON --- */
 .order-action-container {
 text-align: center;
 margin: 50px auto 20px auto;
@@ -315,7 +360,6 @@ transform: scale(1.03) translateY(-2px);
 box-shadow: 0 14px 30px rgba(195, 106, 122, 0.45);
 }
 
-/* --- FOOTER REGION --- */
 footer {
 text-align: center;
 padding: 60px 20px;
@@ -325,8 +369,6 @@ background: linear-gradient(to bottom, var(--bg-palazzo-pink), #FFFFFF);
 color: var(--text-olive-charcoal);
 font-size: 0.85rem;
 }
-
-footer p { margin-bottom: 8px; }
 </style>
 </head>
 <body>
@@ -341,12 +383,9 @@ footer p { margin-bottom: 8px; }
 </header>
 
 <div class="container">
-
 <section id="view-shop">
 <h2 class="section-title">The Resort Collection</h2>
-
-<div class="products-grid" id="catalog-injection-point">
-</div>
+<div class="products-grid" id="catalog-injection-point"></div>
 
 <div class="order-action-container">
 <button class="global-order-btn" onclick="redirectToOrderForm()">
@@ -354,7 +393,15 @@ footer p { margin-bottom: 8px; }
 </button>
 </div>
 </section>
+</div>
 
+<div id="galleryModal" class="modal-overlay" onclick="closeSampleGallery(event)">
+<div class="modal-card">
+<span class="close-modal-btn" onclick="forceCloseGallery()">&times;</span>
+<h3 class="modal-title" id="modalTitle">Product Samples</h3>
+<p class="modal-subtitle">Click anywhere outside to exit layout</p>
+<div class="samples-gallery-grid" id="modalGalleryInjected"></div>
+</div>
 </div>
 
 <footer>
@@ -363,45 +410,41 @@ footer p { margin-bottom: 8px; }
 </footer>
 
 <script>
-// CONFIGURATION: Insert your live Google Form / Order link here
 const ORDER_FORM_URL = "https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/viewform";
 
-// MASTER INVENTORY DATA ARRAY
+// CATALOG MASTER INVENTORY ARRAY
 const studioProducts = [
-{ id: 30, name: "iPhone 13 Case Bundle", price: 259, originalPrice: 349, image: "Iphone 13 plain.jpg", bundle: "Charms, Ribbons & Ponytails by Pair" },
-{ id: 31, name: "iPhone 13 Pro Case Bundle", price: 259, originalPrice: 349, image: "Iphone 13 plain.jpg", bundle: "Charms, Ribbons & Ponytails by Pair" },
-{ id: 32, name: "iPhone 13 Pro Max Case Bundle", price: 259, originalPrice: 349, image: "Iphone 13 plain.jpg", bundle: "Charms, Ribbons & Ponytails by Pair" },
-{ id: 33, name: "iPhone 14 Case Bundle", price: 259, originalPrice: 349, image: "your-image-here.jpg", bundle: "Charms, Ribbons & Ponytails by Pair" },
-{ id: 34, name: "iPhone 14 Plus Case Bundle", price: 259, originalPrice: 349, image: "your-image-here.jpg", bundle: "Charms, Ribbons & Ponytails by Pair" },
-{ id: 35, name: "iPhone 14 Pro Case Bundle", price: 259, originalPrice: 349, image: "your-image-here.jpg", bundle: "Charms, Ribbons & Ponytails by Pair" },
-{ id: 36, name: "iPhone 14 Pro Max Case Bundle", price: 259, originalPrice: 349, image: "your-image-here.jpg", bundle: "Charms, Ribbons & Ponytails by Pair" },
-{ id: 37, name: "iPhone 15 Case Bundle", price: 259, originalPrice: 349, image: "your-image-here.jpg", bundle: "Charms, Ribbons & Ponytails by Pair" },
-{ id: 38, name: "iPhone 15 Plus Case Bundle", price: 259, originalPrice: 349, image: "your-image-here.jpg", bundle: "Charms, Ribbons & Ponytails by Pair" },
-{ id: 39, name: "iPhone 15 Pro Case Bundle", price: 259, originalPrice: 349, image: "your-image-here.jpg", bundle: "Charms, Ribbons & Ponytails by Pair" },
-{ id: 40, name: "iPhone 15 Pro Max Case Bundle", price: 259, originalPrice: 349, image: "your-image-here.jpg", bundle: "Charms, Ribbons & Ponytails by Pair" },
-{ id: 41, name: "iPhone 16 Case Bundle", price: 259, originalPrice: 349, image: "your-image-here.jpg", bundle: "Charms, Ribbons & Ponytails by Pair" },
-{ id: 42, name: "iPhone 16 Plus Case Bundle", price: 259, originalPrice: 349, image: "your-image-here.jpg", bundle: "Charms, Ribbons & Ponytails by Pair" },
-{ id: 43, name: "iPhone 16 Pro Case Bundle", price: 259, originalPrice: 349, image: "your-image-here.jpg", bundle: "Charms, Ribbons & Ponytails by Pair" },
-{ id: 44, name: "iPhone 16 Pro Max Case Bundle", price: 259, originalPrice: 349, image: "your-image-here.jpg", bundle: "Charms, Ribbons & Ponytails by Pair" },
-{ id: 45, name: "iPhone 17 Case Bundle", price: 259, originalPrice: 349, image: "your-image-here.jpg", bundle: "Charms, Ribbons & Ponytails by Pair" },
-{ id: 46, name: "iPhone 17 Pro Case Bundle", price: 259, originalPrice: 349, image: "your-image-here.jpg", bundle: "Charms, Ribbons & Ponytails by Pair" },
-{ id: 47, name: "iPhone 17 Pro Max Case Bundle", price: 259, originalPrice: 349, image: "your-image-here.jpg", bundle: "Charms, Ribbons & Ponytails by Pair" }
+{ id: 30, name: "iPhone 13 Case Bundle", price: 259, originalPrice: 349, image: "Iphone 13 plain.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: ["Iphone 13 plain.jpg", "iphone13image1.jpg", "iphone13image2.jpg", "iphone13image3.jpg"] },
+{ id: 31, name: "iPhone 13 Pro Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+{ id: 32, name: "iPhone 13 Pro Max Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+{ id: 33, name: "iPhone 14 Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+{ id: 34, name: "iPhone 14 Plus Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+{ id: 35, name: "iPhone 14 Pro Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+{ id: 36, name: "iPhone 14 Pro Max Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+{ id: 37, name: "iPhone 15 Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+{ id: 38, name: "iPhone 15 Plus Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+{ id: 39, name: "iPhone 15 Pro Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+{ id: 40, name: "iPhone 15 Pro Max Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+{ id: 41, name: "iPhone 16 Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+{ id: 42, name: "iPhone 16 Plus Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+{ id: 43, name: "iPhone 16 Pro Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+{ id: 44, name: "iPhone 16 Pro Max Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+{ id: 45, name: "iPhone 17 Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+{ id: 46, name: "iPhone 17 Pro Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+{ id: 47, name: "iPhone 17 Pro Max Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] }
 ];
 
-// STARTUP HOOK
 document.addEventListener("DOMContentLoaded", () => {
 renderCatalogGrid();
 });
 
-// CATALOG VIEW GENERATOR
 function renderCatalogGrid() {
 const container = document.getElementById('catalog-injection-point');
-
-container.innerHTML = studioProducts.map(product => `
-<div class="product-card">
+container.innerHTML = studioProducts.map((product, index) => `
+<div class="product-card" onclick="triggerSampleGallery(${index})">
 <div class="sale-badge">Sale!</div>
 <div class="product-preview">
-<img src="${product.image}" alt="${product.name}" class="product-img" onerror="this.style.opacity='0';">
+<img src="${product.image}" alt="${product.name}" class="product-img" onerror="this.src='placeholder.jpg';">
 </div>
 <div class="product-details">
 <div>
@@ -412,17 +455,40 @@ container.innerHTML = studioProducts.map(product => `
 <p class="product-cost">₱${product.price.toFixed(2)}</p>
 <p class="product-original-cost">₱${product.originalPrice.toFixed(2)}</p>
 </div>
+${product.samples.length > 0 ? `<div class="view-samples-hint">✨ View Samples</div>` : ''}
 </div>
 </div>
 `).join('');
 }
 
-// REDIRECT ACTION ENGINE
+// INTERACTION: GALLERY ENGINE
+function triggerSampleGallery(index) {
+const targetProduct = studioProducts[index];
+if (!targetProduct.samples || targetProduct.samples.length === 0) return;
+
+document.getElementById('modalTitle').innerText = targetProduct.name + " Samples";
+const galleryInjectionNode = document.getElementById('modalGalleryInjected');
+
+galleryInjectionNode.innerHTML = targetProduct.samples.map(imageUrl => `
+<img src="${imageUrl}" alt="Sample View" class="gallery-sample-item" onerror="this.src='placeholder.jpg';">
+`).join('');
+
+document.getElementById('galleryModal').style.display = 'flex';
+}
+
+function closeSampleGallery(event) {
+if (event.target.id === "galleryModal") {
+document.getElementById('galleryModal').style.display = 'none';
+}
+}
+
+function forceCloseGallery() {
+document.getElementById('galleryModal').style.display = 'none';
+}
+
 function redirectToOrderForm() {
 window.open(ORDER_FORM_URL, '_blank');
 }
 </script>
 </body>
 </html>
-
-```
