@@ -47,6 +47,11 @@ from { opacity: 0; transform: translateY(-40px); filter: blur(6px); }
 to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 
+@keyframes logoFloat {
+0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 10px 15px rgba(195, 106, 122, 0.15)); }
+50% { transform: translateY(-8px) scale(1.02); filter: drop-shadow(0 20px 25px rgba(195, 106, 122, 0.25)); }
+}
+
 @keyframes cardCascadeUp {
 from { opacity: 0; transform: translateY(50px); }
 to { opacity: 1; transform: translateY(0); }
@@ -80,7 +85,6 @@ to { opacity: 1; transform: translateY(0); }
 50% { transform: translateY(-10px) scale(1.03); box-shadow: 0 20px 35px rgba(195, 106, 122, 0.4); }
 }
 
-/* BRAND GOLD SHIMMER FOR DE GARELA */
 @keyframes textMetallicFlow {
 0% { background-position: 0% 50%; }
 50% { background-position: 100% 50%; }
@@ -90,7 +94,7 @@ to { opacity: 1; transform: translateY(0); }
 /* --- HEADER WITH NEW CHARMING INTERACTIVE EFFECTS --- */
 header {
 background: linear-gradient(to bottom, #FFFFFF, var(--bg-palazzo-pink));
-padding: 75px 20px;
+padding: 50px 20px 60px 20px;
 text-align: center;
 border-bottom: 3px double var(--main-baby-pink);
 position: relative;
@@ -99,7 +103,7 @@ overflow: hidden;
 }
 
 header::before, header::after {
-content: '跑 ⚜ 跑';
+content: '🎀 ⚜ 🎀';
 position: absolute;
 top: 50%;
 transform: translateY(-50%);
@@ -114,7 +118,6 @@ pointer-events: none;
 header::before { left: 6%; }
 header::after { right: 6%; }
 
-/* Animate the side flourishes outward when user hovers over the header container */
 header:hover::before { left: 3%; transform: translateY(-50%) scale(1.15) rotate(-5deg); color: var(--deep-amalfi-rose); }
 header:hover::after { right: 3%; transform: translateY(-50%) scale(1.15) rotate(5deg); color: var(--deep-amalfi-rose); }
 
@@ -126,9 +129,25 @@ header::before, header::after { display: none !important; }
 max-width: 600px;
 margin: 0 auto;
 cursor: default;
+display: flex;
+flex-direction: column;
+align-items: center;
 }
 
-/* Interactive Title Letters splitting effect */
+/* Beautiful Animated Logo Image styling */
+.brand-logo-img {
+width: 180px;
+height: 180px;
+object-fit: contain;
+margin-bottom: 15px;
+border-radius: 50%;
+animation: logoFloat 5s infinite ease-in-out;
+transition: transform 0.4s ease;
+}
+.logo-container:hover .brand-logo-img {
+transform: scale(1.05) rotate(2deg);
+}
+
 .logo-main {
 font-family: 'Cinzel', serif;
 font-size: 3.8rem;
@@ -141,6 +160,7 @@ display: flex;
 justify-content: center;
 gap: 2px;
 user-select: none;
+white-space: nowrap;
 }
 
 .logo-main span {
@@ -154,12 +174,12 @@ color: var(--deep-amalfi-rose);
 text-shadow: 0 10px 15px rgba(195, 106, 122, 0.25);
 }
 
-/* Luxurious Metallic Flow Effect on Cursive Script */
 .logo-sub {
 font-family: 'Monsieur La Doulaise', cursive;
 font-size: 5.8rem;
-line-height: 0.55;
-margin-bottom: 15px;
+line-height: 0.65;
+margin-top: 5px;
+margin-bottom: 20px;
 display: block;
 background: linear-gradient(90deg, var(--deep-amalfi-rose), var(--terracotta-gold), #FF9EAF, var(--deep-amalfi-rose));
 background-size: 300% auto;
@@ -168,6 +188,7 @@ background-size: 300% auto;
 animation: textMetallicFlow 6s linear infinite;
 transition: transform 0.5s ease;
 filter: drop-shadow(2px 2px 2px rgba(255, 192, 203, 0.3));
+white-space: nowrap;
 }
 
 .logo-container:hover .logo-sub {
@@ -272,7 +293,7 @@ letter-spacing: 3px;
 }
 
 .section-title::after {
-content: '🍊 跑 🧡 跑 🍊';
+content: '🍊 🎀 🧡 🎀 🍊';
 display: block;
 font-size: 1rem;
 color: var(--terracotta-gold);
@@ -658,12 +679,14 @@ font-size: 0.85rem;
 
 <header>
 <div class="logo-container">
-<!-- Splitting letters dynamically using simple wrapper elements for high response hover actions -->
+<!-- Embedded Official Logo Image File -->
+<img src="StudiodeGarela.jpg.png" alt="Studio de Garela Official Logo" class="brand-logo-img" onerror="this.style.display='none';">
+
 <h1 class="logo-main">
     <span>S</span><span>t</span><span>u</span><span>d</span><span>i</span><span>o</span>
 </h1>
 <span class="logo-sub">de Garela</span>
-<div class="bow-divider">... 跑 ⚜ 跑 ...</div>
+<div class="bow-divider">... 🎀 ⚜ 🎀 ...</div>
 <p class="tagline">timeless craft — beyond trends.</p>
 </div>
 </header>
@@ -683,7 +706,7 @@ font-size: 0.85rem;
 
 <div class="order-action-container">
 <button class="global-order-btn" onclick="redirectToOrderForm()">
-<span>Order Form</span> 跑
+<span>Order Form</span> 🎀
 </button>
 </div>
 </section>
@@ -703,7 +726,7 @@ font-size: 0.85rem;
         </a>
     </div>
     <div class="collab-bot-trigger" onclick="toggleBotDrawer()">
-        <span>跑</span>
+        <span>🎀</span>
     </div>
 </div>
 
