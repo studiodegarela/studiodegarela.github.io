@@ -805,51 +805,46 @@ font-size: clamp(0.7rem, 1.8vw, 0.8rem);
 <script>
 const ORDER_FORM_URL = "https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/viewform";
 
+// ONLY ONE DEFINITION OF THIS ARRAY
 const studioProducts = [
-    { id: 30, name: "iPhone 13 Case Bundle", price: 259, stock: 3, image: "Iphone 13.jpg" },
-    // ... add "stock: 3" to all products
+    { id: 30, name: "iPhone 13 Case Bundle", price: 259, originalPrice: 349, stock: 3, image: "Iphone 13.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: ["Iphone 13.jpg"] },
+    { id: 31, name: "iPhone 13 Pro Case Bundle", price: 259, originalPrice: 349, stock: 3, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 32, name: "iPhone 13 Pro Max Case Bundle", price: 259, originalPrice: 349, stock: 3, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 33, name: "iPhone 14 Case Bundle", price: 259, originalPrice: 349, stock: 3, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 34, name: "iPhone 14 Plus Case Bundle", price: 259, originalPrice: 349, stock: 3, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 35, name: "iPhone 14 Pro Case Bundle", price: 259, originalPrice: 349, stock: 3, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 36, name: "iPhone 14 Pro Max Case Bundle", price: 259, originalPrice: 349, stock: 3, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 37, name: "iPhone 15 Case Bundle", price: 259, originalPrice: 349, stock: 3, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 38, name: "iPhone 15 Plus Case Bundle", price: 259, originalPrice: 349, stock: 3, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 39, name: "iPhone 15 Pro Case Bundle", price: 259, originalPrice: 349, stock: 3, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 40, name: "iPhone 15 Pro Max Case Bundle", price: 259, originalPrice: 349, stock: 3, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 41, name: "iPhone 16 Case Bundle", price: 259, originalPrice: 349, stock: 3, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 42, name: "iPhone 16 Plus Case Bundle", price: 259, originalPrice: 349, stock: 3, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 43, name: "iPhone 16 Pro Case Bundle", price: 259, originalPrice: 349, stock: 3, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 44, name: "iPhone 16 Pro Max Case Bundle", price: 259, originalPrice: 349, stock: 3, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 45, name: "iPhone 17 Case Bundle", price: 259, originalPrice: 349, stock: 3, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 46, name: "iPhone 17 Pro Case Bundle", price: 259, originalPrice: 349, stock: 3, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 47, name: "iPhone 17 Pro Max Case Bundle", price: 259, originalPrice: 349, stock: 3, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] }
 ];
 
-const studioProducts = [
-{ id: 30, name: "iPhone 13 Case Bundle", price: 259, originalPrice: 349, image: "Iphone 13.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: ["Iphone 13.jpg"] },
-{ id: 31, name: "iPhone 13 Pro Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-{ id: 32, name: "iPhone 13 Pro Max Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-{ id: 33, name: "iPhone 14 Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-{ id: 34, name: "iPhone 14 Plus Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-{ id: 35, name: "iPhone 14 Pro Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-{ id: 36, name: "iPhone 14 Pro Max Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-{ id: 37, name: "iPhone 15 Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-{ id: 38, name: "iPhone 15 Plus Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-{ id: 39, name: "iPhone 15 Pro Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-{ id: 40, name: "iPhone 15 Pro Max Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-{ id: 41, name: "iPhone 16 Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-{ id: 42, name: "iPhone 16 Plus Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-{ id: 43, name: "iPhone 16 Pro Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-{ id: 44, name: "iPhone 16 Pro Max Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-{ id: 45, name: "iPhone 17 Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-{ id: 46, name: "iPhone 17 Pro Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-{ id: 47, name: "iPhone 17 Pro Max Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] }
-];
+let cartItems = [];
 
+// MAKE SURE THIS IS CALLED
 document.addEventListener("DOMContentLoaded", () => {
-renderCatalogGrid();
+    renderCatalog();
 });
 
-let cartCount = 0;
-let cartItems = []; // We will use this list to pass data to your form later
-
+// RENAMED TO MATCH THE CALL IN DOMContentLoaded
 function renderCatalog() {
     const container = document.getElementById('catalog-injection-point');
     container.innerHTML = studioProducts.map((p) => `
         <div class="product-card">
             <h3>${p.name}</h3>
             <p style="font-size: 0.8rem; color: #888;">Stock: ${p.stock}</p>
-            
             <div class="price-container">
                 <p class="product-cost" style="margin: 5px 0;">₱${p.price.toFixed(2)}</p>
                 <p style="text-decoration: line-through; color: #999; font-size: 0.9rem;">₱347.00</p>
             </div>
-
             <button class="add-to-cart-btn" 
                     onclick="addToCart(studioProducts.find(x => x.id === ${p.id}))"
                     ${p.stock === 0 ? 'disabled style="background:gray"' : ''}>
@@ -858,7 +853,6 @@ function renderCatalog() {
         </div>
     `).join('');
 }
-
 function addToCart(product) {
     if (product.stock > 0) {
         product.stock -= 1;
