@@ -1416,7 +1416,10 @@ font-size: clamp(0.7rem, 1.8vw, 0.8rem);
 
 const ORDER_FORM_URL = "https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/viewform";
 
-
+const studioProducts = [
+    { id: 30, name: "iPhone 13 Case Bundle", price: 259, originalPrice: 349, image: "Iphone 13.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: ["Iphone 13.jpg"] },
+    // ... (keep your existing product array)
+];
 
 const studioProducts = [
 
@@ -1470,6 +1473,10 @@ renderCatalogGrid();
 
 let cart = [];
 
+document.addEventListener("DOMContentLoaded", () => {
+    renderCatalogGrid();
+});
+
 function renderCatalogGrid() {
     const container = document.getElementById('catalog-injection-point');
     container.innerHTML = studioProducts.map((product, index) => `
@@ -1483,21 +1490,12 @@ function renderCatalogGrid() {
                     <h3 class="product-name">${product.name}</h3>
                     <p class="product-bundle-desc">(+ ${product.bundle})</p>
                 </div>
-                
                 <div class="price-container">
-                    <div class="highlight-price-box" style="background: #FFF0F2; border: 2px solid var(--main-baby-pink); padding: 10px 20px; border-radius: 15px; margin: 10px 0;">
-                        <p class="product-cost" style="font-size: 1.6rem; color: var(--deep-amalfi-rose); font-weight: 800; text-shadow: 0 0 5px rgba(195, 106, 122, 0.2);">
-                            ₱${product.price.toFixed(2)}
-                        </p>
+                    <div class="highlight-price-box">
+                        <p class="product-cost">₱${product.price.toFixed(2)}</p>
                     </div>
-                    <p class="product-original-cost" style="color: #999; margin-bottom: 10px;">Was ₱${product.originalPrice.toFixed(2)}</p>
-                    
-                    <button class="add-to-cart-btn" onclick="addToCart('${product.name}')" 
-                            style="background: linear-gradient(135deg, var(--main-baby-pink), var(--deep-amalfi-rose)); 
-                                   color: white; border: none; padding: 12px 25px; border-radius: 30px; 
-                                   font-family: 'Cinzel', serif; cursor: pointer; font-weight: 700; transition: 0.3s;">
-                        ADD TO CART 🎀
-                    </button>
+                    <p class="product-original-cost">₱${product.originalPrice.toFixed(2)}</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('${product.name}', ${product.price})">ADD TO CART 🎀</button>
                 </div>
             </div>
         </div>
@@ -1505,101 +1503,77 @@ function renderCatalogGrid() {
 }
 
 function addToCart(name, price) {
-    const qty = 3;
-    const existingItem = cart.find(item => item.name === name);
-    
-    if (existingItem) {
-        existingItem.qty += qty;
-    } else {
-        cart.push({ name, price, qty });
-    }
-    alert(`Added 3 of ${name} to your cart! Total for this item: ${cart.find(i => i.name === name).qty}`);
-    console.log("Current Cart:", cart);
+    cart.push({ name, price });
+    updateCartUI();
+    alert(`Added ${name} to your cart!`);
 }
 
+function updateCartUI() {
+    document.getElementById('cartCount').innerText = cart.length;
+}
 
+function checkout() {
+    let cartDetails = cart.map(item => item.name).join(", ");
+    let message = cart.length > 0 ? `Your Cart:\n${cartDetails}\n\nClick OK to proceed to Order Form.` : "Your cart is empty.";
+    
+    if (cart.length > 0) {
+        if(confirm(message)) {
+            window.open(ORDER_FORM_URL, '_blank');
+        }
+    } else {
+        alert(message);
+    }
+}
+
+// Logic for your existing gallery and drawer remains the same...
+// Add this helper if you want a detailed view later:
+function removeFromCart(index) {
+    cart.splice(index, 1);
+    updateCartUI();
+}
 
 function triggerSampleGallery(index) {
-
-const targetProduct = studioProducts[index];
-
-document.getElementById('modalTitle').innerText = targetProduct.name;
-
-const mainZoomNode = document.getElementById('mainZoomedImage');
-
-const imageDisplayList = (targetProduct.samples && targetProduct.samples.length > 0) ? targetProduct.samples : [targetProduct.image];
-
-mainZoomNode.src = imageDisplayList[0];
-
-
-
-const galleryImgContainer = document.getElementById('modalGalleryInjected');
-
-galleryImgContainer.innerHTML = imageDisplayList.map((imageUrl, imgIdx) => `
-
-    <img src="${imageUrl}" alt="Sample View ${imgIdx}" class="gallery-sample-item ${imgIdx === 0 ? 'active-thumbnail' : ''}" onclick="switchFocusedZoomImage(this, '${imageUrl}'); event.stopPropagation();" onerror="this.src='placeholder.jpg';">
-
-`).join('');
-
-document.getElementById('galleryModal').style.display = 'flex';
-
+    const targetProduct = studioProducts[index];
+    document.getElementById('modalTitle').innerText = targetProduct.name;
+    const mainZoomNode = document.getElementById('mainZoomedImage');
+    const imageDisplayList = (targetProduct.samples && targetProduct.samples.length > 0) ? targetProduct.samples : [targetProduct.image];
+    mainZoomNode.src = imageDisplayList[0];
+    const galleryImgContainer = document.getElementById('modalGalleryInjected');
+    galleryImgContainer.innerHTML = imageDisplayList.map((imageUrl, imgIdx) => `
+        <img src="${imageUrl}" alt="Sample View ${imgIdx}" class="gallery-sample-item ${imgIdx === 0 ? 'active-thumbnail' : ''}" onclick="switchFocusedZoomImage(this, '${imageUrl}'); event.stopPropagation();" onerror="this.src='placeholder.jpg';">
+    `).join('');
+    document.getElementById('galleryModal').style.display = 'flex';
 }
-
-
 
 function switchFocusedZoomImage(thumbnailElement, targetSrc) {
-
-const mainZoomNode = document.getElementById('mainZoomedImage');
-
-mainZoomNode.style.opacity = '0';
-
-setTimeout(() => {
-
-    mainZoomNode.src = targetSrc;
-
-    mainZoomNode.style.opacity = '1';
-
-}, 120);
-
-document.querySelectorAll('.gallery-sample-item').forEach(img => img.classList.remove('active-thumbnail'));
-
-thumbnailElement.classList.add('active-thumbnail');
-
+    const mainZoomNode = document.getElementById('mainZoomedImage');
+    mainZoomNode.style.opacity = '0';
+    setTimeout(() => { mainZoomNode.src = targetSrc; mainZoomNode.style.opacity = '1'; }, 120);
+    document.querySelectorAll('.gallery-sample-item').forEach(img => img.classList.remove('active-thumbnail'));
+    thumbnailElement.classList.add('active-thumbnail');
 }
-
-
 
 function toggleBotDrawer() {
-
     const drawer = document.getElementById('botDrawer');
-
     drawer.style.display = (drawer.style.display === 'block') ? 'none' : 'block';
-
 }
-
-
 
 function closeSampleGallery(event) {
-
-if (event.target.id === "galleryModal") document.getElementById('galleryModal').style.display = 'none';
-
+    if (event.target.id === "galleryModal") document.getElementById('galleryModal').style.display = 'none';
 }
-
-
 
 function forceCloseGallery() {
-
-document.getElementById('galleryModal').style.display = 'none';
-
+    document.getElementById('galleryModal').style.display = 'none';
 }
-
-
 
 function redirectToOrderForm() {
-
-window.open(ORDER_FORM_URL, '_blank');
-
+    window.open(ORDER_FORM_URL, '_blank');
 }
+</script>
+
+
+
+
 
 </script>
 
