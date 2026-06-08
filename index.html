@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Studio de Garela | Mediterranean Pink Elegance</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Monsieur+La+Doulaise&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Monsieur+La+Doulaise&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 :root {
@@ -12,34 +12,54 @@
     --main-baby-pink: #FFC0CB;
     --terracotta-gold: #E89E9B;
     --deep-amalfi-rose: #C36A7A;
-    --text-olive-charcoal: #4A3E40;
     --pure-white: #FFFFFF;
-    --sale-red: #E04D50;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
-body { background-color: var(--bg-palazzo-pink); color: var(--text-olive-charcoal); padding-bottom: 50px; }
+body { background: linear-gradient(135deg, #FFF0F2 0%, #FFE4E9 100%); min-height: 100vh; overflow-x: hidden; }
 
-/* Header & Layout */
-header { background: linear-gradient(to bottom, #FFFFFF, var(--bg-palazzo-pink)); padding: 50px 20px; text-align: center; border-bottom: 3px double var(--main-baby-pink); }
-.logo-main { font-family: 'Cinzel', serif; font-size: 2.5rem; }
-.logo-sub { font-family: 'Monsieur La Doulaise', cursive; font-size: 4rem; color: var(--deep-amalfi-rose); }
-.container { max-width: 1200px; margin: 0 auto; padding: 30px 20px; }
+/* Header Animation & Highlight */
+header { padding: 60px 20px; text-align: center; position: relative; }
+.logo-main { font-family: 'Cinzel', serif; font-size: 3rem; letter-spacing: 10px; color: var(--deep-amalfi-rose); text-transform: uppercase; }
+.logo-sub { 
+    font-family: 'Monsieur La Doulaise', cursive; 
+    font-size: 7rem; 
+    color: var(--deep-amalfi-rose); 
+    display: block; 
+    filter: drop-shadow(0 5px 15px rgba(195,106,122,0.3));
+    animation: float 4s ease-in-out infinite;
+}
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-/* Grid & Cards */
-.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; }
-.product-card { background: var(--pure-white); padding: 20px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; }
-.product-img { width: 100%; height: 200px; object-fit: cover; border-radius: 15px; }
+/* Interactive Cart Button */
+.cart-btn { 
+    position: fixed; top: 20px; right: 20px; z-index: 2000;
+    background: linear-gradient(45deg, var(--deep-amalfi-rose), var(--terracotta-gold));
+    color: white; padding: 15px 30px; border-radius: 50px; cursor: pointer; border: none;
+    font-weight: 600; box-shadow: 0 10px 20px rgba(195,106,122,0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.cart-btn:hover { transform: scale(1.1) rotate(2deg); box-shadow: 0 15px 30px rgba(195,106,122,0.6); }
 
-/* Cart Styles */
-.qty-wrapper { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 15px 0; }
-.qty-input { width: 50px; padding: 5px; border: 1px solid var(--main-baby-pink); border-radius: 5px; text-align: center; }
-.add-to-cart-btn { background: var(--deep-amalfi-rose); color: white; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer; }
+/* Product Cards with Shimmer Effect */
+.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 40px; padding: 40px; max-width: 1200px; margin: auto; }
+.product-card { 
+    background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px);
+    border-radius: 50px; padding: 25px; text-align: center; 
+    border: 2px solid var(--pure-white); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.product-card:hover { transform: translateY(-20px) scale(1.02); border-color: var(--terracotta-gold); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+.add-btn { background: var(--terracotta-gold); color: white; border: none; padding: 10px 30px; border-radius: 20px; cursor: pointer; transition: 0.3s; }
+.add-btn:hover { background: var(--deep-amalfi-rose); }
 
-.cart-widget { position: fixed; top: 20px; right: 20px; z-index: 9999; }
-.cart-drawer { display: none; position: absolute; right: 0; top: 60px; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); width: 300px; max-height: 80vh; overflow-y: auto; }
-.cart-item { border-bottom: 1px solid #eee; padding: 10px 0; font-size: 0.9rem; }
-.checkout-btn { background: var(--sale-red); color: white; width: 100%; padding: 10px; border: none; border-radius: 10px; cursor: pointer; margin-top: 15px; }
+/* Concierge Bot Animation */
+.bot-trigger { 
+    position: fixed; bottom: 30px; right: 30px; width: 70px; height: 70px;
+    background: var(--deep-amalfi-rose); color: white; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; cursor: pointer;
+    font-size: 2rem; animation: pulse-bot 2s infinite;
+}
+@keyframes pulse-bot { 0% { box-shadow: 0 0 0 0 rgba(195,106,122,0.7); } 70% { box-shadow: 0 0 0 20px rgba(195,106,122,0); } 100% { box-shadow: 0 0 0 0 rgba(195,106,122,0); } }
 </style>
 </head>
 <body>
@@ -47,69 +67,55 @@ header { background: linear-gradient(to bottom, #FFFFFF, var(--bg-palazzo-pink))
 <header>
     <h1 class="logo-main">Studio</h1>
     <span class="logo-sub">de Garela</span>
-    <div class="cart-widget">
-        <button onclick="toggleCart()" class="add-to-cart-btn">🛒 View Cart</button>
-        <div id="cartDrawer" class="cart-drawer">
-            <h3>Your Cart</h3>
-            <div id="cartItems"></div>
-            <button onclick="checkout()" class="checkout-btn">Checkout Now</button>
-        </div>
-    </div>
 </header>
 
-<div class="container">
-    <div class="products-grid" id="catalog-injection-point"></div>
+<button onclick="toggleCart()" class="cart-btn">🎀 View Cart</button>
+
+<div class="products-grid" id="catalog-injection-point"></div>
+
+<div class="bot-trigger" onclick="toggleBot()">🎀</div>
+<div id="botDrawer" style="display:none; position:fixed; bottom:110px; right:30px; background:white; padding:20px; border-radius:20px; width:260px;">
+    <h4>✨ Studio Concierge</h4>
+    <p>For collaborations:</p>
+    <p>✉ crafts@studiogarela.com</p>
+    <p>📞 +63 900 000 0000</p>
 </div>
 
 <script>
-// Replace this with your actual Google Form URL link[cite: 1]
 const ORDER_FORM_URL = "https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/viewform";
 let cart = [];
-
-const studioProducts = [
-    { id: 1, name: "iPhone 13 Case Bundle", price: 259, image: "placeholder.jpg" },
-    { id: 2, name: "iPhone 14 Case Bundle", price: 259, image: "placeholder.jpg" },
-    { id: 3, name: "iPhone 15 Case Bundle", price: 259, image: "placeholder.jpg" },
-    { id: 4, name: "iPhone 16 Case Bundle", price: 259, image: "placeholder.jpg" }
+const products = [
+    { id: 1, name: "iPhone 13 Case Bundle", price: 259 },
+    { id: 2, name: "iPhone 14 Case Bundle", price: 259 },
+    { id: 3, name: "iPhone 15 Case Bundle", price: 259 }
 ];
 
 function renderCatalog() {
-    const container = document.getElementById('catalog-injection-point');
-    container.innerHTML = studioProducts.map((product, index) => `
+    document.getElementById('catalog-injection-point').innerHTML = products.map((p, i) => `
         <div class="product-card">
-            <img src="${product.image}" class="product-img" alt="${product.name}">
-            <h3>${product.name}</h3>
-            <p>₱${product.price}</p>
-            <div class="qty-wrapper">
-                <input type="number" id="qty-${product.id}" value="3" min="1" class="qty-input">
-                <button class="add-to-cart-btn" onclick="addToCart(${index})">Add</button>
+            <div style="height:200px; background:var(--main-baby-pink); border-radius:40px; margin-bottom:15px; opacity:0.5;"></div>
+            <h3 style="font-family: 'Cinzel', serif;">${p.name}</h3>
+            <div class="qty-wrapper" style="display:flex; justify-content:center; gap:10px; margin:15px 0;">
+                <input type="number" id="qty-${p.id}" value="3" min="1" style="width:50px; border-radius:10px; border:1px solid var(--terracotta-gold); text-align:center;">
+                <button class="add-btn" onclick="addToCart(${i})">Add</button>
             </div>
         </div>
     `).join('');
 }
 
-function addToCart(index) {
-    const product = studioProducts[index];
-    const qty = parseInt(document.getElementById(`qty-${product.id}`).value);
-    cart.push({ ...product, quantity: qty });
-    alert(`Added ${qty} x ${product.name} to cart!`);
+function addToCart(i) {
+    const p = products[i];
+    const q = document.getElementById(`qty-${p.id}`).value;
+    cart.push({...p, quantity: q});
+    alert("Added to cart!");
 }
 
-function toggleCart() {
-    const drawer = document.getElementById('cartDrawer');
-    const itemsDiv = document.getElementById('cartItems');
-    drawer.style.display = (drawer.style.display === 'block') ? 'none' : 'block';
-    
-    itemsDiv.innerHTML = cart.length === 0 ? '<p>Cart is empty</p>' : cart.map(item => `
-        <div class="cart-item">${item.name} <br> <b>Qty: ${item.quantity}</b> - ₱${(item.price * item.quantity).toFixed(2)}</div>
-    `).join('');
+function toggleBot() {
+    const d = document.getElementById('botDrawer');
+    d.style.display = (d.style.display === 'block') ? 'none' : 'block';
 }
 
-function checkout() {
-    if(cart.length === 0) return alert("Your cart is empty!");
-    window.open(ORDER_FORM_URL, '_blank');
-}
-
+function toggleCart() { alert("View Cart: " + cart.map(i => i.name).join(', ')); }
 renderCatalog();
 </script>
 </body>
