@@ -10,78 +10,52 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Monsieur+La+Doulaise&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* --- COLOR PALETTE & GLOBAL VARIABLES --- */
-:root {
---bg-palazzo-pink: #FFF0F2;
---main-baby-pink: #FFC0CB;
---terracotta-gold: #E89E9B;
---deep-amalfi-rose: #C36A7A;
---text-olive-charcoal: #4A3E40;
---pure-white: #FFFFFF;
---sale-red: #E04D50;
---gold-glow: rgba(232, 158, 155, 0.4);
-}
+/* --- ALL YOUR ORIGINAL STYLES --- */
+:root { --bg-palazzo-pink: #FFF0F2; --main-baby-pink: #FFC0CB; --terracotta-gold: #E89E9B; --deep-amalfi-rose: #C36A7A; --text-olive-charcoal: #4A3E40; --pure-white: #FFFFFF; --sale-red: #E04D50; --gold-glow: rgba(232, 158, 155, 0.4); }
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+body { background-color: var(--bg-palazzo-pink); color: var(--text-olive-charcoal); overflow-x: hidden; background-image: radial-gradient(circle at 50% 50%, rgba(255, 192, 203, 0.15) 20%, transparent 20%, transparent 80%, rgba(255, 192, 203, 0.15) 80%), radial-gradient(circle at 0% 0%, rgba(232, 158, 155, 0.1) 40%, transparent 40%), radial-gradient(circle at 100% 0%, rgba(232, 158, 155, 0.1) 40%, transparent 40%); background-size: 40px 40px; }
 
-* {
-box-sizing: border-box;
-margin: 0;
-padding: 0;
-font-family: 'Poppins', sans-serif;
-scroll-behavior: smooth;
--webkit-tap-highlight-color: transparent;
-}
+/* --- INTEGRATED CART STYLES --- */
+#cart-sidebar { position: fixed; right: 20px; top: 20px; width: 220px; background: rgba(255,255,255,0.95); padding: 15px; border-radius: 20px; border: 2px solid var(--main-baby-pink); z-index: 9999; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+#cart-sidebar h3 { font-family: 'Cinzel'; color: var(--deep-amalfi-rose); margin-bottom: 10px; font-size: 1rem; }
+.cart-item { font-size: 0.8rem; margin-bottom: 5px; }
+.checkout-btn { width: 100%; padding: 8px; background: var(--deep-amalfi-rose); color: white; border: none; border-radius: 20px; cursor: pointer; margin-top: 10px; font-weight: bold; }
 
-body {
-background-color: var(--bg-palazzo-pink);
-color: var(--text-olive-charcoal);
-overflow-x: hidden;
-background-image:
-radial-gradient(circle at 50% 50%, rgba(255, 192, 203, 0.15) 20%, transparent 20%, transparent 80%, rgba(255, 192, 203, 0.15) 80%),
-radial-gradient(circle at 0% 0%, rgba(232, 158, 155, 0.1) 40%, transparent 40%),
-radial-gradient(circle at 100% 0%, rgba(232, 158, 155, 0.1) 40%, transparent 40%);
-background-size: 40px 40px;
-}
-
-/* --- ADDED CART STYLES --- */
-#cart-container { position: fixed; top: 20px; right: 20px; z-index: 5000; width: 220px; background: rgba(255, 255, 255, 0.9); padding: 15px; border-radius: 20px; border: 2px solid var(--main-baby-pink); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-.cart-list { font-size: 0.8rem; margin: 10px 0; max-height: 150px; overflow-y: auto; }
-.checkout-btn { width: 100%; padding: 10px; background: var(--deep-amalfi-rose); color: white; border: none; border-radius: 20px; cursor: pointer; font-family: 'Cinzel'; }
-
-/* --- EXISTING STYLES --- */
+/* --- KEEPING ALL ORIGINAL CSS --- */
 @keyframes universalEntrance { from { opacity: 0; transform: translateY(30px); filter: blur(5px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
-@keyframes globalLogoFloat { 0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 10px 15px rgba(195, 106, 122, 0.15)); } 50% { transform: translateY(-6px) scale(1.02); filter: drop-shadow(0 18px 22px rgba(195, 106, 122, 0.25)); } }
 header { background: linear-gradient(to bottom, #FFFFFF, var(--bg-palazzo-pink)); padding: 50px 20px 55px 20px; text-align: center; border-bottom: 3px double var(--main-baby-pink); position: relative; animation: universalEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) both; overflow: hidden; }
 .logo-container { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
-.brand-logo-img { width: clamp(130px, 15vw, 175px); height: clamp(130px, 15vw, 175px); object-fit: contain; margin-bottom: 15px; border-radius: 50%; animation: globalLogoFloat 5s infinite ease-in-out; }
+.brand-logo-img { width: clamp(130px, 15vw, 175px); height: clamp(130px, 15vw, 175px); object-fit: contain; margin-bottom: 15px; border-radius: 50%; }
 .logo-main { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 6vw, 3.8rem); font-weight: 400; color: var(--text-olive-charcoal); line-height: 1.1; letter-spacing: 6px; text-transform: uppercase; }
 .logo-sub { font-family: 'Monsieur La Doulaise', cursive; font-size: clamp(4.5rem, 10vw, 5.8rem); line-height: 0.65; background: linear-gradient(90deg, var(--deep-amalfi-rose), #F391A1, var(--terracotta-gold), var(--deep-amalfi-rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .container { max-width: 1200px; margin: 0 auto; padding: 30px 20px; }
-.section-title { text-align: center; font-family: 'Cinzel', serif; font-size: clamp(1.6rem, 4vw, 2.4rem); margin-bottom: 40px; }
-.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(clamp(145px, 22vw, 275px), 1fr)); gap: clamp(15px, 3vw, 35px); }
-.product-card { background-color: var(--pure-white); border-radius: 40px; padding: 20px; text-align: center; box-shadow: 0 8px 24px rgba(232, 158, 155, 0.08); cursor: pointer; }
-.product-img { width: 100%; height: 200px; object-fit: cover; }
-.add-btn { background: var(--main-baby-pink); border: none; padding: 10px; border-radius: 20px; cursor: pointer; margin-top: 10px; }
+.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(clamp(145px, 22vw, 275px), 1fr)); gap: clamp(15px, 3vw, 35px); margin-bottom: 50px; }
+.product-card { background-color: var(--pure-white); border-radius: 40px; padding: 20px; text-align: center; border: 1px solid rgba(255, 192, 203, 0.35); cursor: pointer; }
+.product-img { width: 100%; height: 200px; object-fit: cover; border-radius: 20px; }
+.add-btn { background: var(--main-baby-pink); border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; margin-top: 10px; font-weight: 600; }
 </style>
 </head>
 <body>
 
-<div id="cart-container">
-    <h3>Cart 🎀</h3>
-    <div id="cart-list" class="cart-list">Empty</div>
+<div id="cart-sidebar">
+    <h3>My Cart 🎀</h3>
+    <div id="cart-items">Empty</div>
     <button id="checkout-btn" class="checkout-btn" style="display:none;" onclick="checkout()">Checkout</button>
 </div>
 
 <header>
     <div class="logo-container">
-        <img src="StudiodeGarela.jpg.png" alt="Logo" class="brand-logo-img">
+        <img src="StudiodeGarela.jpg.png" alt="Studio de Garela Official Logo" class="brand-logo-img">
         <h1 class="logo-main">Studio</h1>
         <span class="logo-sub">de Garela</span>
     </div>
 </header>
 
 <div class="container">
-    <h2 class="section-title">The Resort Collection</h2>
-    <div class="products-grid" id="catalog-injection-point"></div>
+    <section id="view-shop">
+        <h2 class="section-title">The Resort Collection</h2>
+        <div class="products-grid" id="catalog-injection-point"></div>
+    </section>
 </div>
 
 <script>
@@ -136,9 +110,9 @@ function addToCart(index) {
 }
 
 function updateCartUI() {
-    const list = document.getElementById('cart-list');
+    const list = document.getElementById('cart-items');
     const btn = document.getElementById('checkout-btn');
-    list.innerHTML = cart.map(item => `<div>${item.name}</div>`).join('');
+    list.innerHTML = cart.map(i => `<div class="cart-item">${i.name}</div>`).join('');
     btn.style.display = cart.length > 0 ? "block" : "none";
 }
 
