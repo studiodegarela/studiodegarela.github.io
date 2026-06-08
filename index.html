@@ -395,11 +395,14 @@ display: inline-block;
 box-shadow: 0 2px 8px rgba(195, 106, 122, 0.05);
 }
 
-.product-cost {
-color: var(--sale-red);
-font-weight: 800;
-font-size: clamp(1.1rem, 2.5vw, 1.45rem);
-letter-spacing: 0.5px;
+.product-original-cost {
+    color: #8A7A7C;
+    font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+    font-weight: 400;
+    opacity: 0.85;
+    position: relative;
+    display: inline-block;
+    padding: 0 4px;
 }
 
 /* Stays balanced directly underneath */
@@ -634,6 +637,22 @@ border-top: 2px dashed var(--main-baby-pink);
 background: linear-gradient(to bottom, var(--bg-palazzo-pink), #FFFFFF);
 font-size: clamp(0.7rem, 1.8vw, 0.8rem);
 }
+
+.add-to-cart-btn {
+    background: var(--deep-amalfi-rose);
+    color: var(--pure-white);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+.add-to-cart-btn:hover {
+    background: var(--terracotta-gold);
+}
 </style>
 </head>
 <body>
@@ -726,28 +745,46 @@ document.addEventListener("DOMContentLoaded", () => {
 renderCatalogGrid();
 });
 
+let cart = [];
+
 function renderCatalogGrid() {
-const container = document.getElementById('catalog-injection-point');
-container.innerHTML = studioProducts.map((product, index) => `
-    <div class="product-card" style="animation-delay: ${index * 0.03}s" onclick="triggerSampleGallery(${index})">
-    <div class="sale-badge">Sale!</div>
-    <div class="product-preview">
-    <img src="${product.image}" alt="${product.name}" class="product-img" onerror="this.src='placeholder.jpg';">
-    </div>
-    <div class="product-details">
-    <div>
-    <h3 class="product-name">${product.name}</h3>
-    <p class="product-bundle-desc">(+ ${product.bundle})</p>
-    </div>
-    <div class="price-container">
-    <div class="highlight-price-box">
-        <p class="product-cost">₱${product.price.toFixed(2)}</p>
-    </div>
-    <p class="product-original-cost">₱${product.originalPrice.toFixed(2)}</p>
-    </div>
-    </div>
-    </div>
-`).join('');
+    const container = document.getElementById('catalog-injection-point');
+    container.innerHTML = studioProducts.map((product, index) => `
+        <div class="product-card" style="animation-delay: ${index * 0.03}s">
+            <div class="sale-badge">Sale!</div>
+            <div class="product-preview" onclick="triggerSampleGallery(${index})">
+                <img src="${product.image}" alt="${product.name}" class="product-img" onerror="this.src='placeholder.jpg';">
+            </div>
+            <div class="product-details">
+                <div onclick="triggerSampleGallery(${index})">
+                    <h3 class="product-name">${product.name}</h3>
+                    <p class="product-bundle-desc">(+ ${product.bundle})</p>
+                </div>
+                <div class="price-container">
+                    <div class="highlight-price-box">
+                        <p class="product-cost">₱${product.price.toFixed(2)}</p>
+                    </div>
+                    <p class="product-original-cost">₱${product.originalPrice.toFixed(2)}</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('${product.name}', ${product.price})">
+                        Add 3 to Cart 🎀
+                    </button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function addToCart(name, price) {
+    const qty = 3;
+    const existingItem = cart.find(item => item.name === name);
+    
+    if (existingItem) {
+        existingItem.qty += qty;
+    } else {
+        cart.push({ name, price, qty });
+    }
+    alert(`Added 3 of ${name} to your cart! Total for this item: ${cart.find(i => i.name === name).qty}`);
+    console.log("Current Cart:", cart);
 }
 
 function triggerSampleGallery(index) {
