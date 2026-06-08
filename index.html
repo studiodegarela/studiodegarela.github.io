@@ -720,6 +720,21 @@ font-size: clamp(0.7rem, 1.8vw, 0.8rem);
     align-items: center;
     gap: 8px;
 }
+
+    .remove-btn {
+    background: transparent;
+    border: 1px solid var(--deep-amalfi-rose);
+    color: var(--deep-amalfi-rose);
+    border-radius: 5px;
+    padding: 2px 8px;
+    cursor: pointer;
+    font-size: 0.75rem;
+}
+.remove-btn:hover {
+    background: var(--deep-amalfi-rose);
+    color: white;
+}
+    
 </style>
 </head>
     <div class="cart-badge" id="cartBadge" onclick="checkout()">
@@ -828,8 +843,13 @@ function renderCatalog() {
     container.innerHTML = studioProducts.map((p) => `
         <div class="product-card">
             <h3>${p.name}</h3>
-            <p>Stock: ${p.stock}</p>
-            <p class="product-cost">₱${p.price.toFixed(2)}</p>
+            <p style="font-size: 0.8rem; color: #888;">Stock: ${p.stock}</p>
+            
+            <div class="price-container">
+                <p class="product-cost" style="margin: 5px 0;">₱${p.price.toFixed(2)}</p>
+                <p style="text-decoration: line-through; color: #999; font-size: 0.9rem;">₱347.00</p>
+            </div>
+
             <button class="add-to-cart-btn" 
                     onclick="addToCart(studioProducts.find(x => x.id === ${p.id}))"
                     ${p.stock === 0 ? 'disabled style="background:gray"' : ''}>
@@ -868,24 +888,30 @@ function updateCartBadge() {
 
 function updateCartUI() {
     const list = document.getElementById('cartItemsList');
+    
+    // Check if cart is empty
+    if (cartItems.length === 0) {
+        list.innerHTML = "<p>Your cart is empty.</p>";
+        return;
+    }
+
+    // Build the list with Remove buttons
     list.innerHTML = cartItems.map((item, index) => `
-        <li style="display:flex; justify-content:space-between; padding:5px 0;">
-            ${item.name} 
-            <button onclick="removeFromCart(${index})" style="color:red; cursor:pointer;">Remove</button>
+        <li style="display:flex; justify-content:space-between; align-items:center; padding:10px; border-bottom:1px solid #eee;">
+            <span>🛍️ ${item.name}</span>
+            <button onclick="removeFromCart(${index})" 
+                    style="background:#FFF0F2; color:#C36A7A; border:1px solid #C36A7A; border-radius:5px; padding:5px 10px; cursor:pointer;">
+                Remove
+            </button>
         </li>
     `).join('');
 }
-
 function checkout() {
     if (cartItems.length === 0) {
         alert("Your cart is empty!");
     } else {
-        // Populate the list in the modal
-        const list = document.getElementById('cartItemsList');
-        list.innerHTML = cartItems.map(item => `<li style="padding:5px 0; border-bottom:1px solid #eee;">🛍️ ${item}</li>`).join('');
-        
-        // Show the modal
-        document.getElementById('cartModal').style.display = 'flex';
+        updateCartUI(); // Updates the HTML list inside the modal
+        document.getElementById('cartModal').style.display = 'flex'; // Shows the modal
     }
 }
 
