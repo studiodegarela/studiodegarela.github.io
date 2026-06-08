@@ -7,7 +7,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Monsieur+La+Doulaise&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Monsieur+La+Doulaise&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 /* --- COLOR PALETTE & GLOBAL VARIABLES --- */
@@ -18,7 +18,8 @@
 --deep-amalfi-rose: #C36A7A;
 --text-olive-charcoal: #4A3E40;
 --pure-white: #FFFFFF;
---sale-red: #D9383A;
+--sale-red: #E04D50;
+--gold-glow: rgba(232, 158, 155, 0.4);
 }
 
 * {
@@ -36,42 +37,57 @@ overflow-x: hidden;
 background-image:
 radial-gradient(circle at 50% 50%, rgba(255, 192, 203, 0.15) 20%, transparent 20%, transparent 80%, rgba(255, 192, 203, 0.15) 80%),
 radial-gradient(circle at 0% 0%, rgba(232, 158, 155, 0.1) 40%, transparent 40%),
-radial-gradient(circle at 100% 0%, rgba(232, 158, 155, 0.1) 40%, transparent 40%),
-radial-gradient(circle at 100% 100%, rgba(232, 158, 155, 0.1) 40%, transparent 40%),
-radial-gradient(circle at 0% 100%, rgba(232, 158, 155, 0.1) 40%, transparent 40%);
+radial-gradient(circle at 100% 0%, rgba(232, 158, 155, 0.1) 40%, transparent 40%);
 background-size: 40px 40px;
 }
 
-/* --- KEYFRAME ANIMATIONS --- */
+/* --- ADVANCED KEYFRAME ANIMATIONS --- */
 @keyframes fadeInDown {
-from { opacity: 0; transform: translateY(-30px); filter: blur(4px); }
+from { opacity: 0; transform: translateY(-40px); filter: blur(6px); }
 to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 
 @keyframes cardCascadeUp {
-from { opacity: 0; transform: translateY(40px); }
+from { opacity: 0; transform: translateY(50px); }
 to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes buttonPulse {
-0% { box-shadow: 0 0 0 0 rgba(195, 106, 122, 0.5); }
-70% { box-shadow: 0 0 0 18px rgba(195, 106, 122, 0); }
+0% { box-shadow: 0 0 0 0 rgba(195, 106, 122, 0.6); }
+70% { box-shadow: 0 0 0 20px rgba(195, 106, 122, 0); }
 100% { box-shadow: 0 0 0 0 rgba(195, 106, 122, 0); }
 }
 
 @keyframes sideWingShimmer {
 0%, 100% { opacity: 0.4; transform: translateY(-50%) scale(1); }
-50% { opacity: 0.8; transform: translateY(-50%) scale(1.03); }
+50% { opacity: 0.9; transform: translateY(-50%) scale(1.05); color: var(--deep-amalfi-rose); }
 }
 
-/* --- LOGO & HEADER WITH SIDE EFFECTS --- */
+@keyframes saleBadgePulse {
+0% { transform: scale(1); box-shadow: 0 4px 10px rgba(224, 77, 80, 0.4); }
+50% { transform: scale(1.05); box-shadow: 0 6px 15px rgba(224, 77, 80, 0.6); }
+100% { transform: scale(1); box-shadow: 0 4px 10px rgba(224, 77, 80, 0.4); }
+}
+
+@keyframes badgeWiggle {
+0%, 100% { transform: rotate(0deg) scale(1.05); }
+25% { transform: rotate(-4deg) scale(1.08); }
+75% { transform: rotate(4deg) scale(1.08); }
+}
+
+@keyframes floatBot {
+0%, 100% { transform: translateY(0) scale(1); }
+50% { transform: translateY(-10px) scale(1.03); box-shadow: 0 20px 35px rgba(195, 106, 122, 0.4); }
+}
+
+/* --- HEADER WITH SHIMMERING EFFECTS --- */
 header {
 background: linear-gradient(to bottom, #FFFFFF, var(--bg-palazzo-pink));
-padding: 60px 20px;
+padding: 70px 20px;
 text-align: center;
 border-bottom: 3px double var(--main-baby-pink);
 position: relative;
-animation: fadeInDown 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+animation: fadeInDown 1.5s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 header::before, header::after {
@@ -80,14 +96,14 @@ position: absolute;
 top: 50%;
 transform: translateY(-50%);
 font-family: 'Cinzel', serif;
-font-size: 1.1rem;
+font-size: 1.2rem;
 color: var(--terracotta-gold);
-letter-spacing: 4px;
-width: fit-content;
+letter-spacing: 5px;
+transition: all 0.5s ease;
 animation: sideWingShimmer 4s infinite ease-in-out;
 }
-header::before { left: 4%; }
-header::after { right: 4%; }
+header::before { left: 5%; }
+header::after { right: 5%; }
 
 @media (max-width: 768px) {
 header::before, header::after { display: none; }
@@ -96,107 +112,135 @@ header::before, header::after { display: none; }
 .logo-container {
 max-width: 600px;
 margin: 0 auto;
-position: relative;
-z-index: 1;
+transition: transform 0.5s ease;
+}
+.logo-container:hover {
+transform: scale(1.02);
 }
 
 .logo-main {
 font-family: 'Cinzel', serif;
-font-size: 3.4rem;
+font-size: 3.6rem;
 font-weight: 400;
 color: var(--text-olive-charcoal);
 line-height: 1.1;
-letter-spacing: 6px;
+letter-spacing: 8px;
 text-transform: uppercase;
+text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
 }
 
 .logo-sub {
 font-family: 'Monsieur La Doulaise', cursive;
-font-size: 5.2rem;
+font-size: 5.6rem;
 color: var(--deep-amalfi-rose);
 line-height: 0.55;
 margin-bottom: 12px;
 display: block;
+text-shadow: 2px 2px 4px rgba(255, 192, 203, 0.5);
 }
 
 .tagline {
 font-family: 'Cinzel', serif;
-font-size: 0.75rem;
-letter-spacing: 4px;
+font-size: 0.8rem;
+letter-spacing: 5px;
 text-transform: uppercase;
 color: var(--terracotta-gold);
-margin-top: 15px;
+margin-top: 18px;
 font-weight: 600;
 }
 
 .bow-divider {
 color: var(--main-baby-pink);
-font-size: 1.6rem;
-margin: 12px 0;
+font-size: 1.8rem;
+margin: 15px 0;
 user-select: none;
-letter-spacing: 3px;
+letter-spacing: 4px;
+transition: transform 0.4s ease;
+}
+.logo-container:hover .bow-divider {
+transform: rotate(180deg);
+color: var(--deep-amalfi-rose);
 }
 
-/* --- BRAND TRIVIA COMPONENT --- */
+/* --- TRIVIA CARD WITH STUNNING HOVER EFFECT --- */
 .trivia-container {
 max-width: 800px;
-margin: 40px auto 10px auto;
-padding: 30px;
-background: rgba(255, 255, 255, 0.65);
-border: 1px dashed var(--main-baby-pink);
-border-radius: 24px;
+margin: 50px auto 15px auto;
+padding: 35px;
+background: rgba(255, 255, 255, 0.75);
+border: 2px dashed var(--main-baby-pink);
+border-radius: 28px;
 text-align: center;
-backdrop-filter: blur(5px);
-box-shadow: 0 10px 25px rgba(232, 158, 155, 0.08);
-animation: fadeInDown 1.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+backdrop-filter: blur(8px);
+box-shadow: 0 10px 30px rgba(232, 158, 155, 0.1);
+transform: translateY(0);
+transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+animation: fadeInDown 1.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.trivia-container:hover {
+transform: translateY(-8px);
+background: rgba(255, 255, 255, 0.95);
+border-style: solid;
+border-color: var(--terracotta-gold);
+box-shadow: 0 20px 40px rgba(195, 106, 122, 0.2);
 }
 
 .trivia-title {
 font-family: 'Cinzel', serif;
-font-size: 1rem;
+font-size: 1.1rem;
 text-transform: uppercase;
-letter-spacing: 3px;
+letter-spacing: 4px;
 color: var(--deep-amalfi-rose);
-margin-bottom: 12px;
-font-weight: 600;
+margin-bottom: 14px;
+font-weight: 700;
+transition: letter-spacing 0.4s ease;
+}
+.trivia-container:hover .trivia-title {
+letter-spacing: 6px;
+color: var(--text-olive-charcoal);
 }
 
 .trivia-text {
-font-size: 0.85rem;
-line-height: 1.7;
+font-size: 0.9rem;
+line-height: 1.8;
 color: var(--text-olive-charcoal);
 font-style: italic;
 max-width: 680px;
 margin: 0 auto;
+transition: color 0.4s ease;
+}
+.trivia-container:hover .trivia-text {
+color: #000000;
 }
 
-/* --- STRUCTURE --- */
+/* --- STRUCTURE & CONTAINER --- */
 .container {
 max-width: 1200px;
 margin: 0 auto;
-padding: 30px 20px;
+padding: 40px 20px;
 }
 
 .section-title {
 text-align: center;
 font-family: 'Cinzel', serif;
-font-size: 2.2rem;
-margin-bottom: 45px;
+font-size: 2.4rem;
+margin-bottom: 50px;
 font-weight: 400;
 color: var(--text-olive-charcoal);
-letter-spacing: 2px;
+letter-spacing: 3px;
 }
 
 .section-title::after {
 content: '🍊 ୨୧ 🧡 ୨୧ 🍊';
 display: block;
-font-size: 0.9rem;
+font-size: 1rem;
 color: var(--terracotta-gold);
-margin-top: 10px;
-letter-spacing: 8px;
+margin-top: 12px;
+letter-spacing: 10px;
 }
 
-/* --- PRODUCTS GRID --- */
+/* --- HIGH-CONVERSION PRODUCTS GRID --- */
 .products-grid {
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -206,44 +250,53 @@ margin-bottom: 60px;
 
 .product-card {
 background-color: var(--pure-white);
-border-radius: 120px 120px 24px 24px;
+border-radius: 120px 120px 28px 28px;
 overflow: hidden;
-box-shadow: 0 8px 25px rgba(232, 158, 155, 0.1);
-border: 1px solid rgba(255, 192, 203, 0.35);
+box-shadow: 0 10px 30px rgba(232, 158, 155, 0.12);
+border: 1px solid rgba(255, 192, 203, 0.4);
 display: flex;
 flex-direction: column;
 position: relative;
 cursor: pointer;
 opacity: 0;
-animation: cardCascadeUp 0.9s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
-transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease, border-color 0.5s ease;
+animation: cardCascadeUp 1s cubic-bezier(0.215, 0.610, 0.355, 1) forwards;
+transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease, border-color 0.6s ease;
 }
 
 .product-card:hover {
-transform: translateY(-14px) scale(1.02);
-box-shadow: 0 25px 50px rgba(195, 106, 122, 0.25);
+transform: translateY(-15px) scale(1.03);
+box-shadow: 0 30px 60px rgba(195, 106, 122, 0.28);
 border-color: var(--terracotta-gold);
 }
 
+/* MEDIUM SIZE READABLE SALE BADGE */
 .sale-badge {
 position: absolute;
 top: 25px;
 right: 25px;
-background-color: var(--sale-red);
+background: linear-gradient(135deg, var(--sale-red) 0%, #B82629 100%);
 color: var(--pure-white);
-font-family: 'Cinzel', serif;
-font-size: 0.75rem;
-font-weight: 600;
-padding: 4px 14px;
-border-radius: 20px;
-letter-spacing: 1px;
+font-family: 'Poppins', sans-serif;
+font-size: 0.85rem;
+font-weight: 700;
+padding: 6px 16px;
+border-radius: 30px;
+letter-spacing: 1.5px;
 z-index: 10;
 text-transform: uppercase;
+box-shadow: 0 4px 10px rgba(224, 77, 80, 0.4);
+animation: saleBadgePulse 2s infinite ease-in-out;
+transition: all 0.3s ease;
+}
+
+.product-card:hover .sale-badge {
+animation: badgeWiggle 0.5s ease-in-out infinite alternate;
+background: linear-gradient(135deg, #FF3B3F 0%, var(--sale-red) 100%);
 }
 
 .product-preview {
-height: 330px;
-background: linear-gradient(180deg, rgba(255, 240, 242, 0.4) 0%, rgba(255, 192, 203, 0.25) 100%);
+height: 340px;
+background: linear-gradient(180deg, rgba(255, 240, 242, 0.4) 0%, rgba(255, 192, 203, 0.3) 100%);
 display: flex;
 flex-direction: column;
 justify-content: center;
@@ -257,37 +310,46 @@ border-bottom: 1px dashed var(--main-baby-pink);
 width: 100%;
 height: 100%;
 object-fit: cover;
-transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
 }
 
 .product-card:hover .product-img {
-transform: scale(1.09);
-filter: saturate(1.06);
+transform: scale(1.12);
+filter: saturate(1.1);
 }
 
 .product-details {
-padding: 28px 22px;
+padding: 30px 24px;
 text-align: center;
 flex-grow: 1;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
 background: linear-gradient(to bottom, #FFFFFF, var(--bg-palazzo-pink));
+transition: all 0.4s ease;
+}
+
+.product-card:hover .product-details {
+background: linear-gradient(to bottom, #FFFFFF, rgba(255, 240, 242, 0.8));
 }
 
 .product-name {
 font-family: 'Cinzel', serif;
-font-size: 1.15rem;
+font-size: 1.2rem;
 color: var(--text-olive-charcoal);
-margin-bottom: 5px;
+margin-bottom: 6px;
 font-weight: 600;
 line-height: 1.3;
+transition: color 0.3s ease;
+}
+.product-card:hover .product-name {
+color: var(--deep-amalfi-rose);
 }
 
 .product-bundle-desc {
 font-size: 0.75rem;
 color: var(--terracotta-gold);
-margin-bottom: 14px;
+margin-bottom: 16px;
 font-weight: 500;
 font-style: italic;
 }
@@ -296,79 +358,88 @@ font-style: italic;
 display: flex;
 align-items: center;
 justify-content: center;
-gap: 10px;
+gap: 12px;
 margin-bottom: 2px;
 }
 
 .product-cost {
-color: var(--deep-amalfi-rose);
-font-weight: 600;
-font-size: 1.3rem;
+color: var(--sale-red);
+font-weight: 700;
+font-size: 1.4rem;
+text-shadow: 1px 1px 0px rgba(255,255,255,0.8);
 }
 
 .product-original-cost {
-color: #A09596;
-font-size: 1rem;
+color: #A59A9C;
+font-size: 1.05rem;
 text-decoration: line-through;
+font-weight: 300;
 }
 
-/* --- LIGHTBOX POPUP GALLERY --- */
+/* --- LIGHTBOX POPUP GALLERY WITH SMOOTH EFFECTS --- */
 .modal-overlay {
 display: none;
 position: fixed;
 top: 0; left: 0; width: 100%; height: 100%;
-background-color: rgba(74, 62, 64, 0.75);
-z-index: 1000;
+background-color: rgba(74, 62, 64, 0.8);
+z-index: 2000;
 justify-content: center;
 align-items: center;
 padding: 20px;
-backdrop-filter: blur(10px);
+backdrop-filter: blur(12px);
+transition: opacity 0.4s ease;
 }
 
 .modal-card {
 background-color: var(--pure-white);
-border-radius: 32px;
+border-radius: 36px;
 max-width: 480px;
 width: 100%;
-padding: 25px;
-box-shadow: 0 30px 70px rgba(0,0,0,0.3);
+padding: 30px;
+box-shadow: 0 35px 80px rgba(0,0,0,0.35);
 position: relative;
 text-align: center;
 border: 2px solid var(--main-baby-pink);
-animation: fluidBounceSpring 0.65s cubic-bezier(0.34, 1.6, 0.64, 1) both;
+animation: fluidBounceSpring 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
 @keyframes fluidBounceSpring {
-from { transform: scale(0.8); opacity: 0; }
+from { transform: scale(0.7); opacity: 0; }
 to { transform: scale(1); opacity: 1; }
 }
 
 .close-modal-btn {
 position: absolute;
-top: 15px; right: 20px;
-font-size: 2.2rem;
+top: 15px; right: 22px;
+font-size: 2.4rem;
 cursor: pointer;
 color: var(--deep-amalfi-rose);
 font-weight: 300;
 line-height: 1;
 z-index: 10;
+transition: transform 0.3s ease, color 0.3s ease;
+}
+.close-modal-btn:hover {
+transform: scale(1.2) rotate(90deg);
+color: var(--sale-red);
 }
 
 .modal-title {
 font-family: 'Cinzel', serif;
-font-size: 1.4rem;
+font-size: 1.5rem;
 color: var(--text-olive-charcoal);
-margin-bottom: 4px;
+margin-bottom: 6px;
 }
 
 .zoom-display-container {
 width: 100%;
 height: 380px;
-border-radius: 20px;
+border-radius: 24px;
 overflow: hidden;
 margin: 15px 0;
 background-color: var(--bg-palazzo-pink);
-border: 1px solid rgba(255, 192, 203, 0.4);
+border: 1px solid rgba(255, 192, 203, 0.5);
+box-shadow: inset 0 0 20px rgba(0,0,0,0.05);
 }
 
 .zoom-main-img {
@@ -388,22 +459,27 @@ margin-top: 5px;
 }
 
 .gallery-sample-item {
-width: 70px;
-height: 70px;
+width: 75px;
+height: 75px;
 object-fit: cover;
-border-radius: 12px;
+border-radius: 14px;
 border: 2px solid transparent;
-box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 cursor: pointer;
 flex-shrink: 0;
+transition: all 0.3s ease;
+}
+.gallery-sample-item:hover {
+transform: scale(1.08) translateY(-3px);
 }
 
 .gallery-sample-item.active-thumbnail {
 border-color: var(--deep-amalfi-rose);
-transform: scale(1.1);
+transform: scale(1.12);
+box-shadow: 0 6px 15px rgba(195, 106, 122, 0.35);
 }
 
-/* --- FOOTER BUTTON --- */
+/* --- MAIN ORDER ACTION FOOTER BUTTON --- */
 .order-action-container {
 text-align: center;
 margin: 60px auto 20px auto;
@@ -414,27 +490,119 @@ max-width: 420px;
 background: linear-gradient(135deg, var(--main-baby-pink) 0%, var(--terracotta-gold) 100%);
 color: var(--pure-white);
 border: none;
-padding: 18px 40px;
-border-radius: 40px;
+padding: 20px 45px;
+border-radius: 50px;
 cursor: pointer;
 font-family: 'Cinzel', serif;
-font-size: 1.2rem;
+font-size: 1.25rem;
 letter-spacing: 3px;
 text-transform: uppercase;
 width: 100%;
-font-weight: 600;
+font-weight: 700;
 display: flex;
 align-items: center;
 justify-content: center;
-gap: 10px;
-animation: buttonPulse 2.2s infinite ease-in-out;
+gap: 12px;
+box-shadow: 0 10px 25px rgba(195, 106, 122, 0.3);
+animation: buttonPulse 2.5s infinite ease-in-out;
+transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .global-order-btn:hover {
 background: linear-gradient(135deg, var(--deep-amalfi-rose) 0%, var(--main-baby-pink) 100%);
-transform: scale(1.04) translateY(-4px);
+transform: scale(1.05) translateY(-5px);
+box-shadow: 0 20px 40px rgba(195, 106, 122, 0.5);
 }
 
+/* --- CONCIERGE BOT / CONTACT COLLABORATION BOX --- */
+.collab-bot-widget {
+position: fixed;
+bottom: 30px;
+right: 30px;
+z-index: 3000;
+display: flex;
+flex-direction: column;
+align-items: flex-end;
+}
+
+.collab-bot-trigger {
+background: linear-gradient(135deg, var(--deep-amalfi-rose) 0%, var(--terracotta-gold) 100%);
+color: var(--pure-white);
+width: 65px;
+height: 65px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.6rem;
+cursor: pointer;
+box-shadow: 0 10px 30px rgba(195, 106, 122, 0.35);
+animation: floatBot 4s infinite ease-in-out;
+transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+border: 2px solid rgba(255, 255, 255, 0.6);
+}
+.collab-bot-trigger:hover {
+transform: scale(1.1) rotate(15deg);
+}
+
+.collab-drawer {
+display: none;
+background: var(--pure-white);
+border: 2px solid var(--main-baby-pink);
+border-radius: 24px;
+padding: 25px;
+width: 320px;
+box-shadow: 0 20px 50px rgba(74, 62, 64, 0.2);
+margin-bottom: 15px;
+text-align: left;
+animation: fluidBounceSpring 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.drawer-title {
+font-family: 'Cinzel', serif;
+font-size: 1.05rem;
+font-weight: 700;
+color: var(--deep-amalfi-rose);
+margin-bottom: 6px;
+letter-spacing: 1px;
+border-bottom: 1px dashed var(--main-baby-pink);
+padding-bottom: 6px;
+}
+
+.drawer-msg {
+font-size: 0.8rem;
+color: var(--text-olive-charcoal);
+margin-bottom: 14px;
+line-height: 1.5;
+}
+
+.contact-link-item {
+display: flex;
+align-items: center;
+gap: 10px;
+padding: 10px 14px;
+background: var(--bg-palazzo-pink);
+border-radius: 12px;
+margin-bottom: 8px;
+font-size: 0.85rem;
+color: var(--text-olive-charcoal);
+text-decoration: none;
+font-weight: 500;
+transition: all 0.3s ease;
+border: 1px solid transparent;
+}
+.contact-link-item:hover {
+background: var(--pure-white);
+border-color: var(--terracotta-gold);
+transform: translateX(-5px);
+color: var(--deep-amalfi-rose);
+}
+
+.contact-link-item span {
+font-size: 1.1rem;
+}
+
+/* --- FOOTER --- */
 footer {
 text-align: center;
 padding: 60px 20px;
@@ -477,6 +645,23 @@ font-size: 0.85rem;
 </section>
 </div>
 
+<div class="collab-bot-widget">
+    <div class="collab-drawer" id="botDrawer">
+        <h4 class="drawer-title">✨ Studio Concierge</h4>
+        <p class="drawer-msg">Looking to collaborate, partner, or reach our support? Connect with us directly:</p>
+        
+        <a href="mailto:crafts@studiogarela.com" class="contact-link-item">
+            <span>✉</span> crafts@studiogarela.com
+        </a>
+        <a href="tel:+639000000000" class="contact-link-item">
+            <span>📞</span> +63 900 000 0000
+        </a>
+    </div>
+    <div class="collab-bot-trigger" onclick="toggleBotDrawer()">
+        <span>୨୧</span>
+    </div>
+</div>
+
 <div id="galleryModal" class="modal-overlay" onclick="closeSampleGallery(event)">
 <div class="modal-card">
 <span class="close-modal-btn" onclick="forceCloseGallery()">&times;</span>
@@ -496,7 +681,7 @@ font-size: 0.85rem;
 <script>
 const ORDER_FORM_URL = "https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/viewform";
 
-// CATALOG MASTER INVENTORY ARRAY 
+// CATALOG INVENTORY ARRAY
 const studioProducts = [
 { id: 30, name: "iPhone 13 Case Bundle", price: 259, originalPrice: 349, image: "Iphone 13.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: ["Iphone 13.jpg"] },
 { id: 31, name: "iPhone 13 Pro Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
@@ -582,6 +767,16 @@ document.querySelectorAll('.gallery-sample-item').forEach(img => {
 });
 
 thumbnailElement.classList.add('active-thumbnail');
+}
+
+// TOGGLE FLOATING DRAWER CONCIERGE
+function toggleBotDrawer() {
+    const drawer = document.getElementById('botDrawer');
+    if(drawer.style.display === 'block') {
+        drawer.style.display = 'none';
+    } else {
+        drawer.style.display = 'block';
+    }
 }
 
 function closeSampleGallery(event) {
