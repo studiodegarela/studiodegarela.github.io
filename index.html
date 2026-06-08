@@ -791,6 +791,11 @@ font-size: clamp(0.7rem, 1.8vw, 0.8rem);
 const ORDER_FORM_URL = "https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/viewform";
 
 const studioProducts = [
+    { id: 30, name: "iPhone 13 Case Bundle", price: 259, stock: 3, image: "Iphone 13.jpg" },
+    // ... add "stock: 3" to all products
+];
+
+const studioProducts = [
 { id: 30, name: "iPhone 13 Case Bundle", price: 259, originalPrice: 349, image: "Iphone 13.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: ["Iphone 13.jpg"] },
 { id: 31, name: "iPhone 13 Pro Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
 { id: 32, name: "iPhone 13 Pro Max Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
@@ -818,49 +823,57 @@ renderCatalogGrid();
 let cartCount = 0;
 let cartItems = []; // We will use this list to pass data to your form later
 
-function renderCatalogGrid() {
+function renderCatalog() {
     const container = document.getElementById('catalog-injection-point');
-    container.innerHTML = studioProducts.map((product, index) => `
-        <div class="product-card" style="animation-delay: ${index * 0.03}s">
-            <div class="sale-badge">Sale!</div>
-            <div class="product-preview" onclick="triggerSampleGallery(${index})">
-                <img src="${product.image}" alt="${product.name}" class="product-img" onerror="this.src='placeholder.jpg';">
-            </div>
-            <div class="product-details">
-                <div onclick="triggerSampleGallery(${index})">
-                    <h3 class="product-name">${product.name}</h3>
-                    <p class="product-bundle-desc">(+ ${product.bundle})</p>
-                </div>
-                
-                <div class="price-container">
-                    <div class="highlight-price-box" style="background: #FFF0F2; border: 2px solid var(--main-baby-pink); padding: 10px 20px; border-radius: 15px; margin: 10px 0;">
-                        <p class="product-cost" style="font-size: 1.6rem; color: var(--deep-amalfi-rose); font-weight: 800; text-shadow: 0 0 5px rgba(195, 106, 122, 0.2);">
-                            ₱${product.price.toFixed(2)}
-                        </p>
-                    </div>
-                    <p class="product-original-cost" style="color: #999; margin-bottom: 10px;">Was ₱${product.originalPrice.toFixed(2)}</p>
-                    
-                    <button class="add-to-cart-btn" onclick="addToCart('${product.name}')" 
-                            style="background: linear-gradient(135deg, var(--main-baby-pink), var(--deep-amalfi-rose)); 
-                                   color: white; border: none; padding: 12px 25px; border-radius: 30px; 
-                                   font-family: 'Cinzel', serif; cursor: pointer; font-weight: 700; transition: 0.3s;">
-                        ADD TO CART 🎀
-                    </button>
-                </div>
-            </div>
+    container.innerHTML = studioProducts.map((p) => `
+        <div class="product-card">
+            <h3>${p.name}</h3>
+            <p>Stock: ${p.stock}</p>
+            <p class="product-cost">₱${p.price.toFixed(2)}</p>
+            <button class="add-to-cart-btn" 
+                    onclick="addToCart(studioProducts.find(x => x.id === ${p.id}))"
+                    ${p.stock === 0 ? 'disabled style="background:gray"' : ''}>
+                ${p.stock > 0 ? 'ADD TO CART 🎀' : 'OUT OF STOCK'}
+            </button>
         </div>
     `).join('');
 }
 
-function addToCart(productName) {
-    cartItems.push(productName); // Adds item name to array
-    cartCount = cartItems.length;
-    document.getElementById('cartCount').innerText = cartCount;
+function addToCart(product) {
+    if (product.stock > 0) {
+        product.stock -= 1;
+        cartItems.push({ id: product.id, name: product.name });
+        renderCatalog(); // Refresh to show new stock
+        updateCartBadge();
+    } else {
+        alert("Sorry, this item is out of stock!");
+    }
+}
+
+function removeFromCart(index) {
+    const item = cartItems[index];
+    const product = studioProducts.find(p => p.id === item.id);
     
-    // Animation
-    const badge = document.getElementById('cartBadge');
-    badge.style.transform = "scale(1.2)";
-    setTimeout(() => badge.style.transform = "scale(1)", 200);
+    product.stock += 1; // Return stock
+    cartItems.splice(index, 1); // Remove from cart
+    
+    renderCatalog();
+    updateCartUI();
+    updateCartBadge();
+}
+
+function updateCartBadge() {
+    document.getElementById('cartCount').innerText = cartItems.length;
+}
+
+function updateCartUI() {
+    const list = document.getElementById('cartItemsList');
+    list.innerHTML = cartItems.map((item, index) => `
+        <li style="display:flex; justify-content:space-between; padding:5px 0;">
+            ${item.name} 
+            <button onclick="removeFromCart(${index})" style="color:red; cursor:pointer;">Remove</button>
+        </li>
+    `).join('');
 }
 
 function checkout() {
