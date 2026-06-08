@@ -653,8 +653,37 @@ font-size: clamp(0.7rem, 1.8vw, 0.8rem);
 .add-to-cart-btn:hover {
     background: var(--terracotta-gold);
 }
+
+.product-cost {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--deep-amalfi-rose);
+    margin: 5px 0;
+    text-shadow: 1px 1px 2px rgba(255, 192, 203, 0.5);
+}
+
+/* Floating Cart Badge */
+.cart-badge {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--deep-amalfi-rose);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    z-index: 5000;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(195, 106, 122, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 </style>
 </head>
+    <div class="cart-badge" id="cartBadge" onclick="checkout()">
+    🛒 Cart: <span id="cartCount">0</span>
+</div>
 <body>
 
 <header>
@@ -745,7 +774,8 @@ document.addEventListener("DOMContentLoaded", () => {
 renderCatalogGrid();
 });
 
-let cart = [];
+let cartCount = 0;
+let cartItems = []; // We will use this list to pass data to your form later
 
 function renderCatalogGrid() {
     const container = document.getElementById('catalog-injection-point');
@@ -756,17 +786,14 @@ function renderCatalogGrid() {
                 <img src="${product.image}" alt="${product.name}" class="product-img" onerror="this.src='placeholder.jpg';">
             </div>
             <div class="product-details">
-                <div onclick="triggerSampleGallery(${index})">
-                    <h3 class="product-name">${product.name}</h3>
-                    <p class="product-bundle-desc">(+ ${product.bundle})</p>
-                </div>
+                <h3 class="product-name">${product.name}</h3>
+                <p class="product-bundle-desc">(+ ${product.bundle})</p>
+                
                 <div class="price-container">
-                    <div class="highlight-price-box">
-                        <p class="product-cost">₱${product.price.toFixed(2)}</p>
-                    </div>
+                    <p class="product-cost">₱${product.price.toFixed(2)}</p>
                     <p class="product-original-cost">₱${product.originalPrice.toFixed(2)}</p>
-                    <button class="add-to-cart-btn" onclick="addToCart('${product.name}', ${product.price})">
-                        Add 3 to Cart 🎀
+                    <button class="add-to-cart-btn" onclick="addToCart('${product.name}')">
+                        Add to Cart 🎀
                     </button>
                 </div>
             </div>
@@ -774,17 +801,25 @@ function renderCatalogGrid() {
     `).join('');
 }
 
-function addToCart(name, price) {
-    const qty = 3;
-    const existingItem = cart.find(item => item.name === name);
+function addToCart(productName) {
+    cartCount += 1; // Counts as 1 per press
+    cartItems.push(productName);
+    document.getElementById('cartCount').innerText = cartCount;
     
-    if (existingItem) {
-        existingItem.qty += qty;
+    // Optional: Visual feedback
+    const badge = document.getElementById('cartBadge');
+    badge.style.transform = "scale(1.1)";
+    setTimeout(() => badge.style.transform = "scale(1)", 200);
+}
+
+function checkout() {
+    if (cartCount === 0) {
+        alert("Your cart is empty!");
     } else {
-        cart.push({ name, price, qty });
+        // Once you provide the link, we will update this to append 
+        // the cartItems list to the URL
+        window.open(ORDER_FORM_URL, '_blank');
     }
-    alert(`Added 3 of ${name} to your cart! Total for this item: ${cart.find(i => i.name === name).qty}`);
-    console.log("Current Cart:", cart);
 }
 
 function triggerSampleGallery(index) {
