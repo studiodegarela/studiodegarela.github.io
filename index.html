@@ -4,49 +4,56 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Studio de Garela | Mediterranean Pink Elegance</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Monsieur+La+Doulaise&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* --- YOUR ORIGINAL DESIGN --- */
-:root { --bg-palazzo-pink: #FFF0F2; --main-baby-pink: #FFC0CB; --terracotta-gold: #E89E9B; --deep-amalfi-rose: #C36A7A; --text-olive-charcoal: #4A3E40; --pure-white: #FFFFFF; --sale-red: #E04D50; }
+:root {
+    --bg-palazzo-pink: #FFF0F2;
+    --main-baby-pink: #FFC0CB;
+    --terracotta-gold: #E89E9B;
+    --deep-amalfi-rose: #C36A7A;
+    --text-olive-charcoal: #4A3E40;
+    --pure-white: #FFFFFF;
+    --sale-red: #E04D50;
+}
 
-/* --- NEW CART STYLES --- */
-#cart-side { position: fixed; right: 20px; top: 100px; width: 250px; background: white; padding: 20px; border-radius: 20px; border: 2px solid var(--main-baby-pink); z-index: 3000; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-.cart-item { font-size: 0.8rem; margin-bottom: 5px; color: var(--text-olive-charcoal); }
-.add-btn { background: var(--main-baby-pink); border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-weight: bold; margin-top: 10px; width: 100%; transition: 0.3s; }
-.add-btn:hover { background: var(--deep-amalfi-rose); color: white; }
-.stock-badge { font-size: 0.7rem; color: var(--deep-amalfi-rose); margin-bottom: 5px; }
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+body { background-color: var(--bg-palazzo-pink); color: var(--text-olive-charcoal); padding-bottom: 50px; }
 
-/* --- [ALL YOUR ORIGINAL CSS REMAINS HERE] --- */
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
-body { background-color: var(--bg-palazzo-pink); color: var(--text-olive-charcoal); overflow-x: hidden; }
+/* Header & Layout */
 header { background: linear-gradient(to bottom, #FFFFFF, var(--bg-palazzo-pink)); padding: 50px 20px; text-align: center; border-bottom: 3px double var(--main-baby-pink); }
-.logo-container { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
-.brand-logo-img { width: 150px; height: 150px; object-fit: contain; border-radius: 50%; }
-.logo-main { font-family: 'Cinzel', serif; font-size: 3rem; text-transform: uppercase; }
-.logo-sub { font-family: 'Monsieur La Doulaise', cursive; font-size: 5rem; color: var(--deep-amalfi-rose); }
+.logo-main { font-family: 'Cinzel', serif; font-size: 2.5rem; }
+.logo-sub { font-family: 'Monsieur La Doulaise', cursive; font-size: 4rem; color: var(--deep-amalfi-rose); }
 .container { max-width: 1200px; margin: 0 auto; padding: 30px 20px; }
+
+/* Grid & Cards */
 .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; }
-.product-card { background: white; border-radius: 40px; padding: 20px; text-align: center; border: 1px solid rgba(255, 192, 203, 0.35); }
-.product-img { width: 100%; height: 200px; object-fit: cover; border-radius: 20px; }
+.product-card { background: var(--pure-white); padding: 20px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; }
+.product-img { width: 100%; height: 200px; object-fit: cover; border-radius: 15px; }
+
+/* Cart Styles */
+.qty-wrapper { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 15px 0; }
+.qty-input { width: 50px; padding: 5px; border: 1px solid var(--main-baby-pink); border-radius: 5px; text-align: center; }
+.add-to-cart-btn { background: var(--deep-amalfi-rose); color: white; border: none; padding: 8px 20px; border-radius: 20px; cursor: pointer; }
+
+.cart-widget { position: fixed; top: 20px; right: 20px; z-index: 9999; }
+.cart-drawer { display: none; position: absolute; right: 0; top: 60px; background: white; padding: 20px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); width: 300px; max-height: 80vh; overflow-y: auto; }
+.cart-item { border-bottom: 1px solid #eee; padding: 10px 0; font-size: 0.9rem; }
+.checkout-btn { background: var(--sale-red); color: white; width: 100%; padding: 10px; border: none; border-radius: 10px; cursor: pointer; margin-top: 15px; }
 </style>
 </head>
 <body>
 
-<div id="cart-side">
-    <h3 style="font-family:'Cinzel'; margin-bottom:10px;">My Cart 🎀</h3>
-    <div id="cart-items">Empty</div>
-    <button id="checkout-btn" style="display:none; width:100%; padding:10px; background:var(--deep-amalfi-rose); color:white; border:none; border-radius:20px; margin-top:10px; cursor:pointer;" onclick="checkout()">Checkout Form</button>
-</div>
-
 <header>
-    <div class="logo-container">
-        <img src="StudiodeGarela.jpg.png" alt="Logo" class="brand-logo-img">
-        <h1 class="logo-main">Studio</h1>
-        <span class="logo-sub">de Garela</span>
+    <h1 class="logo-main">Studio</h1>
+    <span class="logo-sub">de Garela</span>
+    <div class="cart-widget">
+        <button onclick="toggleCart()" class="add-to-cart-btn">🛒 View Cart</button>
+        <div id="cartDrawer" class="cart-drawer">
+            <h3>Your Cart</h3>
+            <div id="cartItems"></div>
+            <button onclick="checkout()" class="checkout-btn">Checkout Now</button>
+        </div>
     </div>
 </header>
 
@@ -55,62 +62,51 @@ header { background: linear-gradient(to bottom, #FFFFFF, var(--bg-palazzo-pink))
 </div>
 
 <script>
+// Replace this with your actual Google Form URL link[cite: 1]
 const ORDER_FORM_URL = "https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/viewform";
 let cart = [];
 
 const studioProducts = [
-    { id: 30, name: "iPhone 13 Case Bundle", price: 259, quantity: 3, image: "Iphone 13.jpg" },
-    { id: 31, name: "iPhone 13 Pro Case Bundle", price: 259, quantity: 3, image: "placeholder.jpg" },
-    { id: 32, name: "iPhone 13 Pro Max Case Bundle", price: 259, quantity: 3, image: "placeholder.jpg" },
-    { id: 33, name: "iPhone 14 Case Bundle", price: 259, quantity: 3, image: "placeholder.jpg" },
-    { id: 34, name: "iPhone 14 Plus Case Bundle", price: 259, quantity: 3, image: "placeholder.jpg" },
-    { id: 35, name: "iPhone 14 Pro Case Bundle", price: 259, quantity: 3, image: "placeholder.jpg" },
-    { id: 36, name: "iPhone 14 Pro Max Case Bundle", price: 259, quantity: 3, image: "placeholder.jpg" },
-    { id: 37, name: "iPhone 15 Case Bundle", price: 259, quantity: 3, image: "placeholder.jpg" },
-    { id: 38, name: "iPhone 15 Plus Case Bundle", price: 259, quantity: 3, image: "placeholder.jpg" },
-    { id: 39, name: "iPhone 15 Pro Case Bundle", price: 259, quantity: 3, image: "placeholder.jpg" },
-    { id: 40, name: "iPhone 15 Pro Max Case Bundle", price: 259, quantity: 3, image: "placeholder.jpg" },
-    { id: 41, name: "iPhone 16 Case Bundle", price: 259, quantity: 3, image: "placeholder.jpg" },
-    { id: 42, name: "iPhone 16 Plus Case Bundle", price: 259, quantity: 3, image: "placeholder.jpg" },
-    { id: 43, name: "iPhone 16 Pro Case Bundle", price: 259, quantity: 3, image: "placeholder.jpg" },
-    { id: 44, name: "iPhone 16 Pro Max Case Bundle", price: 259, quantity: 3, image: "placeholder.jpg" },
-    { id: 45, name: "iPhone 17 Case Bundle", price: 259, quantity: 3, image: "placeholder.jpg" },
-    { id: 46, name: "iPhone 17 Pro Case Bundle", price: 259, quantity: 3, image: "placeholder.jpg" },
-    { id: 47, name: "iPhone 17 Pro Max Case Bundle", price: 259, quantity: 3, image: "placeholder.jpg" }
+    { id: 1, name: "iPhone 13 Case Bundle", price: 259, image: "placeholder.jpg" },
+    { id: 2, name: "iPhone 14 Case Bundle", price: 259, image: "placeholder.jpg" },
+    { id: 3, name: "iPhone 15 Case Bundle", price: 259, image: "placeholder.jpg" },
+    { id: 4, name: "iPhone 16 Case Bundle", price: 259, image: "placeholder.jpg" }
 ];
 
 function renderCatalog() {
     const container = document.getElementById('catalog-injection-point');
-    container.innerHTML = studioProducts.map((p, i) => `
+    container.innerHTML = studioProducts.map((product, index) => `
         <div class="product-card">
-            <img src="${p.image}" class="product-img">
-            <h3>${p.name}</h3>
-            <p>₱${p.price}</p>
-            <div class="stock-badge">Available: ${p.quantity}</div>
-            <button class="add-btn" onclick="addToCart(${i})" ${p.quantity === 0 ? 'disabled' : ''}>
-                ${p.quantity > 0 ? 'Add to Cart' : 'Sold Out'}
-            </button>
+            <img src="${product.image}" class="product-img" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>₱${product.price}</p>
+            <div class="qty-wrapper">
+                <input type="number" id="qty-${product.id}" value="3" min="1" class="qty-input">
+                <button class="add-to-cart-btn" onclick="addToCart(${index})">Add</button>
+            </div>
         </div>
     `).join('');
 }
 
 function addToCart(index) {
-    if (studioProducts[index].quantity > 0) {
-        studioProducts[index].quantity--;
-        cart.push(studioProducts[index]);
-        updateCartUI();
-        renderCatalog();
-    }
+    const product = studioProducts[index];
+    const qty = parseInt(document.getElementById(`qty-${product.id}`).value);
+    cart.push({ ...product, quantity: qty });
+    alert(`Added ${qty} x ${product.name} to cart!`);
 }
 
-function updateCartUI() {
-    const list = document.getElementById('cart-items');
-    const btn = document.getElementById('checkout-btn');
-    list.innerHTML = cart.map(item => `<div class="cart-item">• ${item.name}</div>`).join('');
-    btn.style.display = cart.length > 0 ? "block" : "none";
+function toggleCart() {
+    const drawer = document.getElementById('cartDrawer');
+    const itemsDiv = document.getElementById('cartItems');
+    drawer.style.display = (drawer.style.display === 'block') ? 'none' : 'block';
+    
+    itemsDiv.innerHTML = cart.length === 0 ? '<p>Cart is empty</p>' : cart.map(item => `
+        <div class="cart-item">${item.name} <br> <b>Qty: ${item.quantity}</b> - ₱${(item.price * item.quantity).toFixed(2)}</div>
+    `).join('');
 }
 
 function checkout() {
+    if(cart.length === 0) return alert("Your cart is empty!");
     window.open(ORDER_FORM_URL, '_blank');
 }
 
