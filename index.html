@@ -18,6 +18,7 @@
 --deep-amalfi-rose: #C36A7A; /* Deep rich rose accent for typography */
 --text-olive-charcoal: #4A3E40; /* Soft dark earthy charcoal with a hint of warm tone */
 --pure-white: #FFFFFF;
+--sale-red: #D9383A; /* Beautiful rich red for the sale badge */
 }
 
 * {
@@ -203,6 +204,24 @@ transform: translateY(-8px);
 box-shadow: 0 16px 35px rgba(195, 106, 122, 0.25);
 }
 
+/* --- FLOATING SALE BADGE --- */
+.sale-badge {
+position: absolute;
+top: 25px;
+right: 25px;
+background-color: var(--sale-red);
+color: var(--pure-white);
+font-family: 'Cinzel', serif;
+font-size: 0.75rem;
+font-weight: 600;
+padding: 4px 14px;
+border-radius: 20px;
+letter-spacing: 1px;
+z-index: 10;
+box-shadow: 0 4px 10px rgba(217, 56, 58, 0.3);
+text-transform: uppercase;
+}
+
 .product-preview {
 height: 300px;
 background: linear-gradient(180deg, rgba(255, 240, 242, 0.5) 0%, rgba(255, 192, 203, 0.3) 100%);
@@ -253,9 +272,25 @@ background: linear-gradient(to bottom, #FFFFFF, var(--bg-palazzo-pink));
 font-family: 'Cinzel', serif;
 font-size: 1.15rem;
 color: var(--text-olive-charcoal);
-margin-bottom: 8px;
+margin-bottom: 4px;
 font-weight: 600;
 line-height: 1.3;
+}
+
+.product-bundle-desc {
+font-size: 0.75rem;
+color: var(--terracotta-gold);
+margin-bottom: 12px;
+font-weight: 500;
+font-style: italic;
+}
+
+.price-container {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 10px;
+margin-bottom: 6px;
 }
 
 .product-cost {
@@ -263,7 +298,14 @@ color: var(--deep-amalfi-rose);
 font-family: 'Poppins', sans-serif;
 font-weight: 600;
 font-size: 1.3rem;
-margin-bottom: 6px;
+}
+
+.product-original-cost {
+color: #A09596;
+font-family: 'Poppins', sans-serif;
+font-size: 1rem;
+text-decoration: line-through;
+font-weight: 400;
 }
 
 /* --- MEDITERRANEAN RIBBON BUTTON --- */
@@ -328,9 +370,7 @@ footer p { margin-bottom: 8px; }
 <div class="nav-wrapper">
 <div class="collection-filters">
 <a onclick="filterCatalog('all')" id="filter-all" class="active">✨ All Treasures</a>
-<a onclick="filterCatalog('Charms')" id="filter-charms">🎀 Charms</a>
 <a onclick="filterCatalog('His and Hers')" id="filter-his-hers">💝 His & Hers</a>
-<a onclick="filterCatalog('Jewelries')" id="filter-jewelry">💎 Jewelries</a>
 <a onclick="filterCatalog('Phone Models')" id="filter-phone-models">📱 Phone Cases</a>
 </div>
 </div>
@@ -345,7 +385,7 @@ footer p { margin-bottom: 8px; }
 
 <div class="order-action-container">
 <button class="global-order-btn" onclick="redirectToOrderForm()">
-<span>Order Form</span> ୨୧
+<span>Order Form</span> ୨微
 </button>
 </div>
 </section>
@@ -361,62 +401,41 @@ footer p { margin-bottom: 8px; }
 // CONFIGURATION: Insert your live Google Form / Order link here
 const ORDER_FORM_URL = "https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/viewform";
 
-// MASTER INVENTORY DATA ARRAY
+// MASTER INVENTORY DATA ARRAY (Charms & Jewelries removed)
 const studioProducts = [
-// --- CHARMS CATEGORY ---
-{ id: 1, name: "Peach Puff", category: "Charms", price: 29, icon: "🍑" },
-{ id: 2, name: "Yume Charm", category: "Charms", price: 39, icon: "🌙" },
-{ id: 3, name: "Usagi Drop", category: "Charms", price: 29, icon: "🐇" },
-{ id: 4, name: "Berry Mochi", category: "Charms", price: 29, icon: "🍓" },
-{ id: 5, name: "Blush Heirloom", category: "Charms", price: 39, icon: "🌸" },
-{ id: 6, name: "Pink Duchess", category: "Charms", price: 49, icon: "🌷" },
-{ id: 7, name: "Strawberry Dream", category: "Charms", price: 39, icon: "🍰" },
-{ id: 8, name: "Fairy Bloom", category: "Charms", price: 49, icon: "🧚🏻‍♀️" },
-{ id: 9, name: "Cotton Hearts", category: "Charms", price: 29, icon: "☁️" },
-{ id: 10, name: "Cloudy Kiss", category: "Charms", price: 39, icon: "💕" },
-{ id: 11, name: "Princess Bow", category: "Charms", price: 49, icon: "🎀" },
-
 // --- HIS AND HERS CATEGORY ---
-{ id: 12, name: "Bound by Grace", category: "His and Hers", price: 249, icon: "♾️" },
-{ id: 13, name: "Twin treasures", category: "His and Hers", price: 249, icon: "🐚" },
-{ id: 14, name: "Sun & Moon", category: "His and Hers", price: 249, icon: "🌑" },
-{ id: 15, name: "Milk & Cookie", category: "His and Hers", price: 249, icon: "🥛" },
-{ id: 16, name: "Peach & Cream", category: "His and Hers", price: 249, icon: "🍑" },
-{ id: 17, name: "Honey & Clover", category: "His and Hers", price: 249, icon: "🍀" },
-{ id: 18, name: "Batman & Catwoman", category: "His and Hers", price: 249, icon: "🦇" },
-{ id: 19, name: "Spider-Man & Mary Jane", category: "His and Hers", price: 249, icon: "🕸️" },
-{ id: 20, name: "Shrek & Fiona", category: "His and Hers", price: 249, icon: "🧌" },
-{ id: 21, name: "Mickey & Minnie", category: "His and Hers", price: 249, icon: "🐭" },
-{ id: 22, name: "Lilo & Stitch", category: "His and Hers", price: 249, icon: "🌺" },
-{ id: 23, name: "Toothless & Light Fury", category: "His and Hers", price: 249, icon: "🐉" },
-
-// --- JEWELRIES CATEGORY ---
-{ id: 24, name: "Initial Necklace / Pendants", category: "Jewelries", price: 149, icon: "💎" },
-{ id: 25, name: "Coordinate Bracelet", category: "Jewelries", price: 149, icon: "💫" },
-{ id: 26, name: "Minimalist Bands", category: "Jewelries", price: 149, icon: "✨" },
-{ id: 27, name: "Beaded", category: "Jewelries", price: 149, icon: "🪞" },
-{ id: 28, name: "Rings", category: "Jewelries", price: 149, icon: "💍" },
-{ id: 29, name: "Career band", category: "Jewelries", price: 149, icon: "💻" },
+{ id: 12, name: "Bound by Grace", category: "His and Hers", price: 259, originalPrice: 349, icon: "♾️", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 13, name: "Twin treasures", category: "His and Hers", price: 259, originalPrice: 349, icon: "🐚", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 14, name: "Sun & Moon", category: "His and Hers", price: 259, originalPrice: 349, icon: "🌑", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 15, name: "Milk & Cookie", category: "His and Hers", price: 259, originalPrice: 349, icon: "🥛", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 16, name: "Peach & Cream", category: "His and Hers", price: 259, originalPrice: 349, icon: "🍑", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 17, name: "Honey & Clover", category: "His and Hers", price: 259, originalPrice: 349, icon: "🍀", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 18, name: "Batman & Catwoman", category: "His and Hers", price: 259, originalPrice: 349, icon: "🦇", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 19, name: "Spider-Man & Mary Jane", category: "His and Hers", price: 259, originalPrice: 349, icon: "🕸️", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 20, name: "Shrek & Fiona", category: "His and Hers", price: 259, originalPrice: 349, icon: "🧌", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 21, name: "Mickey & Minnie", category: "His and Hers", price: 259, originalPrice: 349, icon: "🐭", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 22, name: "Lilo & Stitch", category: "His and Hers", price: 259, originalPrice: 349, icon: "🌺", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 23, name: "Toothless & Light Fury", category: "His and Hers", price: 259, originalPrice: 349, icon: "🐉", bundle: "Charms, Ribbons & Ponytails by Pair" },
 
 // --- PHONE MODELS CATEGORY ---
-{ id: 30, name: "iPhone 13 Case", category: "Phone Models", price: 199, icon: "📱" },
-{ id: 31, name: "iPhone 13 Pro Case", category: "Phone Models", price: 199, icon: "✨" },
-{ id: 32, name: "iPhone 13 Pro Max Case", category: "Phone Models", price: 199, icon: "🎀" },
-{ id: 33, name: "iPhone 14 Case", category: "Phone Models", price: 199, icon: "📱" },
-{ id: 34, name: "iPhone 14 Plus Case", category: "Phone Models", price: 199, icon: "✨" },
-{ id: 35, name: "iPhone 14 Pro Case", category: "Phone Models", price: 199, icon: "🎀" },
-{ id: 36, name: "iPhone 14 Pro Max Case", category: "Phone Models", price: 199, icon: "📱" },
-{ id: 37, name: "iPhone 15 Case", category: "Phone Models", price: 199, icon: "✨" },
-{ id: 38, name: "iPhone 15 Plus Case", category: "Phone Models", price: 199, icon: "🎀" },
-{ id: 39, name: "iPhone 15 Pro Case", category: "Phone Models", price: 199, icon: "📱" },
-{ id: 40, name: "iPhone 15 Pro Max Case", category: "Phone Models", price: 199, icon: "✨" },
-{ id: 41, name: "iPhone 16 Case", category: "Phone Models", price: 199, icon: "🎀" },
-{ id: 42, name: "iPhone 16 Plus Case", category: "Phone Models", price: 199, icon: "📱" },
-{ id: 43, name: "iPhone 16 Pro Case", category: "Phone Models", price: 199, icon: "✨" },
-{ id: 44, name: "iPhone 16 Pro Max Case", category: "Phone Models", price: 199, icon: "🎀" },
-{ id: 45, name: "iPhone 17 Case", category: "Phone Models", price: 199, icon: "📱" },
-{ id: 46, name: "iPhone 17 Pro Case", category: "Phone Models", price: 199, icon: "✨" },
-{ id: 47, name: "iPhone 17 Pro Max Case", category: "Phone Models", price: 199, icon: "🎀" }
+{ id: 30, name: "iPhone 13 Case Bundle", category: "Phone Models", price: 259, originalPrice: 349, icon: "📱", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 31, name: "iPhone 13 Pro Case Bundle", category: "Phone Models", price: 259, originalPrice: 349, icon: "✨", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 32, name: "iPhone 13 Pro Max Case Bundle", category: "Phone Models", price: 259, originalPrice: 349, icon: "🎀", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 33, name: "iPhone 14 Case Bundle", category: "Phone Models", price: 259, originalPrice: 349, icon: "📱", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 34, name: "iPhone 14 Plus Case Bundle", category: "Phone Models", price: 259, originalPrice: 349, icon: "✨", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 35, name: "iPhone 14 Pro Case Bundle", category: "Phone Models", price: 259, originalPrice: 349, icon: "🎀", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 36, name: "iPhone 14 Pro Max Case Bundle", category: "Phone Models", price: 259, originalPrice: 349, icon: "📱", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 37, name: "iPhone 15 Case Bundle", category: "Phone Models", price: 259, originalPrice: 349, icon: "✨", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 38, name: "iPhone 15 Plus Case Bundle", category: "Phone Models", price: 259, originalPrice: 349, icon: "🎀", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 39, name: "iPhone 15 Pro Case Bundle", category: "Phone Models", price: 259, originalPrice: 349, icon: "📱", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 40, name: "iPhone 15 Pro Max Case Bundle", category: "Phone Models", price: 259, originalPrice: 349, icon: "✨", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 41, name: "iPhone 16 Case Bundle", category: "Phone Models", price: 259, originalPrice: 349, icon: "🎀", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 42, name: "iPhone 16 Plus Case Bundle", category: "Phone Models", price: 259, originalPrice: 349, icon: "📱", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 43, name: "iPhone 16 Pro Case Bundle", category: "Phone Models", price: 259, originalPrice: 349, icon: "✨", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 44, name: "iPhone 16 Pro Max Case Bundle", category: "Phone Models", price: 259, originalPrice: 349, icon: "🎀", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 45, name: "iPhone 17 Case Bundle", category: "Phone Models", price: 259, originalPrice: 349, icon: "📱", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 46, name: "iPhone 17 Pro Case Bundle", category: "Phone Models", price: 259, originalPrice: 349, icon: "✨", bundle: "Charms, Ribbons & Ponytails by Pair" },
+{ id: 47, name: "iPhone 17 Pro Max Case Bundle", category: "Phone Models", price: 259, originalPrice: 349, icon: "🎀", bundle: "Charms, Ribbons & Ponytails by Pair" }
 ];
 
 // STARTUP HOOK
@@ -430,9 +449,7 @@ document.querySelectorAll('.collection-filters a').forEach(el => el.classList.re
 
 const filterIds = {
 'all': 'filter-all',
-'Charms': 'filter-charms',
 'His and Hers': 'filter-his-hers',
-'Jewelries': 'filter-jewelry',
 'Phone Models': 'filter-phone-models'
 };
 
@@ -447,14 +464,19 @@ const targetedSubset = category === 'all' ? studioProducts : studioProducts.filt
 
 container.innerHTML = targetedSubset.map(product => `
 <div class="product-card">
+<div class="sale-badge">Sale!</div>
 <div class="product-preview">
 <div>${product.icon}</div>
 <span class="product-tag">${product.category}</span>
 </div>
 <div class="product-details">
-<h3 class="product-name">${product.name}</h3>
 <div>
+<h3 class="product-name">${product.name}</h3>
+<p class="product-bundle-desc">(+ ${product.bundle})</p>
+</div>
+<div class="price-container">
 <p class="product-cost">₱${product.price.toFixed(2)}</p>
+<p class="product-original-cost">₱${product.originalPrice.toFixed(2)}</p>
 </div>
 </div>
 </div>
