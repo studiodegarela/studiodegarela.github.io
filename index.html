@@ -1465,18 +1465,14 @@ renderCatalogGrid();
 
     
 const ORDER_FORM_URL = "https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/viewform";
+let cart = [];
 
 const studioProducts = [
     { id: 30, name: "iPhone 13 Case Bundle", price: 259, originalPrice: 349, image: "Iphone 13.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: ["Iphone 13.jpg"] },
-    // ... (keep your existing product array)
+    // ... add other products here
 ];
 
-
-let cart = [];
-
-document.addEventListener("DOMContentLoaded", () => {
-    renderCatalogGrid();
-});
+document.addEventListener("DOMContentLoaded", () => renderCatalogGrid());
 
 function renderCatalogGrid() {
     const container = document.getElementById('catalog-injection-point');
@@ -1505,34 +1501,31 @@ function renderCatalogGrid() {
 
 function addToCart(name, price) {
     cart.push({ name, price });
-    updateCartUI();
+    document.getElementById('cartCount').innerText = cart.length;
     alert(`Added ${name} to your cart!`);
 }
 
-function updateCartUI() {
-    document.getElementById('cartCount').innerText = cart.length;
-}
-
 function checkout() {
-    let cartDetails = cart.map(item => item.name).join(", ");
-    let message = cart.length > 0 ? `Your Cart:\n${cartDetails}\n\nClick OK to proceed to Order Form.` : "Your cart is empty.";
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
     
-    if (cart.length > 0) {
-        if(confirm(message)) {
-            window.open(ORDER_FORM_URL, '_blank');
+    let cartList = cart.map((item, index) => `${index + 1}. ${item.name} (₱${item.price})`).join("\n");
+    let confirmOrder = confirm(`Your Cart:\n${cartList}\n\nRemove an item? (Cancel to proceed to checkout)`);
+    
+    if (confirmOrder) {
+        let removeIdx = prompt("Enter the number of the item to remove:") - 1;
+        if (removeIdx >= 0 && removeIdx < cart.length) {
+            cart.splice(removeIdx, 1);
+            document.getElementById('cartCount').innerText = cart.length;
         }
     } else {
-        alert(message);
+        window.open(ORDER_FORM_URL, '_blank');
     }
 }
 
-// Logic for your existing gallery and drawer remains the same...
-// Add this helper if you want a detailed view later:
-function removeFromCart(index) {
-    cart.splice(index, 1);
-    updateCartUI();
-}
-
+// Keep your existing Gallery and Drawer functions here:
 function triggerSampleGallery(index) {
     const targetProduct = studioProducts[index];
     document.getElementById('modalTitle').innerText = targetProduct.name;
@@ -1566,7 +1559,6 @@ function closeSampleGallery(event) {
 function forceCloseGallery() {
     document.getElementById('galleryModal').style.display = 'none';
 }
-
 function redirectToOrderForm() {
     window.open(ORDER_FORM_URL, '_blank');
 }
