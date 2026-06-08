@@ -404,11 +404,26 @@ letter-spacing: 0.5px;
 
 /* Stays balanced directly underneath */
 .product-original-cost {
-color: #8A7A7C;
-font-size: clamp(0.8rem, 1.8vw, 0.95rem);
-text-decoration: line-through;
-font-weight: 400;
-opacity: 0.85;
+    color: #8A7A7C;
+    font-size: clamp(0.8rem, 1.8vw, 0.95rem);
+    font-weight: 400;
+    opacity: 0.85;
+    position: relative;
+    display: inline-block;
+    padding: 0 4px;
+}
+
+/* The diagonal strike-through line */
+.product-original-cost::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #8A7A7C;
+    transform: rotate(-15deg); /* Adjusted for bottom-left to top-right tilt */
+    transform-origin: center;
 }
 
 /* --- LIGHTBOX MODAL --- */
