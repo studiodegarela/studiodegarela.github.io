@@ -1,3 +1,17 @@
+Here is the fully upgraded code! I have packed it with elegant, smooth CSS animations and interactive micro-transitions designed to make your storefront feel like a premium, high-end boutique.
+
+### ✨ What I Added For Maximum Engagement:
+
+1. **Header Fade-In & Slide Down:** The logo and tagline animate gracefully when the page loads, drawing the visitor's eye immediately.
+2. **Smooth Card Lift & Glow:** When visitors hover over a product case, the card gently floats up, and a soft, pink Mediterranean glow fades in behind it.
+3. **Smooth Image Ken Burns Zoom effect:** When hovering over a product, the phone image inside the card scales up slightly, making the product feel dynamic.
+4. **Pulsing "View Gallery" Hint:** The sample hint text subtly pulses to let users know the card is completely interactive.
+5. **Magnetic Order Button:** The main Order Form button has a gentle, inviting pulse wave and expands smoothly on hover.
+6. **Pop-up "Spring" Animation:** The sample gallery bounces open with a fluid "spring" feel, and thumbnails seamlessly dim and highlight as they are clicked.
+
+Replace your current `index.html` on GitHub with this code:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +40,7 @@ box-sizing: border-box;
 margin: 0;
 padding: 0;
 font-family: 'Poppins', sans-serif;
+scroll-behavior: smooth;
 }
 
 body {
@@ -41,6 +56,28 @@ radial-gradient(circle at 0% 100%, rgba(232, 158, 155, 0.1) 40%, transparent 40%
 background-size: 40px 40px;
 }
 
+/* --- ENTRANCE ANIMATIONS --- */
+@keyframes fadeInDown {
+from { opacity: 0; transform: translateY(-20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cardEntrance {
+from { opacity: 0; transform: translateY(30px); }
+to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseHint {
+0%, 100% { transform: scale(1); opacity: 0.8; }
+50% { transform: scale(1.04); opacity: 1; color: var(--terracotta-gold); }
+}
+
+@keyframes buttonPulse {
+0% { box-shadow: 0 0 0 0 rgba(195, 106, 122, 0.4); }
+70% { box-shadow: 0 0 0 15px rgba(195, 106, 122, 0); }
+100% { box-shadow: 0 0 0 0 rgba(195, 106, 122, 0); }
+}
+
 /* --- LOGO & HEADER --- */
 header {
 background: linear-gradient(to bottom, #FFFFFF, var(--bg-palazzo-pink));
@@ -48,6 +85,7 @@ padding: 50px 20px;
 text-align: center;
 border-bottom: 3px double var(--main-baby-pink);
 position: relative;
+animation: fadeInDown 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 header::before {
@@ -133,7 +171,7 @@ margin-top: 10px;
 letter-spacing: 8px;
 }
 
-/* --- PRODUCTS CARD DESIGN --- */
+/* --- PRODUCTS GRID & CARD DESIGN --- */
 .products-grid {
 display: grid;
 grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -145,18 +183,21 @@ margin-bottom: 60px;
 background-color: var(--pure-white);
 border-radius: 120px 120px 20px 20px;
 overflow: hidden;
-box-shadow: 0 10px 30px rgba(232, 158, 155, 0.15);
+box-shadow: 0 10px 30px rgba(232, 158, 155, 0.12);
 border: 1px solid rgba(255, 192, 203, 0.4);
-transition: transform 0.4s ease, box-shadow 0.4s ease;
 display: flex;
 flex-direction: column;
 position: relative;
 cursor: pointer;
+opacity: 0;
+animation: cardEntrance 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
 .product-card:hover {
-transform: translateY(-8px);
-box-shadow: 0 16px 35px rgba(195, 106, 122, 0.25);
+transform: translateY(-10px);
+box-shadow: 0 20px 40px rgba(195, 106, 122, 0.22);
+border-color: var(--main-baby-pink);
 }
 
 .sale-badge {
@@ -173,6 +214,11 @@ border-radius: 20px;
 letter-spacing: 1px;
 z-index: 10;
 text-transform: uppercase;
+transition: transform 0.3s ease;
+}
+
+.product-card:hover .sale-badge {
+transform: scale(1.08);
 }
 
 .product-preview {
@@ -191,6 +237,12 @@ border-bottom: 1px dashed var(--main-baby-pink);
 width: 100%;
 height: 100%;
 object-fit: cover;
+transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Beautiful dynamic photo growth zoom */
+.product-card:hover .product-img {
+transform: scale(1.06);
 }
 
 .product-details {
@@ -210,6 +262,11 @@ color: var(--text-olive-charcoal);
 margin-bottom: 4px;
 font-weight: 600;
 line-height: 1.3;
+transition: color 0.3s ease;
+}
+
+.product-card:hover .product-name {
+color: var(--deep-amalfi-rose);
 }
 
 .product-bundle-desc {
@@ -247,36 +304,39 @@ margin-top: 8px;
 letter-spacing: 1px;
 text-transform: uppercase;
 font-weight: 600;
+animation: pulseHint 2s infinite ease-in-out;
 }
 
-/* --- LIGHTBOX SAMPLE POPUP --- */
+/* --- INTERACTIVE POPUP MODAL --- */
 .modal-overlay {
 display: none;
 position: fixed;
 top: 0; left: 0; width: 100%; height: 100%;
-background-color: rgba(74, 62, 64, 0.85);
+background-color: rgba(74, 62, 64, 0.75);
 z-index: 1000;
 justify-content: center;
 align-items: center;
 padding: 20px;
-backdrop-filter: blur(5px);
+backdrop-filter: blur(8px);
+transition: opacity 0.3s ease;
 }
 
 .modal-card {
 background-color: var(--pure-white);
 border-radius: 30px;
-max-width: 500px;
+max-width: 480px;
 width: 100%;
 padding: 25px;
-box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+box-shadow: 0 25px 60px rgba(0,0,0,0.25);
 position: relative;
 text-align: center;
 border: 2px solid var(--main-baby-pink);
-animation: scaleUp 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+/* Smooth Custom Spring Elastic Bounce Fluid Motion */
+animation: fluidSpring 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-@keyframes scaleUp {
-from { transform: scale(0.9); opacity: 0; }
+@keyframes fluidSpring {
+from { transform: scale(0.85); opacity: 0; }
 to { transform: scale(1); opacity: 1; }
 }
 
@@ -289,6 +349,12 @@ color: var(--deep-amalfi-rose);
 font-weight: 300;
 line-height: 1;
 z-index: 10;
+transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.close-modal-btn:hover {
+transform: scale(1.15) rotate(90deg);
+color: var(--terracotta-gold);
 }
 
 .modal-title {
@@ -298,7 +364,6 @@ color: var(--text-olive-charcoal);
 margin-bottom: 4px;
 }
 
-/* Big Zoomed Main Image Display Area */
 .zoom-display-container {
 width: 100%;
 height: 380px;
@@ -307,14 +372,14 @@ overflow: hidden;
 margin: 15px 0;
 background-color: var(--bg-palazzo-pink);
 border: 1px solid rgba(255, 192, 203, 0.4);
-box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
+position: relative;
 }
 
 .zoom-main-img {
 width: 100%;
 height: 100%;
 object-fit: cover;
-transition: transform 0.4s ease;
+transition: opacity 0.25s ease-in-out, transform 0.4s ease;
 }
 
 /* Sample Thumbnails Row */
@@ -328,32 +393,31 @@ margin-top: 5px;
 }
 
 .gallery-sample-item {
-width: 75px;
-height: 75px;
+width: 70px;
+height: 70px;
 object-fit: cover;
 border-radius: 12px;
 border: 2px solid transparent;
 box-shadow: 0 4px 8px rgba(0,0,0,0.06);
 cursor: pointer;
-transition: all 0.2s ease;
+transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 flex-shrink: 0;
 }
 
 .gallery-sample-item:hover {
-transform: translateY(-2px);
+transform: translateY(-4px) scale(1.04);
 }
 
-/* Active Highlight state for the selected item */
 .gallery-sample-item.active-thumbnail {
 border-color: var(--deep-amalfi-rose);
-transform: scale(1.05);
-box-shadow: 0 4px 12px rgba(195, 106, 122, 0.2);
+transform: scale(1.08);
+box-shadow: 0 6px 15px rgba(195, 106, 122, 0.25);
 }
 
-/* --- GLOBAL ORDER BUTTON --- */
+/* --- GLOBAL ORDER FORM BUTTON --- */
 .order-action-container {
 text-align: center;
-margin: 50px auto 20px auto;
+margin: 60px auto 20px auto;
 max-width: 420px;
 }
 
@@ -368,20 +432,20 @@ font-family: 'Cinzel', serif;
 font-size: 1.2rem;
 letter-spacing: 3px;
 text-transform: uppercase;
-transition: all 0.3s ease;
 width: 100%;
-box-shadow: 0 10px 25px rgba(195, 106, 122, 0.3);
 font-weight: 600;
 display: flex;
 align-items: center;
 justify-content: center;
 gap: 10px;
+animation: buttonPulse 2s infinite ease-in-out;
+transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .global-order-btn:hover {
 background: linear-gradient(135deg, var(--deep-amalfi-rose) 0%, var(--main-baby-pink) 100%);
-transform: scale(1.03) translateY(-2px);
-box-shadow: 0 14px 30px rgba(195, 106, 122, 0.45);
+transform: scale(1.04) translateY(-3px);
+box-shadow: 0 16px 35px rgba(195, 106, 122, 0.5);
 }
 
 footer {
@@ -467,7 +531,7 @@ renderCatalogGrid();
 function renderCatalogGrid() {
 const container = document.getElementById('catalog-injection-point');
 container.innerHTML = studioProducts.map((product, index) => `
-<div class="product-card" onclick="triggerSampleGallery(${index})">
+<div class="product-card" style="animation-delay: ${index * 0.05}s" onclick="triggerSampleGallery(${index})">
 <div class="sale-badge">Sale!</div>
 <div class="product-preview">
 <img src="${product.image}" alt="${product.name}" class="product-img" onerror="this.src='placeholder.jpg';">
@@ -487,20 +551,17 @@ ${product.samples.length > 0 ? `<div class="view-samples-hint">✨ View Gallery<
 `).join('');
 }
 
-// INTERACTION: LIVE GALLERY INTERACTIVE FOCUS ENGINE
 function triggerSampleGallery(index) {
 const targetProduct = studioProducts[index];
 if (!targetProduct.samples || targetProduct.samples.length === 0) return;
 
 document.getElementById('modalTitle').innerText = targetProduct.name;
 
-// Set initial main display image inside modal focus box
 const mainZoomNode = document.getElementById('mainZoomedImage');
 mainZoomNode.src = targetProduct.samples[0];
 
 const galleryImgContainer = document.getElementById('modalGalleryInjected');
 
-// Render clickable thumbnails below the zoom panel
 galleryImgContainer.innerHTML = targetProduct.samples.map((imageUrl, imgIdx) => `
 <img src="${imageUrl}" 
      alt="Sample View ${imgIdx}" 
@@ -512,23 +573,21 @@ galleryImgContainer.innerHTML = targetProduct.samples.map((imageUrl, imgIdx) => 
 document.getElementById('galleryModal').style.display = 'flex';
 }
 
-// Switches the active large image when clicking individual sample boxes
 function switchFocusedZoomImage(thumbnailElement, targetSrc) {
-// Update large view
 const mainZoomNode = document.getElementById('mainZoomedImage');
-mainZoomNode.style.opacity = '0.4';
+mainZoomNode.style.opacity = '0';
+mainZoomNode.style.transform = 'scale(0.98)';
 
 setTimeout(() => {
     mainZoomNode.src = targetSrc;
     mainZoomNode.style.opacity = '1';
-}, 100);
+    mainZoomNode.style.transform = 'scale(1)';
+}, 200);
 
-// Reset all borders on lower thumbnails
 document.querySelectorAll('.gallery-sample-item').forEach(img => {
     img.classList.remove('active-thumbnail');
 });
 
-// Highlight the currently selected item
 thumbnailElement.classList.add('active-thumbnail');
 }
 
@@ -548,3 +607,5 @@ window.open(ORDER_FORM_URL, '_blank');
 </script>
 </body>
 </html>
+
+```
