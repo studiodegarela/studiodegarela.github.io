@@ -1,17 +1,3 @@
-Here is the complete, final code for your shop.
-
-I have integrated the **Popup Gallery (Lightbox)** feature specifically for the **iPhone 13 Case Bundle**. The floating ribbon badge on the product image layout has been completely removed.
-
-### Look at the Script section:
-
-Inside the JavaScript array (`studioProducts`), I set up the image variables for your sample pictures:
-
-* `image: "Iphone 13 plain.jpg"` (Your main cover image)
-* `samples: ["Iphone 13 plain.jpg", "iphone13image1.jpg", "iphone13image2.jpg", "iphone13image3.jpg"]`
-
-> ⚠️ **Important Step:** Just like you did with your main cover image, make sure to upload your extra sample images to your GitHub repository with the exact filenames **`iphone13image1.jpg`**, **`iphone13image2.jpg`**, etc.
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -279,14 +265,14 @@ backdrop-filter: blur(5px);
 .modal-card {
 background-color: var(--pure-white);
 border-radius: 30px;
-max-width: 700px;
+max-width: 500px;
 width: 100%;
-padding: 30px;
+padding: 25px;
 box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 position: relative;
 text-align: center;
 border: 2px solid var(--main-baby-pink);
-animation: scaleUp 0.3s ease-out;
+animation: scaleUp 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 @keyframes scaleUp {
@@ -297,47 +283,71 @@ to { transform: scale(1); opacity: 1; }
 .close-modal-btn {
 position: absolute;
 top: 15px; right: 20px;
-font-size: 2rem;
+font-size: 2.2rem;
 cursor: pointer;
 color: var(--deep-amalfi-rose);
 font-weight: 300;
 line-height: 1;
+z-index: 10;
 }
 
 .modal-title {
 font-family: 'Cinzel', serif;
-font-size: 1.5rem;
+font-size: 1.4rem;
 color: var(--text-olive-charcoal);
-margin-bottom: 5px;
+margin-bottom: 4px;
 }
 
-.modal-subtitle {
-font-size: 0.8rem;
-color: var(--terracotta-gold);
-margin-bottom: 20px;
+/* Big Zoomed Main Image Display Area */
+.zoom-display-container {
+width: 100%;
+height: 380px;
+border-radius: 20px;
+overflow: hidden;
+margin: 15px 0;
+background-color: var(--bg-palazzo-pink);
+border: 1px solid rgba(255, 192, 203, 0.4);
+box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
 }
 
+.zoom-main-img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: transform 0.4s ease;
+}
+
+/* Sample Thumbnails Row */
 .samples-gallery-grid {
-display: grid;
-grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-gap: 15px;
-max-height: 400px;
-overflow-y: auto;
-padding: 5px;
+display: flex;
+gap: 12px;
+justify-content: center;
+overflow-x: auto;
+padding: 10px 5px;
+margin-top: 5px;
 }
 
 .gallery-sample-item {
-width: 100%;
-aspect-ratio: 1 / 1;
+width: 75px;
+height: 75px;
 object-fit: cover;
-border-radius: 15px;
-border: 1px solid rgba(255, 192, 203, 0.5);
-box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-transition: transform 0.2s;
+border-radius: 12px;
+border: 2px solid transparent;
+box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+cursor: pointer;
+transition: all 0.2s ease;
+flex-shrink: 0;
 }
 
 .gallery-sample-item:hover {
+transform: translateY(-2px);
+}
+
+/* Active Highlight state for the selected item */
+.gallery-sample-item.active-thumbnail {
+border-color: var(--deep-amalfi-rose);
 transform: scale(1.05);
+box-shadow: 0 4px 12px rgba(195, 106, 122, 0.2);
 }
 
 /* --- GLOBAL ORDER BUTTON --- */
@@ -412,8 +422,10 @@ font-size: 0.85rem;
 <div id="galleryModal" class="modal-overlay" onclick="closeSampleGallery(event)">
 <div class="modal-card">
 <span class="close-modal-btn" onclick="forceCloseGallery()">&times;</span>
-<h3 class="modal-title" id="modalTitle">Product Samples</h3>
-<p class="modal-subtitle">Click anywhere outside to exit layout</p>
+<h3 class="modal-title" id="modalTitle">Product Gallery</h3>
+<div class="zoom-display-container">
+    <img id="mainZoomedImage" src="" alt="Main Preview View" class="zoom-main-img">
+</div>
 <div class="samples-gallery-grid" id="modalGalleryInjected"></div>
 </div>
 </div>
@@ -469,25 +481,55 @@ container.innerHTML = studioProducts.map((product, index) => `
 <p class="product-cost">₱${product.price.toFixed(2)}</p>
 <p class="product-original-cost">₱${product.originalPrice.toFixed(2)}</p>
 </div>
-${product.samples.length > 0 ? `<div class="view-samples-hint">✨ View Samples</div>` : ''}
+${product.samples.length > 0 ? `<div class="view-samples-hint">✨ View Gallery</div>` : ''}
 </div>
 </div>
 `).join('');
 }
 
-// INTERACTION: GALLERY ENGINE
+// INTERACTION: LIVE GALLERY INTERACTIVE FOCUS ENGINE
 function triggerSampleGallery(index) {
 const targetProduct = studioProducts[index];
 if (!targetProduct.samples || targetProduct.samples.length === 0) return;
 
-document.getElementById('modalTitle').innerText = targetProduct.name + " Samples";
-const galleryInjectionNode = document.getElementById('modalGalleryInjected');
+document.getElementById('modalTitle').innerText = targetProduct.name;
 
-galleryInjectionNode.innerHTML = targetProduct.samples.map(imageUrl => `
-<img src="${imageUrl}" alt="Sample View" class="gallery-sample-item" onerror="this.src='placeholder.jpg';">
+// Set initial main display image inside modal focus box
+const mainZoomNode = document.getElementById('mainZoomedImage');
+mainZoomNode.src = targetProduct.samples[0];
+
+const galleryImgContainer = document.getElementById('modalGalleryInjected');
+
+// Render clickable thumbnails below the zoom panel
+galleryImgContainer.innerHTML = targetProduct.samples.map((imageUrl, imgIdx) => `
+<img src="${imageUrl}" 
+     alt="Sample View ${imgIdx}" 
+     class="gallery-sample-item ${imgIdx === 0 ? 'active-thumbnail' : ''}" 
+     onclick="switchFocusedZoomImage(this, '${imageUrl}')"
+     onerror="this.src='placeholder.jpg';">
 `).join('');
 
 document.getElementById('galleryModal').style.display = 'flex';
+}
+
+// Switches the active large image when clicking individual sample boxes
+function switchFocusedZoomImage(thumbnailElement, targetSrc) {
+// Update large view
+const mainZoomNode = document.getElementById('mainZoomedImage');
+mainZoomNode.style.opacity = '0.4';
+
+setTimeout(() => {
+    mainZoomNode.src = targetSrc;
+    mainZoomNode.style.opacity = '1';
+}, 100);
+
+// Reset all borders on lower thumbnails
+document.querySelectorAll('.gallery-sample-item').forEach(img => {
+    img.classList.remove('active-thumbnail');
+});
+
+// Highlight the currently selected item
+thumbnailElement.classList.add('active-thumbnail');
 }
 
 function closeSampleGallery(event) {
@@ -506,5 +548,3 @@ window.open(ORDER_FORM_URL, '_blank');
 </script>
 </body>
 </html>
-
-```
