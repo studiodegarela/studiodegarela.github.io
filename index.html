@@ -1,3 +1,24 @@
+Ah, you’re hosting your code on **GitHub Pages** (or viewing it directly inside a GitHub repository)!
+
+When your HTML code is live on GitHub, it can no longer look at your local laptop folders. It can only see files that have been explicitly uploaded to your GitHub repository.
+
+Here is how you can easily fix this so your image displays perfectly on your live site:
+
+### The Fix: Upload the Image to GitHub
+
+1. Go to your repository on **GitHub.com**.
+2. Click on the **"Add file"** button near the top right of your repository's file list, then select **"Upload files"**.
+3. Drag and drop your **`Iphone 13 plain.jpg`** file directly from your laptop into the box.
+4. Scroll to the bottom and click **"Commit changes"** (this saves the file to your repository).
+5. **Crucial Step:** Make sure the filename in GitHub is spelled *exactly* like it is in the code. If GitHub renames it to lowercase (like `iphone-13-plain.jpg` or `iphone 13 plain.jpg`), it will break because GitHub is strictly case-sensitive.
+
+---
+
+### The Complete Code (Restored with all iPhone models)
+
+Here is your complete, beautiful web shop code containing all your inventory items from iPhone 13 to iPhone 17. Once you upload your `Iphone 13 plain.jpg` file to the same repository on GitHub, all the iPhone 13 variants will display that image flawlessly.
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +53,7 @@ body {
 background-color: var(--bg-palazzo-pink);
 color: var(--text-olive-charcoal);
 overflow-x: hidden;
-/* Mediterranean Majolica / Portuguese Tile Tile Motif made subtler and pinker */
+/* Mediterranean Majolica Tile Motif */
 background-image:
 radial-gradient(circle at 50% 50%, rgba(255, 192, 203, 0.15) 20%, transparent 20%, transparent 80%, rgba(255, 192, 203, 0.15) 80%),
 radial-gradient(circle at 0% 0%, rgba(232, 158, 155, 0.1) 40%, transparent 40%),
@@ -145,7 +166,7 @@ margin-bottom: 60px;
 
 .product-card {
 background-color: var(--pure-white);
-border-radius: 120px 120px 20px 20px; /* Stunning Palazzo Villa Arch style top */
+border-radius: 120px 120px 20px 20px; /* Palazzo Villa Arch style top */
 overflow: hidden;
 box-shadow: 0 10px 30px rgba(232, 158, 155, 0.15);
 border: 1px solid rgba(255, 192, 203, 0.4);
@@ -179,7 +200,7 @@ text-transform: uppercase;
 }
 
 .product-preview {
-height: 300px;
+height: 320px;
 background: linear-gradient(180deg, rgba(255, 240, 242, 0.5) 0%, rgba(255, 192, 203, 0.3) 100%);
 display: flex;
 flex-direction: column;
@@ -196,7 +217,7 @@ height: 100%;
 object-fit: cover;
 }
 
-/* Ribbon Tie overlays on the arches */
+/* Ribbon Tie overlay on the arches */
 .product-preview::before {
 content: '୨୧';
 position: absolute;
@@ -345,7 +366,7 @@ footer p { margin-bottom: 8px; }
 // CONFIGURATION: Insert your live Google Form / Order link here
 const ORDER_FORM_URL = "https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/viewform";
 
-// MASTER INVENTORY DATA ARRAY (Focus: iPhone Case Bundles only)
+// MASTER INVENTORY DATA ARRAY
 const studioProducts = [
 { id: 30, name: "iPhone 13 Case Bundle", price: 259, originalPrice: 349, image: "Iphone 13 plain.jpg", bundle: "Charms, Ribbons & Ponytails by Pair" },
 { id: 31, name: "iPhone 13 Pro Case Bundle", price: 259, originalPrice: 349, image: "Iphone 13 plain.jpg", bundle: "Charms, Ribbons & Ponytails by Pair" },
@@ -380,7 +401,7 @@ container.innerHTML = studioProducts.map(product => `
 <div class="product-card">
 <div class="sale-badge">Sale!</div>
 <div class="product-preview">
-<img src="${product.image}" alt="${product.name}" class="product-img" onerror="this.style.display='none';">
+<img src="${product.image}" alt="${product.name}" class="product-img" onerror="this.style.opacity='0';">
 </div>
 <div class="product-details">
 <div>
@@ -403,3 +424,5 @@ window.open(ORDER_FORM_URL, '_blank');
 </script>
 </body>
 </html>
+
+```
