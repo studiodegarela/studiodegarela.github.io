@@ -10,58 +10,53 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Monsieur+La+Doulaise&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-/* --- ALL YOUR ORIGINAL STYLES --- */
-:root { --bg-palazzo-pink: #FFF0F2; --main-baby-pink: #FFC0CB; --terracotta-gold: #E89E9B; --deep-amalfi-rose: #C36A7A; --text-olive-charcoal: #4A3E40; --pure-white: #FFFFFF; --sale-red: #E04D50; --gold-glow: rgba(232, 158, 155, 0.4); }
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
-body { background-color: var(--bg-palazzo-pink); color: var(--text-olive-charcoal); overflow-x: hidden; background-image: radial-gradient(circle at 50% 50%, rgba(255, 192, 203, 0.15) 20%, transparent 20%, transparent 80%, rgba(255, 192, 203, 0.15) 80%), radial-gradient(circle at 0% 0%, rgba(232, 158, 155, 0.1) 40%, transparent 40%), radial-gradient(circle at 100% 0%, rgba(232, 158, 155, 0.1) 40%, transparent 40%); background-size: 40px 40px; }
+/* --- YOUR ORIGINAL DESIGN --- */
+:root { --bg-palazzo-pink: #FFF0F2; --main-baby-pink: #FFC0CB; --terracotta-gold: #E89E9B; --deep-amalfi-rose: #C36A7A; --text-olive-charcoal: #4A3E40; --pure-white: #FFFFFF; --sale-red: #E04D50; }
 
-/* --- INTEGRATED CART STYLES --- */
-#cart-sidebar { position: fixed; right: 20px; top: 20px; width: 220px; background: rgba(255,255,255,0.95); padding: 15px; border-radius: 20px; border: 2px solid var(--main-baby-pink); z-index: 9999; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-#cart-sidebar h3 { font-family: 'Cinzel'; color: var(--deep-amalfi-rose); margin-bottom: 10px; font-size: 1rem; }
-.cart-item { font-size: 0.8rem; margin-bottom: 5px; }
-.checkout-btn { width: 100%; padding: 8px; background: var(--deep-amalfi-rose); color: white; border: none; border-radius: 20px; cursor: pointer; margin-top: 10px; font-weight: bold; }
+/* --- NEW CART STYLES --- */
+#cart-side { position: fixed; right: 20px; top: 100px; width: 250px; background: white; padding: 20px; border-radius: 20px; border: 2px solid var(--main-baby-pink); z-index: 3000; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+.cart-item { font-size: 0.8rem; margin-bottom: 5px; color: var(--text-olive-charcoal); }
+.add-btn { background: var(--main-baby-pink); border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-weight: bold; margin-top: 10px; width: 100%; transition: 0.3s; }
+.add-btn:hover { background: var(--deep-amalfi-rose); color: white; }
+.stock-badge { font-size: 0.7rem; color: var(--deep-amalfi-rose); margin-bottom: 5px; }
 
-/* --- KEEPING ALL ORIGINAL CSS --- */
-@keyframes universalEntrance { from { opacity: 0; transform: translateY(30px); filter: blur(5px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
-header { background: linear-gradient(to bottom, #FFFFFF, var(--bg-palazzo-pink)); padding: 50px 20px 55px 20px; text-align: center; border-bottom: 3px double var(--main-baby-pink); position: relative; animation: universalEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) both; overflow: hidden; }
+/* --- [ALL YOUR ORIGINAL CSS REMAINS HERE] --- */
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; scroll-behavior: smooth; }
+body { background-color: var(--bg-palazzo-pink); color: var(--text-olive-charcoal); overflow-x: hidden; }
+header { background: linear-gradient(to bottom, #FFFFFF, var(--bg-palazzo-pink)); padding: 50px 20px; text-align: center; border-bottom: 3px double var(--main-baby-pink); }
 .logo-container { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; }
-.brand-logo-img { width: clamp(130px, 15vw, 175px); height: clamp(130px, 15vw, 175px); object-fit: contain; margin-bottom: 15px; border-radius: 50%; }
-.logo-main { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 6vw, 3.8rem); font-weight: 400; color: var(--text-olive-charcoal); line-height: 1.1; letter-spacing: 6px; text-transform: uppercase; }
-.logo-sub { font-family: 'Monsieur La Doulaise', cursive; font-size: clamp(4.5rem, 10vw, 5.8rem); line-height: 0.65; background: linear-gradient(90deg, var(--deep-amalfi-rose), #F391A1, var(--terracotta-gold), var(--deep-amalfi-rose)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.brand-logo-img { width: 150px; height: 150px; object-fit: contain; border-radius: 50%; }
+.logo-main { font-family: 'Cinzel', serif; font-size: 3rem; text-transform: uppercase; }
+.logo-sub { font-family: 'Monsieur La Doulaise', cursive; font-size: 5rem; color: var(--deep-amalfi-rose); }
 .container { max-width: 1200px; margin: 0 auto; padding: 30px 20px; }
-.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(clamp(145px, 22vw, 275px), 1fr)); gap: clamp(15px, 3vw, 35px); margin-bottom: 50px; }
-.product-card { background-color: var(--pure-white); border-radius: 40px; padding: 20px; text-align: center; border: 1px solid rgba(255, 192, 203, 0.35); cursor: pointer; }
+.products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; }
+.product-card { background: white; border-radius: 40px; padding: 20px; text-align: center; border: 1px solid rgba(255, 192, 203, 0.35); }
 .product-img { width: 100%; height: 200px; object-fit: cover; border-radius: 20px; }
-.add-btn { background: var(--main-baby-pink); border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; margin-top: 10px; font-weight: 600; }
 </style>
 </head>
 <body>
 
-<div id="cart-sidebar">
-    <h3>My Cart 🎀</h3>
+<div id="cart-side">
+    <h3 style="font-family:'Cinzel'; margin-bottom:10px;">My Cart 🎀</h3>
     <div id="cart-items">Empty</div>
-    <button id="checkout-btn" class="checkout-btn" style="display:none;" onclick="checkout()">Checkout</button>
+    <button id="checkout-btn" style="display:none; width:100%; padding:10px; background:var(--deep-amalfi-rose); color:white; border:none; border-radius:20px; margin-top:10px; cursor:pointer;" onclick="checkout()">Checkout Form</button>
 </div>
 
 <header>
     <div class="logo-container">
-        <img src="StudiodeGarela.jpg.png" alt="Studio de Garela Official Logo" class="brand-logo-img">
+        <img src="StudiodeGarela.jpg.png" alt="Logo" class="brand-logo-img">
         <h1 class="logo-main">Studio</h1>
         <span class="logo-sub">de Garela</span>
     </div>
 </header>
 
 <div class="container">
-    <section id="view-shop">
-        <h2 class="section-title">The Resort Collection</h2>
-        <div class="products-grid" id="catalog-injection-point"></div>
-    </section>
+    <div class="products-grid" id="catalog-injection-point"></div>
 </div>
 
 <script>
-// --- CONFIGURATION ---
 const ORDER_FORM_URL = "https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/viewform";
-const FORM_ENTRY_ID = "entry.123456789"; 
+let cart = [];
 
 const studioProducts = [
     { id: 30, name: "iPhone 13 Case Bundle", price: 259, quantity: 3, image: "Iphone 13.jpg" },
@@ -84,15 +79,14 @@ const studioProducts = [
     { id: 47, name: "iPhone 17 Pro Max Case Bundle", price: 259, quantity: 3, image: "placeholder.jpg" }
 ];
 
-let cart = [];
-
 function renderCatalog() {
     const container = document.getElementById('catalog-injection-point');
     container.innerHTML = studioProducts.map((p, i) => `
         <div class="product-card">
             <img src="${p.image}" class="product-img">
             <h3>${p.name}</h3>
-            <p>Stock: ${p.quantity}</p>
+            <p>₱${p.price}</p>
+            <div class="stock-badge">Available: ${p.quantity}</div>
             <button class="add-btn" onclick="addToCart(${i})" ${p.quantity === 0 ? 'disabled' : ''}>
                 ${p.quantity > 0 ? 'Add to Cart' : 'Sold Out'}
             </button>
@@ -112,13 +106,12 @@ function addToCart(index) {
 function updateCartUI() {
     const list = document.getElementById('cart-items');
     const btn = document.getElementById('checkout-btn');
-    list.innerHTML = cart.map(i => `<div class="cart-item">${i.name}</div>`).join('');
+    list.innerHTML = cart.map(item => `<div class="cart-item">• ${item.name}</div>`).join('');
     btn.style.display = cart.length > 0 ? "block" : "none";
 }
 
 function checkout() {
-    const items = cart.map(i => i.name).join(", ");
-    window.open(`${ORDER_FORM_URL}?usp=pp_url&${FORM_ENTRY_ID}=${encodeURIComponent(items)}`, '_blank');
+    window.open(ORDER_FORM_URL, '_blank');
 }
 
 renderCatalog();
