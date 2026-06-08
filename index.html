@@ -79,13 +79,12 @@ to { opacity: 1; transform: translateY(0); filter: blur(0); }
 
 /* --- SEAMLESS HYBRID HEADER --- */
 header {
-background: linear-gradient(to bottom, #FFFFFF, var(--bg-palazzo-pink));
-padding: 50px 20px 55px 20px;
-text-align: center;
-border-bottom: 3px double var(--main-baby-pink);
-position: relative;
-animation: universalEntrance 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
-overflow: hidden;
+background: linear-gradient(180deg, #FFFFFF 0%, var(--bg-palazzo-pink) 100%);
+    padding: 60px 20px;
+    text-align: center;
+    border-bottom: 3px double var(--main-baby-pink);
+    position: relative;
+    transition: background 0.5s ease;
 }
 
 header::before, header::after {
@@ -112,9 +111,35 @@ header::after { right: 1.5%; opacity: 0.25; }
 header::before, header::after { display: none !important; }
 }
 
-header:hover::before { left: 2%; opacity: 0.8; color: var(--deep-amalfi-rose); }
-header:hover::after { right: 2%; opacity: 0.8; color: var(--deep-amalfi-rose); }
 
+header:hover {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FFE9EC 100%);
+}
+
+    .logo-main {
+    transition: letter-spacing 0.4s ease, color 0.4s ease;
+}
+
+    header:hover .logo-main {
+    letter-spacing: 12px; /* Expands on hover */
+    color: var(--deep-amalfi-rose);
+}
+    header::after {
+    content: '⚜';
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    color: var(--terracotta-gold);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+header:hover::after {
+    opacity: 1;
+}
+    
 .logo-container {
 max-width: 600px;
 margin: 0 auto;
@@ -207,23 +232,39 @@ font-weight: 600;
 
 /* --- TRIVIA CARD --- */
 .trivia-container {
-max-width: 800px;
-margin: 40px auto 10px auto;
-padding: clamp(20px, 4vw, 35px);
-background: rgba(255, 255, 255, 0.75);
-border: 2px dashed var(--main-baby-pink);
-border-radius: 26px;
-text-align: center;
-backdrop-filter: blur(8px);
-box-shadow: 0 10px 30px rgba(232, 158, 155, 0.08);
-animation: universalEntrance 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
-transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    max-width: 800px;
+    margin: 40px auto 10px auto;
+    padding: clamp(20px, 4vw, 35px);
+    background: rgba(255, 255, 255, 0.6);
+    border: 2px solid var(--main-baby-pink); /* Solid border initially */
+    border-radius: 30px;
+    text-align: center;
+    backdrop-filter: blur(12px);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
 }
+
 .trivia-container:hover {
-transform: translateY(-5px);
-background: rgba(255, 255, 255, 0.95);
-border-style: solid;
-border-color: var(--terracotta-gold);
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.95);
+    border-color: var(--deep-amalfi-rose);
+    box-shadow: 0 20px 40px rgba(195, 106, 122, 0.15);
+}
+
+/* Subtle glow effect on hover */
+.trivia-container::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(255, 240, 242, 0.8) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.trivia-container:hover::before {
+    opacity: 1;
 }
 
 .trivia-title {
@@ -786,14 +827,24 @@ function renderCatalogGrid() {
                 <img src="${product.image}" alt="${product.name}" class="product-img" onerror="this.src='placeholder.jpg';">
             </div>
             <div class="product-details">
-                <h3 class="product-name">${product.name}</h3>
-                <p class="product-bundle-desc">(+ ${product.bundle})</p>
+                <div onclick="triggerSampleGallery(${index})">
+                    <h3 class="product-name">${product.name}</h3>
+                    <p class="product-bundle-desc">(+ ${product.bundle})</p>
+                </div>
                 
                 <div class="price-container">
-                    <p class="product-cost">₱${product.price.toFixed(2)}</p>
-                    <p class="product-original-cost">₱${product.originalPrice.toFixed(2)}</p>
-                    <button class="add-to-cart-btn" onclick="addToCart('${product.name}')">
-                        Add to Cart 🎀
+                    <div class="highlight-price-box" style="background: #FFF0F2; border: 2px solid var(--main-baby-pink); padding: 10px 20px; border-radius: 15px; margin: 10px 0;">
+                        <p class="product-cost" style="font-size: 1.6rem; color: var(--deep-amalfi-rose); font-weight: 800; text-shadow: 0 0 5px rgba(195, 106, 122, 0.2);">
+                            ₱${product.price.toFixed(2)}
+                        </p>
+                    </div>
+                    <p class="product-original-cost" style="color: #999; margin-bottom: 10px;">Was ₱${product.originalPrice.toFixed(2)}</p>
+                    
+                    <button class="add-to-cart-btn" onclick="addToCart('${product.name}')" 
+                            style="background: linear-gradient(135deg, var(--main-baby-pink), var(--deep-amalfi-rose)); 
+                                   color: white; border: none; padding: 12px 25px; border-radius: 30px; 
+                                   font-family: 'Cinzel', serif; cursor: pointer; font-weight: 700; transition: 0.3s;">
+                        ADD TO CART 🎀
                     </button>
                 </div>
             </div>
