@@ -1,3128 +1,960 @@
+<!DOCTYPE html>
 <html lang="en">
-
-
-
 <head>
-
-
-
 <meta charset="UTF-8">
-
-
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-
-
 <title>Studio de Garela | Mediterranean Pink Elegance</title>
 
-
-
-
-
-
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
-
-
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
-
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Monsieur+La+Doulaise&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-
-
-
-
-
 
 <style>
 
-
-
-    .add-to-cart-btn {
-
-    background: var(--deep-amalfi-rose);
-
-    color: var(--pure-white);
-
-    border: none;
-
-    padding: 8px 15px;
-
-    border-radius: 20px;
-
-    margin-top: 10px;
-
-    cursor: pointer;
-
-    font-size: 0.8rem;
-
-    font-weight: 600;
-
-    transition: background 0.3s ease;
-
-}
-
-.add-to-cart-btn:hover {
-
-    background: var(--terracotta-gold);
-
-}
-
-
-
 /* --- COLOR PALETTE & GLOBAL VARIABLES --- */
-
-
-
 :root {
-
-
-
---bg-palazzo-pink: #FFF0F2;
-
-
-
---main-baby-pink: #FFC0CB;
-
-
-
---highlight-pink-soft: #FFE3E7;
-
-
-
---terracotta-gold: #E89E9B;
-
-
-
---deep-amalfi-rose: #C36A7A;
-
-
-
---text-olive-charcoal: #4A3E40;
-
-
-
---pure-white: #FFFFFF;
-
-
-
---sale-red: #D32F2F;
-
-
-
---gold-glow: rgba(232, 158, 155, 0.4);
-
-
-
+    --bg-palazzo-pink: #FFF0F2;
+    --main-baby-pink: #FFC0CB;
+    --highlight-pink-soft: #FFE3E7;
+    --terracotta-gold: #E89E9B;
+    --deep-amalfi-rose: #C36A7A;
+    --text-olive-charcoal: #4A3E40;
+    --pure-white: #FFFFFF;
+    --sale-red: #D32F2F;
+    --gold-glow: rgba(232, 158, 155, 0.4);
 }
-
-
-
-
-
-
 
 * {
-
-
-
-box-sizing: border-box;
-
-
-
-margin: 0;
-
-
-
-padding: 0;
-
-
-
-font-family: 'Poppins', sans-serif;
-
-
-
-scroll-behavior: smooth;
-
-
-
--webkit-tap-highlight-color: transparent;
-
-
-
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
 }
-
-
-
-
-
-
 
 body {
-
-
-
-background-color: var(--bg-palazzo-pink);
-
-
-
-color: var(--text-olive-charcoal);
-
-
-
-overflow-x: hidden;
-
-
-
-background-image:
-
-
-
-radial-gradient(circle at 50% 50%, rgba(255, 192, 203, 0.15) 20%, transparent 20%, transparent 80%, rgba(255, 192, 203, 0.15) 80%),
-
-
-
-radial-gradient(circle at 0% 0%, rgba(232, 158, 155, 0.1) 40%, transparent 40%),
-
-
-
-radial-gradient(circle at 100% 0%, rgba(232, 158, 155, 0.1) 40%, transparent 40%);
-
-
-
-background-size: 40px 40px;
-
-
-
+    background-color: var(--bg-palazzo-pink);
+    color: var(--text-olive-charcoal);
+    overflow-x: hidden;
+    background-image:
+        radial-gradient(circle at 50% 50%, rgba(255, 192, 203, 0.15) 20%, transparent 20%, transparent 80%, rgba(255, 192, 203, 0.15) 80%),
+        radial-gradient(circle at 0% 0%, rgba(232, 158, 155, 0.1) 40%, transparent 40%),
+        radial-gradient(circle at 100% 0%, rgba(232, 158, 155, 0.1) 40%, transparent 40%);
+    background-size: 40px 40px;
 }
 
-
-
-
-
-
-
-/* --- MOTION & TRANSITION ENGINE --- */
-
-
-
+/* --- ANIMATIONS --- */
 @keyframes universalEntrance {
-
-
-
-from { opacity: 0; transform: translateY(30px); filter: blur(5px); }
-
-
-
-to { opacity: 1; transform: translateY(0); filter: blur(0); }
-
-
-
+    from { opacity: 0; transform: translateY(30px); filter: blur(5px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
-
-
-
-
-
-
 
 @keyframes globalLogoFloat {
-
-
-
-0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 10px 15px rgba(195, 106, 122, 0.15)); }
-
-
-
-50% { transform: translateY(-6px) scale(1.02); filter: drop-shadow(0 18px 22px rgba(195, 106, 122, 0.25)); }
-
-
-
+    0%, 100% { transform: translateY(0) scale(1); filter: drop-shadow(0 10px 15px rgba(195, 106, 122, 0.15)); }
+    50% { transform: translateY(-6px) scale(1.02); filter: drop-shadow(0 18px 22px rgba(195, 106, 122, 0.25)); }
 }
-
-
-
-
-
-
 
 @keyframes dynamicRibbonPulse {
-
-
-
-0%, 100% { filter: drop-shadow(0 2px 5px rgba(243, 145, 161, 0.4)); }
-
-
-
-50% { filter: drop-shadow(0 4px 15px rgba(195, 106, 122, 0.6)); }
-
-
-
+    0%, 100% { filter: drop-shadow(0 2px 5px rgba(243, 145, 161, 0.4)); }
+    50% { filter: drop-shadow(0 4px 15px rgba(195, 106, 122, 0.6)); }
 }
-
-
-
-
-
-
 
 @keyframes smoothBadgePulse {
-
-
-
-0% { transform: scale(1); box-shadow: 0 4px 10px rgba(211, 47, 47, 0.3); }
-
-
-
-50% { transform: scale(1.05); box-shadow: 0 6px 15px rgba(211, 47, 47, 0.5); }
-
-
-
-100% { transform: scale(1); box-shadow: 0 4px 10px rgba(211, 47, 47, 0.3); }
-
-
-
+    0% { transform: scale(1); box-shadow: 0 4px 10px rgba(211, 47, 47, 0.3); }
+    50% { transform: scale(1.05); box-shadow: 0 6px 15px rgba(211, 47, 47, 0.5); }
+    100% { transform: scale(1); box-shadow: 0 4px 10px rgba(211, 47, 47, 0.3); }
 }
-
-
-
-
-
-
 
 @keyframes continuousMetallicFlow {
-
-
-
-0% { background-position: 0% 50%; }
-
-
-
-50% { background-position: 100% 50%; }
-
-
-
-100% { background-position: 0% 50%; }
-
-
-
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
-
-
-
-
-
-
 
 @keyframes elegantCardGlint {
-
-
-
-0% { left: -150%; }
-
-
-
-50% { left: 150%; }
-
-
-
-100% { left: 150%; }
-
-
-
+    0% { left: -150%; }
+    50% { left: 150%; }
+    100% { left: 150%; }
 }
 
-
-
-
-
-
-
-/* --- SEAMLESS HYBRID HEADER --- */
-
-header {
-
-    background: linear-gradient(180deg, #FFFFFF 0%, var(--bg-palazzo-pink) 100%);
-
-    padding: 60px 20px;
-
-    text-align: center;
-
-    border-bottom: 3px double var(--main-baby-pink);
-
-    position: relative;
-
-    transition: background 0.5s ease;
-
+@keyframes ribbonWave {
+    0%, 100% { transform: translateX(-50%) rotate(-2deg) scale(1); }
+    50% { transform: translateX(-50%) rotate(2deg) scale(1.04); }
 }
 
-
-
-header:hover {
-
-    background: linear-gradient(180deg, #FFFFFF 0%, #FFE9EC 100%);
-
+@keyframes btnRibbonFloat {
+    0% { transform: translateY(0) rotate(-5deg); opacity: 0.85; }
+    50% { transform: translateY(-4px) rotate(5deg); opacity: 1; }
+    100% { transform: translateY(0) rotate(-5deg); opacity: 0.85; }
 }
 
-
-
-.logo-main {
-
-    transition: letter-spacing 0.4s ease, color 0.4s ease;
-
+@keyframes glowPulse {
+    0%, 100% { box-shadow: 0 8px 22px rgba(195, 106, 122, 0.3), 0 0 0 0 rgba(243, 145, 161, 0); }
+    50% { box-shadow: 0 15px 35px rgba(195, 106, 122, 0.55), 0 0 0 8px rgba(243, 145, 161, 0.12); }
 }
 
-
-
-header:hover .logo-main {
-
-    letter-spacing: 12px; /* Expands on hover */
-
-    color: var(--deep-amalfi-rose);
-
+@keyframes stockPulse {
+    0%, 100% { color: var(--sale-red); }
+    50% { color: #991B1B; }
 }
-
-
-
-/* Adds a small decorative flourish on header hover */
-
-header::after {
-
-    content: '⚜';
-
-    position: absolute;
-
-    bottom: 10px;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    font-size: 1.5rem;
-
-    color: var(--terracotta-gold);
-
-    opacity: 0;
-
-    transition: opacity 0.5s ease;
-
-}
-
-
-
-header:hover::after {
-
-    opacity: 1;
-
-}
-
-
-
-
-
-
-
-.logo-container {
-
-
-
-max-width: 600px;
-
-
-
-margin: 0 auto;
-
-
-
-display: flex;
-
-
-
-flex-direction: column;
-
-
-
-align-items: center;
-
-
-
-}
-
-
-
-
-
-
-
-.brand-logo-img {
-
-
-
-width: clamp(130px, 15vw, 175px);
-
-
-
-height: clamp(130px, 15vw, 175px);
-
-
-
-object-fit: contain;
-
-
-
-margin-bottom: 15px;
-
-
-
-border-radius: 50%;
-
-
-
-animation: globalLogoFloat 5s infinite ease-in-out;
-
-
-
-transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-
-
-
-}
-
-
-
-.logo-container:hover .brand-logo-img {
-
-
-
-transform: scale(1.04) rotate(2deg);
-
-
-
-}
-
-
-
-
-
-
-
-.logo-main {
-
-
-
-font-family: 'Cinzel', serif;
-
-
-
-font-size: clamp(2.5rem, 6vw, 3.8rem);
-
-
-
-font-weight: 400;
-
-
-
-color: var(--text-olive-charcoal);
-
-
-
-line-height: 1.1;
-
-
-
-letter-spacing: 6px;
-
-
-
-text-transform: uppercase;
-
-
-
-user-select: none;
-
-
-
-}
-
-
-
-
-
-
-
-.logo-sub-wrapper {
-
-
-
-position: relative;
-
-
-
-display: inline-block;
-
-
-
-padding-bottom: 6px;
-
-
-
-margin-top: 4px;
-
-
-
-margin-bottom: 16px;
-
-
-
-}
-
-
-
-
-
-
-
-.logo-sub {
-
-
-
-font-family: 'Monsieur La Doulaise', cursive;
-
-
-
-font-size: clamp(4.5rem, 10vw, 5.8rem);
-
-
-
-line-height: 0.65;
-
-
-
-display: block;
-
-
-
-background: linear-gradient(90deg, var(--deep-amalfi-rose), #F391A1, var(--terracotta-gold), var(--deep-amalfi-rose));
-
-
-
-background-size: 300% auto;
-
-
-
--webkit-background-clip: text;
-
-
-
--webkit-text-fill-color: transparent;
-
-
-
-animation: continuousMetallicFlow 6s linear infinite, dynamicRibbonPulse 3s infinite ease-in-out;
-
-
-
-transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-
-
-
-white-space: nowrap;
-
-
-
-}
-
-
-
-
-
-
-
-.logo-sub-wrapper::after {
-
-
-
-content: '';
-
-
-
-position: absolute;
-
-
-
-bottom: 0;
-
-
-
-left: 50%;
-
-
-
-width: 40%;
-
-
-
-height: 1.5px;
-
-
-
-background: linear-gradient(90deg, transparent, var(--terracotta-gold), transparent);
-
-
-
-transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1), left 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-
-
-
-}
-
-
-
-
-
-
-
-.logo-container:hover .logo-sub {
-
-
-
-transform: scale(1.05) translateY(-2px);
-
-
-
-}
-
-
-
-.logo-container:hover .logo-sub-wrapper::after {
-
-
-
-width: 85%;
-
-
-
-left: 7.5%;
-
-
-
-}
-
-
-
-
-
-
-
-.bow-divider {
-
-
-
-color: var(--main-baby-pink);
-
-
-
-font-size: clamp(1.3rem, 3vw, 1.8rem);
-
-
-
-margin: 12px 0;
-
-
-
-letter-spacing: 4px;
-
-
-
-transition: transform 0.5s ease;
-
-
-
-}
-
-
-
-
-
-
-
-.tagline {
-
-
-
-font-family: 'Cinzel', serif;
-
-
-
-font-size: clamp(0.7rem, 1.8vw, 0.8rem);
-
-
-
-letter-spacing: 4px;
-
-
-
-text-transform: uppercase;
-
-
-
-color: var(--terracotta-gold);
-
-
-
-font-weight: 600;
-
-
-
-}
-
-
-
-
-
-
-
-/* --- TRIVIA CARD --- */
-
-
-
-.trivia-container {
-
-    max-width: 800px;
-
-    margin: 40px auto 10px auto;
-
-    padding: clamp(20px, 4vw, 35px);
-
-    background: rgba(255, 255, 255, 0.6);
-
-    border: 2px solid var(--main-baby-pink); /* Solid border initially */
-
-    border-radius: 30px;
-
-    text-align: center;
-
-    backdrop-filter: blur(12px);
-
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-
-    position: relative;
-
-    overflow: hidden;
-
-}
-
-
-
-.trivia-container:hover {
-
-    transform: translateY(-8px);
-
-    background: rgba(255, 255, 255, 0.95);
-
-    border-color: var(--deep-amalfi-rose);
-
-    box-shadow: 0 20px 40px rgba(195, 106, 122, 0.15);
-
-}
-
-
-
-/* Subtle glow effect on hover */
-
-.trivia-container::before {
-
-    content: '';
-
-    position: absolute;
-
-    top: -50%; left: -50%; width: 200%; height: 200%;
-
-    background: radial-gradient(circle, rgba(255, 240, 242, 0.8) 0%, transparent 70%);
-
-    opacity: 0;
-
-    transition: opacity 0.5s ease;
-
-    pointer-events: none;
-
-}
-
-
-
-.trivia-container:hover::before {
-
-    opacity: 1;
-
-}
-
-
-
-
-
-
-
-.trivia-title {
-
-
-
-font-family: 'Cinzel', serif;
-
-
-
-font-size: clamp(0.9rem, 2.2vw, 1.1rem);
-
-
-
-text-transform: uppercase;
-
-
-
-letter-spacing: 3px;
-
-
-
-color: var(--deep-amalfi-rose);
-
-
-
-margin-bottom: 12px;
-
-
-
-font-weight: 700;
-
-
-
-}
-
-
-
-
-
-
-
-.trivia-text {
-
-
-
-font-size: clamp(0.78rem, 1.8vw, 0.9rem);
-
-
-
-line-height: 1.7;
-
-
-
-color: var(--text-olive-charcoal);
-
-
-
-font-style: italic;
-
-
-
-max-width: 680px;
-
-
-
-margin: 0 auto;
-
-
-
-}
-
-
-
-
-
-
-
-/* --- MAIN CONTAINER --- */
-
-
-
-.container {
-
-
-
-max-width: 1200px;
-
-
-
-margin: 0 auto;
-
-
-
-padding: 30px 20px;
-
-
-
-}
-
-
-
-
-
-
-
-.section-title {
-
-
-
-text-align: center;
-
-
-
-font-family: 'Cinzel', serif;
-
-
-
-font-size: clamp(1.6rem, 4vw, 2.4rem);
-
-
-
-margin-bottom: 40px;
-
-
-
-font-weight: 400;
-
-
-
-color: var(--text-olive-charcoal);
-
-
-
-letter-spacing: 2px;
-
-
-
-}
-
-
-
-.section-title::after {
-
-
-
-content: '🍊 🎀 🧡 🎀 🍊';
-
-
-
-display: block;
-
-
-
-font-size: clamp(0.8rem, 2vw, 1rem);
-
-
-
-color: var(--terracotta-gold);
-
-
-
-margin-top: 10px;
-
-
-
-letter-spacing: 6px;
-
-
-
-}
-
-
-
-
-
-
-
-/* --- RESPONSIVE GRID SYSTEM --- */
-
-
-
-.products-grid {
-
-
-
-display: grid;
-
-
-
-grid-template-columns: repeat(auto-fill, minmax(clamp(150px, 23vw, 275px), 1fr));
-
-
-
-gap: clamp(15px, 3vw, 35px);
-
-
-
-margin-bottom: 50px;
-
-
-
-}
-
-
-
-
-
-
-
-.product-card {
-
-
-
-background-color: var(--pure-white);
-
-
-
-border-radius: clamp(45px, 8vw, 110px) clamp(45px, 8vw, 110px) 24px 24px;
-
-
-
-overflow: hidden;
-
-
-
-box-shadow: 0 8px 24px rgba(232, 158, 155, 0.08);
-
-
-
-border: 1px solid rgba(255, 192, 203, 0.35);
-
-
-
-display: flex;
-
-
-
-flex-direction: column;
-
-
-
-position: relative;
-
-
-
-cursor: pointer;
-
-
-
-animation: universalEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) both;
-
-
-
-transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
-
-
-
-}
-
-
-
-
-
-
-
-.product-card::before {
-
-
-
-content: '';
-
-
-
-position: absolute;
-
-
-
-top: 0; left: -150%; width: 50%; height: 100%;
-
-
-
-background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
-
-
-
-transform: skewX(-25deg);
-
-
-
-z-index: 5;
-
-
-
-pointer-events: none;
-
-
-
-}
-
-
-
-.product-card:hover::before {
-
-
-
-animation: elegantCardGlint 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-
-
-
-}
-
-
-
-
-
-
-
-.product-card:hover {
-
-
-
-transform: translateY(-10px) scale(1.02);
-
-
-
-box-shadow: 0 25px 45px rgba(195, 106, 122, 0.22);
-
-
-
-border-color: var(--terracotta-gold);
-
-
-
-}
-
-
-
-
-
-
-
-.sale-badge {
-
-
-
-position: absolute;
-
-
-
-top: clamp(12px, 2vw, 22px);
-
-
-
-right: clamp(12px, 2vw, 22px);
-
-
-
-background: linear-gradient(135deg, var(--sale-red) 0%, #991B1B) 100%;
-
-
-
-color: var(--pure-white);
-
-
-
-font-size: clamp(0.65rem, 1.5vw, 0.8rem);
-
-
-
-font-weight: 700;
-
-
-
-padding: 5px clamp(10px, 1.5vw, 15px);
-
-
-
-border-radius: 25px;
-
-
-
-letter-spacing: 1px;
-
-
-
-z-index: 10;
-
-
-
-text-transform: uppercase;
-
-
-
-animation: smoothBadgePulse 2s infinite ease-in-out;
-
-
-
-}
-
-
-
-
-
-
-
-.product-preview {
-
-
-
-height: clamp(180px, 35vw, 320px);
-
-
-
-background: linear-gradient(180deg, rgba(255, 240, 242, 0.3) 0%, rgba(255, 192, 203, 0.2) 100%);
-
-
-
-display: flex;
-
-
-
-justify-content: center;
-
-
-
-align-items: center;
-
-
-
-overflow: hidden;
-
-
-
-border-bottom: 1px dashed var(--main-baby-pink);
-
-
-
-}
-
-
-
-
-
-
-
-.product-img {
-
-
-
-width: 100%;
-
-
-
-height: 100%;
-
-
-
-object-fit: cover;
-
-
-
-transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-
-
-
-}
-
-
-
-.product-card:hover .product-img {
-
-
-
-transform: scale(1.08);
-
-
-
-}
-
-
-
-
-
-
-
-.product-details {
-
-
-
-padding: clamp(16px, 2.5vw, 24px) clamp(12px, 2vw, 20px);
-
-
-
-text-align: center;
-
-
-
-flex-grow: 1;
-
-
-
-display: flex;
-
-
-
-flex-direction: column;
-
-
-
-justify-content: space-between;
-
-
-
-background: linear-gradient(to bottom, #FFFFFF, var(--bg-palazzo-pink));
-
-
-
-}
-
-
-
-
-
-
-
-.product-name {
-
-
-
-font-family: 'Cinzel', serif;
-
-
-
-font-size: clamp(0.9rem, 2vw, 1.15rem);
-
-
-
-color: var(--text-olive-charcoal);
-
-
-
-margin-bottom: 4px;
-
-
-
-font-weight: 700;
-
-
-
-line-height: 1.3;
-
-
-
-letter-spacing: 0.5px;
-
-
-
-}
-
-
-
-
-
-
-
-.product-bundle-desc {
-
-
-
-font-size: clamp(0.68rem, 1.5vw, 0.8rem);
-
-
-
-color: #705E61;
-
-
-
-margin-bottom: 14px;
-
-
-
-font-style: italic;
-
-
-
-line-height: 1.3;
-
-
-
-}
-
-
-
-
-
-
-
-/* --- THE STACKED & HIGHLIGHTED PRICE STRIP --- */
-
-
-
-.price-container {
-
-
-
-display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 2px;
-
-    margin-top: auto;
-
-    padding-top: 10px;
-
-
-
-}
-
-
-
-
-
-
-
-/* Pink highlighted main price chip */
-
-
-
-.highlight-price-box {
-
-
-
-background-color: var(--highlight-pink-soft);
-
-
-
-border: 1px solid rgba(243, 145, 161, 0.3);
-
-
-
-padding: 4px clamp(12px, 3vw, 20px);
-
-
-
-border-radius: 12px;
-
-
-
-display: inline-block;
-
-
-
-box-shadow: 0 2px 8px rgba(195, 106, 122, 0.05);
-
-
-
-}
-
-
-
-
-
-.product-original-cost {
-
-    font-size: 0.8rem;
-
-    color: #8A7A7C;
-
-    text-decoration: none; /* Change from line-through to none */
-
-    opacity: 0.6;
-
-    margin-bottom: 2px;
-
-    font-style: italic; /* Adds a nice boutique touch */
-
-}
-
-
-
-
-
-
-
-/* Stays balanced directly underneath */
-
-
-
-.product-original-cost {
-
-
-
-color: #8A7A7C;
-
-
-
-font-size: clamp(0.8rem, 1.8vw, 0.95rem);
-
-
-
-text-decoration: line-through;
-
-
-
-font-weight: 400;
-
-
-
-opacity: 0.85;
-
-
-
-}
-
-
-
-
-
-
-
-/* The diagonal strike-through line */
-
-
-
-
-
-
-
-
-
-
-
-/* --- LIGHTBOX MODAL --- */
-
-
-
-.modal-overlay {
-
-
-
-display: none;
-
-
-
-position: fixed;
-
-
-
-top: 0; left: 0; width: 100%; height: 100%;
-
-
-
-background-color: rgba(74, 62, 64, 0.85);
-
-
-
-z-index: 2000;
-
-
-
-justify-content: center;
-
-
-
-align-items: center;
-
-
-
-padding: clamp(12px, 3vw, 30px);
-
-
-
-backdrop-filter: blur(8px);
-
-
-
-}
-
-
-
-
-
-
-
-.modal-card {
-
-
-
-background-color: var(--pure-white);
-
-
-
-border-radius: 28px;
-
-
-
-max-width: 460px;
-
-
-
-width: 100%;
-
-
-
-padding: clamp(20px, 4vw, 30px);
-
-
-
-box-shadow: 0 25px 60px rgba(0,0,0,0.3);
-
-
-
-position: relative;
-
-
-
-text-align: center;
-
-
-
-border: 2px solid var(--main-baby-pink);
-
-
-
-animation: scaleSpringReveal 0.45s cubic-bezier(0.34, 1.4, 0.64, 1) both;
-
-
-
-max-height: 90vh;
-
-
-
-overflow-y: auto;
-
-
-
-}
-
-
-
-
-
-
 
 @keyframes scaleSpringReveal {
-
-
-
-from { transform: scale(0.85); opacity: 0; }
-
-
-
-to { transform: scale(1); opacity: 1; }
-
-
-
+    from { transform: scale(0.85); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
-
-
-
-
-
-
-.close-modal-btn {
-
-
-
-position: absolute;
-
-
-
-top: 12px; right: 18px;
-
-
-
-font-size: 2.2rem;
-
-
-
-cursor: pointer;
-
-
-
-color: var(--deep-amalfi-rose);
-
-
-
-font-weight: 300;
-
-
-
-line-height: 1;
-
-
-
-z-index: 10;
-
-
-
+/* --- OPENING SALE BANNER --- */
+.opening-sale-banner {
+    background: linear-gradient(90deg, var(--deep-amalfi-rose), #F391A1, var(--terracotta-gold), #F391A1, var(--deep-amalfi-rose));
+    background-size: 300% auto;
+    animation: continuousMetallicFlow 4s linear infinite;
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: clamp(0.7rem, 2vw, 0.85rem);
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    position: sticky;
+    top: 0;
+    z-index: 999;
 }
 
-
-
-
-
-
-
-.modal-title {
-
-
-
-font-family: 'Cinzel', serif;
-
-
-
-font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-
-
-
-color: var(--text-olive-charcoal);
-
-
-
-margin-bottom: 8px;
-
-
-
-padding: 0 15px;
-
-
-
+.opening-sale-banner span {
+    margin: 0 8px;
 }
 
-
-
-
-
-
-
-.zoom-display-container {
-
-
-
-width: 100%;
-
-
-
-height: clamp(240px, 45vw, 350px);
-
-
-
-border-radius: 20px;
-
-
-
-overflow: hidden;
-
-
-
-margin: 12px 0;
-
-
-
-background-color: var(--bg-palazzo-pink);
-
-
-
-border: 1px solid rgba(255, 192, 203, 0.4);
-
-
-
+/* --- HEADER --- */
+header {
+    background: linear-gradient(180deg, #FFFFFF 0%, var(--bg-palazzo-pink) 100%);
+    padding: 60px 20px;
+    text-align: center;
+    border-bottom: 3px double var(--main-baby-pink);
+    position: relative;
+    transition: background 0.5s ease;
 }
 
-
-
-
-
-
-
-.zoom-main-img {
-
-
-
-width: 100%;
-
-
-
-height: 100%;
-
-
-
-object-fit: cover;
-
-
-
-transition: opacity 0.2s ease;
-
-
-
+header:hover {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FFE9EC 100%);
 }
 
-
-
-
-
-
-
-.samples-gallery-grid {
-
-
-
-display: flex;
-
-
-
-gap: 10px;
-
-
-
-justify-content: flex-start;
-
-
-
-overflow-x: auto;
-
-
-
-padding: 5px 2px 10px 2px;
-
-
-
-scrollbar-width: none;
-
-
-
+.logo-main {
+    transition: letter-spacing 0.4s ease, color 0.4s ease;
 }
 
-
-
-.samples-gallery-grid::-webkit-scrollbar {
-
-
-
-display: none;
-
-
-
+header:hover .logo-main {
+    letter-spacing: 12px;
+    color: var(--deep-amalfi-rose);
 }
 
-
-
-
-
-
-
-.gallery-sample-item {
-
-
-
-width: clamp(60px, 12vw, 75px);
-
-
-
-height: clamp(60px, 12vw, 75px);
-
-
-
-object-fit: cover;
-
-
-
-border-radius: 12px;
-
-
-
-border: 2px solid transparent;
-
-
-
-flex-shrink: 0;
-
-
-
-cursor: pointer;
-
-
-
+header::after {
+    content: '⚜';
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.5rem;
+    color: var(--terracotta-gold);
+    opacity: 0;
+    transition: opacity 0.5s ease;
 }
 
-
-
-.gallery-sample-item.active-thumbnail {
-
-
-
-border-color: var(--deep-amalfi-rose);
-
-
-
-transform: scale(1.06);
-
-
-
+header:hover::after {
+    opacity: 1;
 }
 
+.logo-container {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
+.brand-logo-img {
+    width: clamp(130px, 15vw, 175px);
+    height: clamp(130px, 15vw, 175px);
+    object-fit: contain;
+    margin-bottom: 15px;
+    border-radius: 50%;
+    animation: globalLogoFloat 5s infinite ease-in-out;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
+.logo-container:hover .brand-logo-img {
+    transform: scale(1.04) rotate(2deg);
+}
 
+.logo-main {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.5rem, 6vw, 3.8rem);
+    font-weight: 400;
+    color: var(--text-olive-charcoal);
+    line-height: 1.1;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    user-select: none;
+}
 
+.logo-sub-wrapper {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 6px;
+    margin-top: 4px;
+    margin-bottom: 16px;
+}
 
+.logo-sub {
+    font-family: 'Monsieur La Doulaise', cursive;
+    font-size: clamp(4.5rem, 10vw, 5.8rem);
+    line-height: 0.65;
+    display: block;
+    background: linear-gradient(90deg, var(--deep-amalfi-rose), #F391A1, var(--terracotta-gold), var(--deep-amalfi-rose));
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: continuousMetallicFlow 6s linear infinite, dynamicRibbonPulse 3s infinite ease-in-out;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+}
 
-/* --- CALL TO ACTION --- */
+.logo-sub-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 40%;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, var(--terracotta-gold), transparent);
+    transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1), left 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
+.logo-container:hover .logo-sub {
+    transform: scale(1.05) translateY(-2px);
+}
 
+.logo-container:hover .logo-sub-wrapper::after {
+    width: 85%;
+    left: 7.5%;
+}
 
+.bow-divider {
+    color: var(--main-baby-pink);
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    margin: 12px 0;
+    letter-spacing: 4px;
+    transition: transform 0.5s ease;
+}
+
+.tagline {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.7rem, 1.8vw, 0.8rem);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--terracotta-gold);
+    font-weight: 600;
+}
+
+/* --- TRIVIA CARD --- */
+.trivia-container {
+    max-width: 800px;
+    margin: 40px auto 10px auto;
+    padding: clamp(20px, 4vw, 35px);
+    background: rgba(255, 255, 255, 0.6);
+    border: 2px solid var(--main-baby-pink);
+    border-radius: 30px;
+    text-align: center;
+    backdrop-filter: blur(12px);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.trivia-container:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.95);
+    border-color: var(--deep-amalfi-rose);
+    box-shadow: 0 20px 40px rgba(195, 106, 122, 0.15);
+}
+
+.trivia-container::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle, rgba(255, 240, 242, 0.8) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.trivia-container:hover::before {
+    opacity: 1;
+}
+
+.trivia-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.9rem, 2.2vw, 1.1rem);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--deep-amalfi-rose);
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.trivia-text {
+    font-size: clamp(0.78rem, 1.8vw, 0.9rem);
+    line-height: 1.7;
+    color: var(--text-olive-charcoal);
+    font-style: italic;
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+/* --- MAIN CONTAINER --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    margin-bottom: 40px;
+    font-weight: 400;
+    color: var(--text-olive-charcoal);
+    letter-spacing: 2px;
+}
+
+.section-title::after {
+    content: '🍊 🎀 🧡 🎀 🍊';
+    display: block;
+    font-size: clamp(0.8rem, 2vw, 1rem);
+    color: var(--terracotta-gold);
+    margin-top: 10px;
+    letter-spacing: 6px;
+}
+
+/* --- PRODUCT GRID --- */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(150px, 23vw, 275px), 1fr));
+    gap: clamp(15px, 3vw, 35px);
+    margin-bottom: 50px;
+}
+
+.product-card {
+    background-color: var(--pure-white);
+    border-radius: clamp(45px, 8vw, 110px) clamp(45px, 8vw, 110px) 24px 24px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(232, 158, 155, 0.08);
+    border: 1px solid rgba(255, 192, 203, 0.35);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    cursor: pointer;
+    animation: universalEntrance 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.product-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -150%; width: 50%; height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-25deg);
+    z-index: 5;
+    pointer-events: none;
+}
+
+.product-card:hover::before {
+    animation: elegantCardGlint 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 25px 45px rgba(195, 106, 122, 0.22);
+    border-color: var(--terracotta-gold);
+}
+
+/* --- SALE BADGE --- */
+.sale-badge {
+    position: absolute;
+    top: clamp(12px, 2vw, 22px);
+    right: clamp(12px, 2vw, 22px);
+    background: linear-gradient(135deg, #D32F2F 0%, #991B1B 100%);
+    color: var(--pure-white);
+    font-size: clamp(0.6rem, 1.4vw, 0.72rem);
+    font-weight: 700;
+    padding: 4px clamp(8px, 1.5vw, 12px);
+    border-radius: 25px;
+    letter-spacing: 1px;
+    z-index: 10;
+    text-transform: uppercase;
+    animation: smoothBadgePulse 2s infinite ease-in-out;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.sale-badge .badge-pct {
+    display: block;
+    font-size: clamp(0.7rem, 1.6vw, 0.82rem);
+    font-weight: 800;
+}
+
+/* --- PRODUCT IMAGE --- */
+.product-preview {
+    height: clamp(180px, 35vw, 320px);
+    background: linear-gradient(180deg, rgba(255, 240, 242, 0.3) 0%, rgba(255, 192, 203, 0.2) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-bottom: 1px dashed var(--main-baby-pink);
+}
+
+.product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.product-card:hover .product-img {
+    transform: scale(1.08);
+}
+
+/* --- PRODUCT DETAILS --- */
+.product-details {
+    padding: clamp(16px, 2.5vw, 24px) clamp(12px, 2vw, 20px);
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: linear-gradient(to bottom, #FFFFFF, var(--bg-palazzo-pink));
+}
+
+.product-name {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(0.9rem, 2vw, 1.15rem);
+    color: var(--text-olive-charcoal);
+    margin-bottom: 4px;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0.5px;
+}
+
+.product-bundle-desc {
+    font-size: clamp(0.68rem, 1.5vw, 0.8rem);
+    color: #705E61;
+    margin-bottom: 14px;
+    font-style: italic;
+    line-height: 1.3;
+}
+
+/* --- PRICE AREA --- */
+.price-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    margin-top: auto;
+    padding-top: 10px;
+}
+
+.highlight-price-box {
+    background-color: var(--highlight-pink-soft);
+    border: 1px solid rgba(243, 145, 161, 0.3);
+    padding: 3px clamp(10px, 2.5vw, 18px);
+    border-radius: 10px;
+    display: inline-block;
+    box-shadow: 0 2px 8px rgba(195, 106, 122, 0.05);
+}
+
+.product-cost {
+    font-size: clamp(1.1rem, 2.4vw, 1.3rem);
+    font-weight: 800;
+    color: var(--deep-amalfi-rose);
+    margin: 2px 0;
+    text-shadow: 1px 1px 2px rgba(255, 192, 203, 0.5);
+}
+
+.product-original-cost {
+    color: #8A7A7C;
+    font-size: clamp(0.68rem, 1.4vw, 0.78rem);
+    text-decoration: line-through;
+    font-weight: 400;
+    opacity: 0.75;
+}
+
+/* --- LIMITED STOCK LABEL (replaces Add to Cart) --- */
+.stock-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 9px;
+    background: linear-gradient(135deg, #FFF0F0, #FFE3E7);
+    border: 1.5px dashed #E89E9B;
+    border-radius: 20px;
+    padding: 5px 12px;
+    font-size: clamp(0.62rem, 1.4vw, 0.72rem);
+    font-weight: 700;
+    color: var(--sale-red);
+    letter-spacing: 0.5px;
+    animation: stockPulse 2.2s infinite ease-in-out;
+    cursor: default;
+}
+
+.stock-label .fire-icon {
+    font-size: 0.85rem;
+}
+
+/* --- ORDER BUTTON --- */
 .order-action-container {
-
-
-
-text-align: center;
-
-
-
-margin: 40px auto 10px auto;
-
-
-
-max-width: 380px;
-
-
-
-padding: 0 15px;
-
-
-
+    text-align: center;
+    margin: 40px auto 10px auto;
+    max-width: 420px;
+    padding: 0 15px;
+    position: relative;
 }
 
+/* Floating ribbon decorations above button */
+.order-action-container::before,
+.order-action-container::after {
+    content: '🎀';
+    position: absolute;
+    font-size: 1.5rem;
+    top: -22px;
+    animation: btnRibbonFloat 2.5s infinite ease-in-out;
+    pointer-events: none;
+}
 
+.order-action-container::before {
+    left: 20%;
+    animation-delay: 0s;
+}
 
-
-
-
+.order-action-container::after {
+    right: 20%;
+    animation-delay: 1.2s;
+}
 
 .global-order-btn {
-
-
-
-background: linear-gradient(135deg, var(--main-baby-pink) 0%, var(--terracotta-gold) 100%);
-
-
-
-color: var(--pure-white);
-
-
-
-border: none;
-
-
-
-padding: clamp(15px, 2.5vw, 18px) 35px;
-
-
-
-border-radius: 40px;
-
-
-
-cursor: pointer;
-
-
-
-font-family: 'Cinzel', serif;
-
-
-
-font-size: clamp(1rem, 2.2vw, 1.15rem);
-
-
-
-letter-spacing: 2px;
-
-
-
-text-transform: uppercase;
-
-
-
-width: 100%;
-
-
-
-font-weight: 700;
-
-
-
-display: flex;
-
-
-
-align-items: center;
-
-
-
-justify-content: center;
-
-
-
-gap: 10px;
-
-
-
-box-shadow: 0 8px 22px rgba(195, 106, 122, 0.25);
-
-
-
-transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-
-
+    background: linear-gradient(135deg, #F391A1 0%, var(--deep-amalfi-rose) 40%, var(--terracotta-gold) 100%);
+    background-size: 200% auto;
+    color: var(--pure-white);
+    border: 3px solid rgba(255, 255, 255, 0.45);
+    padding: clamp(16px, 2.5vw, 20px) 38px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1rem, 2.2vw, 1.15rem);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    width: 100%;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    animation: glowPulse 2.5s infinite ease-in-out, continuousMetallicFlow 4s linear infinite;
+    transition: transform 0.2s ease, filter 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
 }
 
-
+/* Inner shimmer effect */
+.global-order-btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -80%;
+    width: 60%; height: 100%;
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 50%, rgba(255,255,255,0) 100%);
+    transform: skewX(-20deg);
+    animation: elegantCardGlint 3s infinite ease-in-out;
+}
 
 .global-order-btn:hover {
-
-
-
-transform: translateY(-3px);
-
-
-
-box-shadow: 0 15px 30px rgba(195, 106, 122, 0.4);
-
-
-
+    transform: translateY(-4px) scale(1.02);
+    filter: brightness(1.08);
 }
 
+.global-order-btn:active {
+    transform: scale(0.97);
+    filter: brightness(0.95);
+}
 
+/* Ribbon row below button */
+.ribbon-row {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 14px;
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    animation: dynamicRibbonPulse 3s infinite ease-in-out;
+}
 
+.order-note {
+    font-size: clamp(0.65rem, 1.6vw, 0.74rem);
+    color: var(--terracotta-gold);
+    letter-spacing: 1px;
+    margin-top: 8px;
+    font-style: italic;
+}
 
+/* --- LIGHTBOX MODAL --- */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(74, 62, 64, 0.85);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    padding: clamp(12px, 3vw, 30px);
+    backdrop-filter: blur(8px);
+}
 
+.modal-card {
+    background-color: var(--pure-white);
+    border-radius: 28px;
+    max-width: 460px;
+    width: 100%;
+    padding: clamp(20px, 4vw, 30px);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+    position: relative;
+    text-align: center;
+    border: 2px solid var(--main-baby-pink);
+    animation: scaleSpringReveal 0.45s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+    max-height: 90vh;
+    overflow-y: auto;
+}
 
+.close-modal-btn {
+    position: absolute;
+    top: 12px; right: 18px;
+    font-size: 2.2rem;
+    cursor: pointer;
+    color: var(--deep-amalfi-rose);
+    font-weight: 300;
+    line-height: 1;
+    z-index: 10;
+}
+
+.modal-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    color: var(--text-olive-charcoal);
+    margin-bottom: 8px;
+    padding: 0 15px;
+}
+
+.zoom-display-container {
+    width: 100%;
+    height: clamp(240px, 45vw, 350px);
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 12px 0;
+    background-color: var(--bg-palazzo-pink);
+    border: 1px solid rgba(255, 192, 203, 0.4);
+}
+
+.zoom-main-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.2s ease;
+}
+
+.samples-gallery-grid {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 5px 2px 10px 2px;
+    scrollbar-width: none;
+}
+
+.samples-gallery-grid::-webkit-scrollbar {
+    display: none;
+}
+
+.gallery-sample-item {
+    width: clamp(60px, 12vw, 75px);
+    height: clamp(60px, 12vw, 75px);
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.gallery-sample-item.active-thumbnail {
+    border-color: var(--deep-amalfi-rose);
+    transform: scale(1.06);
+}
 
 /* --- CHAT WIDGET --- */
-
-
-
 .collab-bot-widget {
-
-
-
-position: fixed;
-
-
-
-bottom: clamp(15px, 3vw, 25px);
-
-
-
-right: clamp(15px, 3vw, 25px);
-
-
-
-z-index: 3000;
-
-
-
-display: flex;
-
-
-
-flex-direction: column;
-
-
-
-align-items: flex-end;
-
-
-
+    position: fixed;
+    bottom: clamp(15px, 3vw, 25px);
+    right: clamp(15px, 3vw, 25px);
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
-
-
-
-<div class="cart-badge" id="cartBadge" onclick="toggleCart()">
-
-    🛒 <span id="cartCount">0</span>
-
-</div>
-
-
-
-
-
-
 
 .collab-bot-trigger {
-
-
-
-background: linear-gradient(135deg, var(--deep-amalfi-rose) 0%, var(--terracotta-gold) 100%);
-
-
-
-color: var(--pure-white);
-
-
-
-width: clamp(54px, 8vw, 62px);
-
-
-
-height: clamp(54px, 8vw, 62px);
-
-
-
-border-radius: 50%;
-
-
-
-display: flex;
-
-
-
-align-items: center;
-
-
-
-justify-content: center;
-
-
-
-font-size: clamp(1.3rem, 2.5vw, 1.5rem);
-
-
-
-cursor: pointer;
-
-
-
-box-shadow: 0 8px 25px rgba(195, 106, 122, 0.3);
-
-
-
-border: 2px solid rgba(255, 255, 255, 0.5);
-
-
-
+    background: linear-gradient(135deg, var(--deep-amalfi-rose) 0%, var(--terracotta-gold) 100%);
+    color: var(--pure-white);
+    width: clamp(54px, 8vw, 62px);
+    height: clamp(54px, 8vw, 62px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(1.3rem, 2.5vw, 1.5rem);
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(195, 106, 122, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.5);
 }
-
-
-
-
-
-
 
 .collab-drawer {
-
-
-
-display: none;
-
-
-
-background: var(--pure-white);
-
-
-
-border: 1.5px solid var(--main-baby-pink);
-
-
-
-border-radius: 22px;
-
-
-
-padding: 20px;
-
-
-
-width: clamp(270px, 60vw, 310px);
-
-
-
-box-shadow: 0 15px 45px rgba(74, 62, 64, 0.18);
-
-
-
-margin-bottom: 12px;
-
-
-
-animation: scaleSpringReveal 0.35s ease both;
-
-
-
+    display: none;
+    background: var(--pure-white);
+    border: 1.5px solid var(--main-baby-pink);
+    border-radius: 22px;
+    padding: 20px;
+    width: clamp(270px, 60vw, 310px);
+    box-shadow: 0 15px 45px rgba(74, 62, 64, 0.18);
+    margin-bottom: 12px;
+    animation: scaleSpringReveal 0.35s ease both;
 }
-
-
-
-    .product-cost {
-
-    font-size: 1.5rem;
-
-    font-weight: 800;
-
-    color: var(--deep-amalfi-rose);
-
-    margin: 5px 0;
-
-    text-shadow: 1px 1px 2px rgba(255, 192, 203, 0.5);
-
-}
-
-
-
-/* Floating Cart Badge */
-
-.cart-badge {
-
-    position: fixed;
-
-    top: 20px;
-
-    right: 20px;
-
-    background: var(--deep-amalfi-rose);
-
-    color: white;
-
-    padding: 10px 20px;
-
-    border-radius: 50px;
-
-    z-index: 5000;
-
-    font-weight: 700;
-
-    cursor: pointer;
-
-    box-shadow: 0 4px 15px rgba(195, 106, 122, 0.4);
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
-
-}
-
-
-
-
-
-
 
 .drawer-title {
-
-
-
-font-family: 'Cinzel', serif;
-
-
-
-font-size: 0.95rem;
-
-
-
-font-weight: 700;
-
-
-
-color: var(--deep-amalfi-rose);
-
-
-
-margin-bottom: 5px;
-
-
-
-border-bottom: 1px dashed var(--main-baby-pink);
-
-
-
-padding-bottom: 5px;
-
-
-
+    font-family: 'Cinzel', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--deep-amalfi-rose);
+    margin-bottom: 5px;
+    border-bottom: 1px dashed var(--main-baby-pink);
+    padding-bottom: 5px;
 }
-
-
-
-
-
-
 
 .drawer-msg {
-
-
-
-font-size: 0.75rem;
-
-
-
-color: var(--text-olive-charcoal);
-
-
-
-margin-bottom: 12px;
-
-
-
-line-height: 1.4;
-
-
-
+    font-size: 0.75rem;
+    color: var(--text-olive-charcoal);
+    margin-bottom: 12px;
+    line-height: 1.4;
 }
-
-
-
-
-
-
 
 .contact-link-item {
-
-
-
-display: flex;
-
-
-
-align-items: center;
-
-
-
-gap: 8px;
-
-
-
-padding: 10px 12px;
-
-
-
-background: var(--bg-palazzo-pink);
-
-
-
-border-radius: 10px;
-
-
-
-margin-bottom: 6px;
-
-
-
-font-size: 0.75rem;
-
-
-
-color: var(--text-olive-charcoal);
-
-
-
-text-decoration: none;
-
-
-
-font-weight: 500;
-
-
-
-border: 1px solid transparent;
-
-
-
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: var(--bg-palazzo-pink);
+    border-radius: 10px;
+    margin-bottom: 6px;
+    font-size: 0.75rem;
+    color: var(--text-olive-charcoal);
+    text-decoration: none;
+    font-weight: 500;
+    border: 1px solid transparent;
 }
-
-
 
 .contact-link-item:hover {
-
-
-
-border-color: var(--terracotta-gold);
-
-
-
-color: var(--deep-amalfi-rose);
-
-
-
+    border-color: var(--terracotta-gold);
+    color: var(--deep-amalfi-rose);
 }
 
-
-
-
-
-
-
+/* --- FOOTER --- */
 footer {
-
-
-
-text-align: center;
-
-
-
-padding: 45px 20px;
-
-
-
-margin-top: 40px;
-
-
-
-border-top: 2px dashed var(--main-baby-pink);
-
-
-
-background: linear-gradient(to bottom, var(--bg-palazzo-pink), #FFFFFF);
-
-
-
-font-size: clamp(0.7rem, 1.8vw, 0.8rem);
-
-
-
+    text-align: center;
+    padding: 45px 20px;
+    margin-top: 40px;
+    border-top: 2px dashed var(--main-baby-pink);
+    background: linear-gradient(to bottom, var(--bg-palazzo-pink), #FFFFFF);
+    font-size: clamp(0.7rem, 1.8vw, 0.8rem);
 }
-
-
 
 </style>
-
-
-
 </head>
-
-
 
 <body>
 
-
-
-
-
-
+<!-- Opening Sale Sticky Banner -->
+<div class="opening-sale-banner">
+    🎀 <span>Grand Opening Sale</span> 🎀 <span>Limited Stocks Only!</span> 🎀 <span>While Supplies Last</span> 🎀
+</div>
 
 <header>
-
-
-
-<div class="logo-container">
-
-
-
-<img src="StudiodeGarela.jpg.png" alt="Studio de Garela Official Logo" class="brand-logo-img" onerror="this.style.display='none';">
-
-
-
-<h1 class="logo-main">Studio</h1>
-
-
-
-<div class="logo-sub-wrapper">
-
-
-
-    <span class="logo-sub">de Garela</span>
-
-
-
-</div>
-
-
-
-<div class="bow-divider">🎀 ⚜ 🎀</div>
-
-
-
-<p class="tagline">timeless craft — beyond trends.</p>
-
-
-
-</div>
-
-
-
+    <div class="logo-container">
+        <img src="StudiodeGarela.jpg.png" alt="Studio de Garela Official Logo" class="brand-logo-img" onerror="this.style.display='none';">
+        <h1 class="logo-main">Studio</h1>
+        <div class="logo-sub-wrapper">
+            <span class="logo-sub">de Garela</span>
+        </div>
+        <div class="bow-divider">🎀 ⚜ 🎀</div>
+        <p class="tagline">timeless craft — beyond trends.</p>
+    </div>
 </header>
 
-
-
-
-
-
-
 <div class="trivia-container">
-
-
-
     <h4 class="trivia-title">⚜ The Essence of Garela ⚜</h4>
-
-
-
     <p class="trivia-text">
-
-
-
         Inspired by the sun-drenched architectural arches of the Mediterranean coast and the soft grace of classic coquette fashion. Every curated bundle is handcrafted to weave timeless elegance into modern necessity.
-
-
-
     </p>
-
-
-
 </div>
-
-
-
-
-
-
 
 <div class="container">
+    <section id="view-shop">
+        <h2 class="section-title">The Resort Collection</h2>
+        <div class="products-grid" id="catalog-injection-point"></div>
 
-
-
-<section id="view-shop">
-
-
-
-<h2 class="section-title">The Resort Collection</h2>
-
-
-
-<div class="products-grid" id="catalog-injection-point"></div>
-
-
-
-
-
-
-
-<div class="order-action-container">
-
-
-
-<button class="global-order-btn" onclick="redirectToOrderForm()">
-
-
-
-<span>Order Form</span> 🎀
-
-
-
-</button>
-
-
-
+        <div class="order-action-container">
+            <button class="global-order-btn" onclick="redirectToOrderForm()">
+                <span>🎀</span> Order Now <span>🎀</span>
+            </button>
+            <div class="ribbon-row">🎀 🌸 🎀 🌸 🎀</div>
+            <p class="order-note">Opening Sale — Limited Stocks, Order While Available!</p>
+        </div>
+    </section>
 </div>
-
-
-
-</section>
-
-
-
-</div>
-
-
-
-
-
-
 
 <div class="collab-bot-widget">
-
-
-
     <div class="collab-drawer" id="botDrawer">
-
-
-
         <h4 class="drawer-title">✨ Studio Concierge</h4>
-
-
-
         <p class="drawer-msg">Looking to collaborate, partner, or reach our support? Connect with us directly:</p>
-
-
-
         <a href="mailto:crafts@studiogarela.com" class="contact-link-item">✉ crafts@studiogarela.com</a>
-
-
-
         <a href="tel:+639000000000" class="contact-link-item">📞 +63 900 000 0000</a>
-
-
-
     </div>
-
-
-
     <div class="collab-bot-trigger" onclick="toggleBotDrawer()">
-
-
-
         <span>🎀</span>
-
-
-
     </div>
-
-
-
 </div>
-
-
-
-
-
-
 
 <div id="galleryModal" class="modal-overlay" onclick="closeSampleGallery(event)">
-
-
-
-<div class="modal-card">
-
-
-
-<span class="close-modal-btn" onclick="forceCloseGallery()">&times;</span>
-
-
-
-<h3 class="modal-title" id="modalTitle">Product Gallery</h3>
-
-
-
-<div class="zoom-display-container">
-
-
-
-    <img id="mainZoomedImage" src="" alt="Main Preview View" class="zoom-main-img">
-
-
-
+    <div class="modal-card">
+        <span class="close-modal-btn" onclick="forceCloseGallery()">&times;</span>
+        <h3 class="modal-title" id="modalTitle">Product Gallery</h3>
+        <div class="zoom-display-container">
+            <img id="mainZoomedImage" src="" alt="Main Preview View" class="zoom-main-img">
+        </div>
+        <div class="samples-gallery-grid" id="modalGalleryInjected"></div>
+    </div>
 </div>
-
-
-
-<div class="samples-gallery-grid" id="modalGalleryInjected"></div>
-
-
-
-</div>
-
-    
-
-    <div class="cart-badge" id="cartBadge" onclick="checkout()">
-
-    🛒 Cart: <span id="cartCount">0</span>
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
 
 <footer>
-
-
-
-<p style="font-family: 'Cinzel', serif; font-weight: 600; letter-spacing: 1px;">Studio de Garela — Est. 2026</p>
-
-
-
-<p style="font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase; color: var(--deep-amalfi-rose); margin-top: 4px;">Amalfi Skies &amp; Coquette Bows.</p>
-
-
-
+    <p style="font-family: 'Cinzel', serif; font-weight: 600; letter-spacing: 1px;">Studio de Garela — Est. 2026</p>
+    <p style="font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase; color: var(--deep-amalfi-rose); margin-top: 4px;">Amalfi Skies &amp; Coquette Bows.</p>
 </footer>
-
-
-
-
-
-
 
 <script>
 
-
-
-
-
-const ORDER_FORM_URL = "https://docs.google.com/forms/d/e/YOUR_FORM_ID_HERE/viewform";
-
-
-
-// Full product list restored
+const ORDER_FORM_URL = "https://forms.gle/ZmBc8ktV6CuZMy7q7";
 
 const studioProducts = [
-
-    { id: 30, name: "iPhone 13 Case Bundle", price: 259, originalPrice: 349, image: "Iphone 13.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: ["Iphone 13.jpg"] },
-
-    { id: 31, name: "iPhone 13 Pro Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-
-    { id: 32, name: "iPhone 13 Pro Max Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-
-    { id: 33, name: "iPhone 14 Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-
-    { id: 34, name: "iPhone 14 Plus Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-
-    { id: 35, name: "iPhone 14 Pro Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-
-    { id: 36, name: "iPhone 14 Pro Max Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-
-    { id: 37, name: "iPhone 15 Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-
-    { id: 38, name: "iPhone 15 Plus Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-
-    { id: 39, name: "iPhone 15 Pro Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-
-    { id: 40, name: "iPhone 15 Pro Max Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-
-    { id: 41, name: "iPhone 16 Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-
-    { id: 42, name: "iPhone 16 Plus Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-
-    { id: 43, name: "iPhone 16 Pro Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-
-    { id: 44, name: "iPhone 16 Pro Max Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-
-    { id: 45, name: "iPhone 17 Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-
-    { id: 46, name: "iPhone 17 Pro Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
-
-    { id: 47, name: "iPhone 17 Pro Max Case Bundle", price: 259, originalPrice: 349, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] }
-
+    { id: 30, name: "iPhone 13 Case Bundle", price: 249, originalPrice: 347, image: "Iphone 13.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: ["Iphone 13.jpg"] },
+    { id: 31, name: "iPhone 13 Pro Case Bundle", price: 249, originalPrice: 347, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 32, name: "iPhone 13 Pro Max Case Bundle", price: 249, originalPrice: 347, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 33, name: "iPhone 14 Case Bundle", price: 249, originalPrice: 347, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 34, name: "iPhone 14 Plus Case Bundle", price: 249, originalPrice: 347, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 35, name: "iPhone 14 Pro Case Bundle", price: 249, originalPrice: 347, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 36, name: "iPhone 14 Pro Max Case Bundle", price: 249, originalPrice: 347, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 37, name: "iPhone 15 Case Bundle", price: 249, originalPrice: 347, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 38, name: "iPhone 15 Plus Case Bundle", price: 249, originalPrice: 347, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 39, name: "iPhone 15 Pro Case Bundle", price: 249, originalPrice: 347, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 40, name: "iPhone 15 Pro Max Case Bundle", price: 249, originalPrice: 347, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 41, name: "iPhone 16 Case Bundle", price: 249, originalPrice: 347, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 42, name: "iPhone 16 Plus Case Bundle", price: 249, originalPrice: 347, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 43, name: "iPhone 16 Pro Case Bundle", price: 249, originalPrice: 347, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 44, name: "iPhone 16 Pro Max Case Bundle", price: 249, originalPrice: 347, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 45, name: "iPhone 17 Case Bundle", price: 249, originalPrice: 347, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 46, name: "iPhone 17 Pro Case Bundle", price: 249, originalPrice: 347, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] },
+    { id: 47, name: "iPhone 17 Pro Max Case Bundle", price: 249, originalPrice: 347, image: "placeholder.jpg", bundle: "Charms, Ribbons & Ponytails by Pair", samples: [] }
 ];
-
-
-
-let cart = [];
-
-
 
 document.addEventListener("DOMContentLoaded", () => renderCatalogGrid());
 
-
-
 function renderCatalogGrid() {
-
     const container = document.getElementById('catalog-injection-point');
-
     container.innerHTML = studioProducts.map((product, index) => `
-
         <div class="product-card" style="animation-delay: ${index * 0.03}s">
-
-            <div class="sale-badge">Sale!</div>
-
+            <div class="sale-badge">
+                <span class="badge-pct">−28% OFF</span>
+                Opening Sale
+            </div>
             <div class="product-preview" onclick="triggerSampleGallery(${index})">
-
                 <img src="${product.image}" alt="${product.name}" class="product-img" onerror="this.src='placeholder.jpg';">
-
             </div>
-
             <div class="product-details">
-
                 <div onclick="triggerSampleGallery(${index})">
-
                     <h3 class="product-name">${product.name}</h3>
-
                     <p class="product-bundle-desc">(+ ${product.bundle})</p>
-
                 </div>
-
                 <div class="price-container">
-
                     <div class="highlight-price-box">
-
                         <p class="product-cost">₱${product.price.toFixed(2)}</p>
-
                     </div>
-
                     <p class="product-original-cost">₱${product.originalPrice.toFixed(2)}</p>
-
-                    <button class="add-to-cart-btn" onclick="addToCart('${product.name}', ${product.price})">ADD TO CART 🎀</button>
-
+                    <div class="stock-label">
+                        <span class="fire-icon">🔥</span>
+                        Only 3 pcs left!
+                    </div>
                 </div>
-
             </div>
-
         </div>
-
     `).join('');
-
 }
-
-
-
-function addToCart(name, price) {
-
-    cart.push({ name, price });
-
-    document.getElementById('cartCount').innerText = cart.length;
-
-    
-
-    // Auto-open the cart so they can see it "in front" of them
-
-    toggleCart(); 
-
-}
-
-    function toggleCart() {
-
-    const modal = document.getElementById('cartModal');
-
-    modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
-
-    
-
-    // Populate the list
-
-    const list = document.getElementById('cartItemsList');
-
-    const totalDiv = document.getElementById('cartTotal');
-
-    
-
-    if (cart.length === 0) {
-
-        list.innerHTML = "<p style='text-align:center; padding:20px;'>Your basket is empty... 🎀</p>";
-
-        totalDiv.innerText = "";
-
-    } else {
-
-        list.innerHTML = cart.map((item, index) => `
-
-            <div style="display:flex; justify-content:space-between; align-items:center; padding: 10px; border-bottom: 1px dashed var(--main-baby-pink);">
-
-                <span style="font-size: 0.9rem;">${item.name}</span>
-
-                <div style="display:flex; align-items:center; gap:10px;">
-
-                    <span style="font-weight:bold;">₱${item.price}</span>
-
-                    <button onclick="removeFromCart(${index})" style="background:#FFE3E7; border:none; padding:4px 8px; border-radius:5px; cursor:pointer;">✕</button>
-
-                </div>
-
-            </div>
-
-        `).join('');
-
-        
-
-        const total = cart.reduce((sum, item) => sum + item.price, 0);
-
-        totalDiv.innerText = `Total: ₱${total.toFixed(2)}`;
-
-    }
-
-}
-
-    function removeFromCart(index) {
-
-    cart.splice(index, 1);
-
-    document.getElementById('cartCount').innerText = cart.length;
-
-    toggleCart(); // Refresh the list
-
-    toggleCart(); // Re-open it
-
-}
-
-
-
-function closeCart(event) {
-
-    if (event.target.id === "cartModal") document.getElementById('cartModal').style.display = 'none';
-
-}
-
-
-
-function checkout() {
-
-    if (cart.length === 0) {
-
-        alert("Your cart is empty!");
-
-        return;
-
-    }
-
-    
-
-    let cartList = cart.map((item, index) => `${index + 1}. ${item.name} (₱${item.price})`).join("\n");
-
-    let confirmOrder = confirm(`Your Cart:\n${cartList}\n\nRemove an item? (Cancel to proceed to checkout)`);
-
-    
-
-    if (confirmOrder) {
-
-        let removeIdx = prompt("Enter the number of the item to remove:") - 1;
-
-        if (removeIdx >= 0 && removeIdx < cart.length) {
-
-            cart.splice(removeIdx, 1);
-
-            document.getElementById('cartCount').innerText = cart.length;
-
-        }
-
-    } else {
-
-        window.open(ORDER_FORM_URL, '_blank');
-
-    }
-
-}
-
-
 
 function triggerSampleGallery(index) {
-
     const targetProduct = studioProducts[index];
-
     document.getElementById('modalTitle').innerText = targetProduct.name;
-
     const mainZoomNode = document.getElementById('mainZoomedImage');
-
     const imageDisplayList = (targetProduct.samples && targetProduct.samples.length > 0) ? targetProduct.samples : [targetProduct.image];
-
     mainZoomNode.src = imageDisplayList[0];
-
     const galleryImgContainer = document.getElementById('modalGalleryInjected');
-
     galleryImgContainer.innerHTML = imageDisplayList.map((imageUrl, imgIdx) => `
-
         <img src="${imageUrl}" alt="Sample View ${imgIdx}" class="gallery-sample-item ${imgIdx === 0 ? 'active-thumbnail' : ''}" onclick="switchFocusedZoomImage(this, '${imageUrl}'); event.stopPropagation();" onerror="this.src='placeholder.jpg';">
-
     `).join('');
-
     document.getElementById('galleryModal').style.display = 'flex';
-
 }
-
-
 
 function switchFocusedZoomImage(thumbnailElement, targetSrc) {
-
     const mainZoomNode = document.getElementById('mainZoomedImage');
-
     mainZoomNode.style.opacity = '0';
-
     setTimeout(() => { mainZoomNode.src = targetSrc; mainZoomNode.style.opacity = '1'; }, 120);
-
     document.querySelectorAll('.gallery-sample-item').forEach(img => img.classList.remove('active-thumbnail'));
-
     thumbnailElement.classList.add('active-thumbnail');
-
 }
-
-
 
 function toggleBotDrawer() {
-
     const drawer = document.getElementById('botDrawer');
-
     drawer.style.display = (drawer.style.display === 'block') ? 'none' : 'block';
-
 }
-
-
 
 function closeSampleGallery(event) {
-
     if (event.target.id === "galleryModal") document.getElementById('galleryModal').style.display = 'none';
-
 }
 
-
-
 function forceCloseGallery() {
-
     document.getElementById('galleryModal').style.display = 'none';
-
 }
 
 function redirectToOrderForm() {
-
     window.open(ORDER_FORM_URL, '_blank');
-
 }
 
 </script>
 
-
-
-
-
-
-
-
-
-
-
-</script>
-
-
-
-    <div id="cartModal" class="modal-overlay" onclick="closeCart(event)">
-
-    <div class="modal-card">
-
-        <span class="close-modal-btn" onclick="toggleCart()">×</span>
-
-        <h3 class="modal-title">Your Basket</h3>
-
-        <div id="cartItemsList" style="margin: 20px 0; max-height: 50vh; overflow-y: auto; text-align: left;">
-
-            <!-- Items appear here -->
-
-        </div>
-
-        <div id="cartTotal" style="font-weight: 800; color: var(--deep-amalfi-rose); margin-bottom: 20px; text-align: center;"></div>
-
-        <button class="global-order-btn" onclick="window.open(ORDER_FORM_URL, '_blank')">Checkout Now 🎀</button>
-
-    </div>
-
-</div>
-
-    
-
-
-
 </body>
-
-
-
-</html>   
-
+</html>
