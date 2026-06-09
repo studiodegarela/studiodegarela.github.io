@@ -19,6 +19,14 @@
 
 
 <style>
+    
+    .stock-message {
+    font-size: 0.7rem;
+    color: #D32F2F;
+    font-weight: 700;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+}
 
     .add-to-cart-btn {
     background: var(--deep-amalfi-rose);
@@ -1415,27 +1423,30 @@ document.addEventListener("DOMContentLoaded", () => renderCatalogGrid());
 
 function renderCatalogGrid() {
     const container = document.getElementById('catalog-injection-point');
-    container.innerHTML = studioProducts.map((product, index) => `
-        <div class="product-card" style="animation-delay: ${index * 0.03}s">
-            <div class="sale-badge">Sale!</div>
-            <div class="product-preview" onclick="triggerSampleGallery(${index})">
-                <img src="${product.image}" alt="${product.name}" class="product-img" onerror="this.src='placeholder.jpg';">
+  container.innerHTML = studioProducts.map((product, index) => `
+    <div class="product-card" style="animation-delay: ${index * 0.03}s">
+        <div class="sale-badge">Sale!</div>
+        <div class="product-preview" onclick="triggerSampleGallery(${index})">
+            <img src="${product.image}" alt="${product.name}" class="product-img" onerror="this.src='placeholder.jpg';">
+        </div>
+        <div class="product-details">
+            <div onclick="triggerSampleGallery(${index})">
+                <h3 class="product-name">${product.name}</h3>
+                <p class="product-bundle-desc">(+ ${product.bundle})</p>
             </div>
-            <div class="product-details">
-                <div onclick="triggerSampleGallery(${index})">
-                    <h3 class="product-name">${product.name}</h3>
-                    <p class="product-bundle-desc">(+ ${product.bundle})</p>
+            
+            <div class="price-container">
+                <!-- ADDED THIS LINE -->
+                <div class="stock-message">Only 3pcs available</div> 
+                
+                <div class="highlight-price-box">
+                    <p class="product-cost" style="font-size: 1.1rem;">₱249</p> 
                 </div>
-                <div class="price-container">
-                    <div class="highlight-price-box">
-                        <p class="product-cost">₱${product.price.toFixed(2)}</p>
-                    </div>
-                    <p class="product-original-cost">₱${product.originalPrice.toFixed(2)}</p>
-                    <button class="add-to-cart-btn" onclick="addToCart('${product.name}', ${product.price})">ADD TO CART 🎀</button>
-                </div>
+                <p class="product-original-cost" style="font-size: 0.8rem;">₱347</p>
             </div>
         </div>
-    `).join('');
+    </div>
+`).join('');
 }
 
 function addToCart(name, price) {
