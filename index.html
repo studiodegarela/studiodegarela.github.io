@@ -174,7 +174,7 @@ header{
     max-width:480px;line-height:1.55;
 }
  
-/* WHAT'S INSIDE — no icons, light pink pills */
+/* WHAT'S INSIDE */
 .whats-inside-label{
     font-family:'Cinzel',serif;
     font-size:clamp(0.6rem,1.6vw,0.72rem);
@@ -255,7 +255,7 @@ header{
     font-weight:700;color:#fff;letter-spacing:4px;border-radius:inherit;z-index:20;
 }
  
-/* SALE BADGE top-right */
+/* SALE BADGE */
 .sale-badge{
     position:absolute;
     top:clamp(9px,2vw,15px);right:clamp(9px,2vw,15px);
@@ -304,7 +304,7 @@ header{
 }
 .price-now{font-size:clamp(1.1rem,2.5vw,1.28rem);font-weight:800;color:var(--rose);line-height:1.2;}
  
-/* ORIGINAL PRICE — bold, visible, slanted strikethrough */
+/* ORIGINAL PRICE */
 .price-orig{
     position:relative;display:inline-block;
     font-size:clamp(0.88rem,2vw,1.04rem);
@@ -322,13 +322,12 @@ header{
     border-radius:2px;opacity:1;
 }
  
-/* LAST 1 LEFT — bottom of card only */
+/* QTY TAG */
 .qty-tag{
     display:flex;align-items:center;gap:5px;
     margin-top:10px;padding:7px 16px;border-radius:20px;
     font-size:clamp(0.62rem,1.45vw,0.74rem);
     font-weight:700;color:var(--red);letter-spacing:0.4px;
-    animation:urgency 2.2s ease-in-out infinite;
     border:1.5px dashed rgba(184,50,50,0.4);
     animation:urgency 2.2s ease-in-out infinite, pulse-border 2.2s ease-in-out infinite;
     white-space:nowrap;
@@ -554,24 +553,33 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
 const ORDER_URL  = "https://forms.gle/ZmBc8ktV6CuZMy7q7";
 const SALE_PRICE = 479;
 const ORIG_PRICE = 656;
- 
+
+// All bundles share the same contents, so all 3 real images apply to every card.
+// The first image in the array is the card thumbnail; all 3 appear in the modal gallery.
+const BUNDLE_IMAGES = [
+    "Animal sticker 6pc.png",
+    "Charms 12pcs.jpeg",
+    "InsideOut27pcs.png"
+];
+
 const products = [
-    {id:1,  name:"iPhone 17 Pro Max",      qty:1, image:"placeholder.jpg", samples:[]},
-    {id:2,  name:"iPhone 17",              qty:1, image:"placeholder.jpg", samples:[]},
-    {id:3,  name:"iPhone 16 Pro Max",      qty:1, image:"placeholder.jpg", samples:[]},
-    {id:4,  name:"iPhone 16 Plus",         qty:2, image:"placeholder.jpg", samples:[]},
-    {id:5,  name:"iPhone 16",              qty:1, image:"placeholder.jpg", samples:[]},
-    {id:6,  name:"iPhone 15 Pro Max",      qty:2, image:"placeholder.jpg", samples:[]},
-    {id:7,  name:"iPhone 15",              qty:1, image:"placeholder.jpg", samples:[]},
-    {id:8,  name:"iPhone 13/14 (Mixed)",   qty:5, image:"Iphone 13.jpg",   samples:["Iphone 13.jpg"]},
-    {id:9,  name:"iPhone 13 Pro Max",      qty:1, image:"placeholder.jpg", samples:[]},
-    {id:10, name:"iPhone 12 Pro Max",      qty:2, image:"placeholder.jpg", samples:[]},
+    {id:1,  name:"iPhone 17 Pro Max",    qty:1, image:BUNDLE_IMAGES[0], samples:BUNDLE_IMAGES},
+    {id:2,  name:"iPhone 17",            qty:1, image:BUNDLE_IMAGES[1], samples:BUNDLE_IMAGES},
+    {id:3,  name:"iPhone 16 Pro Max",    qty:1, image:BUNDLE_IMAGES[2], samples:BUNDLE_IMAGES},
+    {id:4,  name:"iPhone 16 Plus",       qty:2, image:BUNDLE_IMAGES[0], samples:BUNDLE_IMAGES},
+    {id:5,  name:"iPhone 16",            qty:1, image:BUNDLE_IMAGES[1], samples:BUNDLE_IMAGES},
+    {id:6,  name:"iPhone 15 Pro Max",    qty:2, image:BUNDLE_IMAGES[2], samples:BUNDLE_IMAGES},
+    {id:7,  name:"iPhone 15",            qty:1, image:BUNDLE_IMAGES[0], samples:BUNDLE_IMAGES},
+    {id:8,  name:"iPhone 13/14 (Mixed)", qty:5, image:BUNDLE_IMAGES[1], samples:BUNDLE_IMAGES},
+    {id:9,  name:"iPhone 13 Pro Max",    qty:1, image:BUNDLE_IMAGES[2], samples:BUNDLE_IMAGES},
+    {id:10, name:"iPhone 12 Pro Max",    qty:2, image:BUNDLE_IMAGES[0], samples:BUNDLE_IMAGES},
 ];
  
 function renderProducts() {
     const grid = document.getElementById('catalog');
     grid.innerHTML = products.map((p, i) => {
         const soldOut = p.qty === 0;
+        const qtyLabel = p.qty === 1 ? 'Last 1 left!' : `Last ${p.qty} left!`;
         return `
         <div class="product-card${soldOut ? ' sold-out' : ''}" style="animation-delay:${i * 0.04}s">
             <div class="sale-badge"><span class="pct">−27% OFF</span>Opening Sale</div>
@@ -586,7 +594,7 @@ function renderProducts() {
                         <div class="price-now">₱${SALE_PRICE.toFixed(2)}</div>
                     </div>
                     <span class="price-orig">₱${ORIG_PRICE.toFixed(2)}</span>
-                    ${!soldOut ? `<div class="qty-tag"><span>🔥</span> Last 1 left!</div>` : ''}
+                    ${!soldOut ? `<div class="qty-tag"><span>🔥</span> ${qtyLabel}</div>` : ''}
                 </div>
             </div>
         </div>`;
@@ -602,7 +610,7 @@ function openModal(idx) {
         <img src="${src}" alt="Sample ${i+1}"
              class="thumb-img${i===0?' active':''}"
              onclick="switchThumb(this,'${src}');event.stopPropagation();"
-             onerror="this.src='placeholder.jpg'">`).join('');
+             onerror="this.style.display='none'">`).join('');
     document.getElementById('galleryModal').style.display = 'flex';
 }
  
