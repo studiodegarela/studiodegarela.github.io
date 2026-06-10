@@ -546,6 +546,11 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
                  onerror="this.style.background='var(--pink-lt)';this.style.minHeight='100px'">
             <div class="bundle-img-caption">Charms</div>
         </div>
+        <div class="bundle-img-item" style="animation-delay:0.15s">
+            <img src="Animal Keychains 6pc.png" alt="Animal Keychains"
+                 onerror="this.style.background='var(--pink-lt)';this.style.minHeight='100px'">
+            <div class="bundle-img-caption">Animal Keychains</div>
+        </div>
         <div class="bundle-img-item" style="animation-delay:0.2s">
             <img src="InsideOut27pcs.png" alt="Inside Out"
                  onerror="this.style.background='var(--pink-lt)';this.style.minHeight='100px'">
@@ -615,8 +620,6 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
 <script>
 const ORDER_URL = "https://forms.gle/ZmBc8ktV6CuZMy7q7";
 
-// Original prices calculated from sale price + 37% off
-// sale = orig * (1 - 0.37)  =>  orig = sale / 0.63
 const products = [
     {
         id: 1,
@@ -626,7 +629,7 @@ const products = [
         image: "placeholder.jpg",
         samples: [],
         includes: "Phone Case · 3 Pairs Earrings · Moon Charm · Inside Out Charm · Cartoon Chains · Mini Keychain Stapler · Fashion Necklace · Fashion Bracelet · FREE 2 Pairs of Socks",
-        tag: "🎀 With Phone Case"
+        tag: "🎀 Includes Phone Case"
     },
     {
         id: 2,
@@ -645,8 +648,8 @@ const products = [
         origPrice: Math.round(1199 / 0.63),
         image: "placeholder.jpg",
         samples: [],
-        includes: "Everything in Bundle 1 + Everything in Bundle 2 — Best Value!",
-        tag: "🔥 Best Value"
+        includes: "Everything in Bundle 1 + Everything in Bundle 2 — Best Bundle!",
+        tag: "🔥 Best Bundle"
     },
     {
         id: 4,
@@ -655,8 +658,8 @@ const products = [
         origPrice: Math.round(599 / 0.63),
         image: "placeholder.jpg",
         samples: [],
-        includes: "30 Pairs of Studs — Mix and Match your way!",
-        tag: "💎 Earring Set"
+        includes: "Socks — Different Designs to Mix and Match!",
+        tag: "🧦 Socks Collection"
     },
 ];
 
