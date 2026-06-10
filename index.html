@@ -501,12 +501,12 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
     </div>
 </header>
 
-<!-- Collection Hero -->
+<!-- Hero -->
 <div class="collection-hero">
     <div class="collection-hero-inner">
         <div class="c-badge">✨ Grand Opening Sale — 27% OFF</div>
         <div class="c-eyebrow">Introducing</div>
-        <div class="c-title">Whimsy &amp; Wonders Collection:</div>
+        <div class="c-title">Whimsy &amp; Wonders:</div>
         <div class="c-enchanted">The Enchanted Bundle</div>
         <div class="c-tagline">A dreamy coquette bundle made for girls who carry magic wherever they go 🌸</div>
         <div class="whats-inside-label">What's Inside</div>
@@ -522,7 +522,7 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
     </div>
 </div>
 
-<!-- Bundle Contents Showcase (above product grid) -->
+<!-- Bundle Contents Showcase -->
 <div class="bundle-showcase">
     <div class="bundle-showcase-label">
         ✨ A Peek Inside Every Bundle ✨
@@ -532,17 +532,17 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
         <div class="bundle-img-item" style="animation-delay:0s">
             <img src="Animal sticker 6pc.png" alt="Animal Stickers"
                  onerror="this.style.background='var(--pink-lt)';this.style.minHeight='100px'">
-            <div class="bundle-img-caption">Animal Stickers · 6 pcs</div>
+            <div class="bundle-img-caption">Animal Stickers</div>
         </div>
         <div class="bundle-img-item" style="animation-delay:0.1s">
             <img src="Charms 12pcs.jpeg" alt="Charms"
                  onerror="this.style.background='var(--pink-lt)';this.style.minHeight='100px'">
-            <div class="bundle-img-caption">Charms · 12 pcs</div>
+            <div class="bundle-img-caption">Charms</div>
         </div>
         <div class="bundle-img-item" style="animation-delay:0.2s">
-            <img src="InsideOut27pcs.png" alt="Inside Out Collection"
+            <img src="InsideOut27pcs.png" alt="Inside Out"
                  onerror="this.style.background='var(--pink-lt)';this.style.minHeight='100px'">
-            <div class="bundle-img-caption">Inside Out Set · 27 pcs</div>
+            <div class="bundle-img-caption">Inside Out Set</div>
         </div>
     </div>
 </div>
@@ -581,7 +581,7 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
         <p class="drawer-msg">Questions? We'd love to hear from you! 🌸</p>
         <a href="mailto:crafts@studiogarela.com" class="contact-link">✉ crafts@studiogarela.com</a>
         <a href="https://www.instagram.com/studiodegarela" target="_blank" class="contact-link">📸 @studiodegarela on Instagram</a>
-        <a href="https://www.tiktok.com/@studiodegarela" target="_blank" class="contact-link">🎵 @studiodegarela on TikTok</a>
+        <a href="https://www.tiktok.com/@studiodegalera?lang=en" target="_blank" class="contact-link">🎵 @studiodegalera on TikTok</a>
     </div>
     <div class="chat-btn" onclick="toggleChat()">🎀</div>
 </div>
@@ -636,7 +636,7 @@ function renderProducts() {
                      onerror="this.parentElement.innerHTML=\`<div class='img-placeholder'><div class='ph-icon'>📱</div><div class='ph-text'>Preview Soon</div></div>\`">
             </div>
             <div class="product-details" onclick="${soldOut ? '' : `openModal(${i})`}">
-                <div class="product-name">${p.name}<br>Case Bundle</div>
+                <div class="product-name">${p.name}<br>Bundle</div>
                 <div class="price-row">
                     <div class="price-box">
                         <div class="price-now">₱${SALE_PRICE.toFixed(2)}</div>
