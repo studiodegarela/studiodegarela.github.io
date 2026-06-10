@@ -335,6 +335,11 @@ header{
     font-family:'Cinzel',serif;font-size:clamp(0.76rem,1.7vw,0.98rem);
     font-weight:700;color:var(--text);line-height:1.3;margin-bottom:6px;letter-spacing:0.4px;
 }
+.product-includes{
+    font-size:clamp(0.58rem,1.4vw,0.66rem);
+    color:var(--muted);line-height:1.55;margin-bottom:8px;
+    font-style:italic;
+}
 
 /* PRICE */
 .price-row{display:flex;flex-direction:column;align-items:center;gap:5px;margin-top:auto;width:100%;}
@@ -487,7 +492,7 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
 
 <!-- Banner -->
 <div class="top-banner">
-    🎀 &nbsp; Grand Opening — 27% OFF &nbsp; 🎀 &nbsp; Limited Stocks Only! &nbsp; 🎀 &nbsp; While Supplies Last &nbsp; 🎀
+    🎀 &nbsp; Grand Opening — 37% OFF &nbsp; 🎀 &nbsp; Limited Stocks Only! &nbsp; 🎀 &nbsp; While Supplies Last &nbsp; 🎀
 </div>
 
 <!-- Header -->
@@ -504,7 +509,7 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
 <!-- Hero -->
 <div class="collection-hero">
     <div class="collection-hero-inner">
-        <div class="c-badge">✨ Grand Opening Sale — 27% OFF</div>
+        <div class="c-badge">✨ Grand Opening Sale — 37% OFF</div>
         <div class="c-eyebrow">Introducing</div>
         <div class="c-title">Whimsy &amp; Wonders:</div>
         <div class="c-enchanted">The Enchanted Bundle</div>
@@ -516,23 +521,25 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
             <span class="c-pill">Charms</span>
             <span class="c-pill">Keychain</span>
             <span class="c-pill">Bracelets</span>
+            <span class="c-pill">Necklace</span>
+            <span class="c-pill">Socks</span>
             <span class="c-pill">Stickers</span>
         </div>
-        <div class="c-stock">⚡ Only 17 enchanted bundles left in total!</div>
+        <div class="c-stock">⚡ Only 50 enchanted bundles available — 17 include a phone case!</div>
     </div>
 </div>
 
 <!-- Bundle Contents Showcase -->
 <div class="bundle-showcase">
     <div class="bundle-showcase-label">
-        ✨ A Peek Inside Every Bundle ✨
-        <span>Each enchanted bundle includes all of these goodies 🌸</span>
+        ✨ A Peek at What's Included in the Bundles ✨
+        <span>Each enchanted bundle is packed with these goodies 🌸</span>
     </div>
     <div class="bundle-imgs-row">
         <div class="bundle-img-item" style="animation-delay:0s">
-            <img src="Animal sticker 6pc.png" alt="Animal Stickers"
+            <img src="Animal keychains.png" alt="Animal Keychains"
                  onerror="this.style.background='var(--pink-lt)';this.style.minHeight='100px'">
-            <div class="bundle-img-caption">Animal Stickers</div>
+            <div class="bundle-img-caption">Animal Keychains</div>
         </div>
         <div class="bundle-img-item" style="animation-delay:0.1s">
             <img src="Charms 12pcs.jpeg" alt="Charms"
@@ -553,7 +560,7 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
     <p class="section-sub">Tap a card to preview · Tap Order Now to claim yours 🎀</p>
 
     <div class="urgency-strip">
-        <p>🔥 These are selling fast — <span>bundles are limited per model. Once gone, they're gone!</span></p>
+        <p>🔥 These are selling fast — <span>bundles are limited. Once gone, they're gone!</span></p>
     </div>
 
     <div class="products-grid" id="catalog"></div>
@@ -570,7 +577,7 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
 <div class="trivia-card">
     <div class="trivia-title">✨ The Enchanted Bundle — What's Inside? ✨</div>
     <p class="trivia-text">
-        Every Whimsy &amp; Wonders bundle comes with a coquette phone case, dainty earrings, cute charms, a charming keychain, pretty bracelets, and fun stickers — everything you need to carry a little magic everywhere you go. 🌸
+        Every Whimsy &amp; Wonders bundle is packed with dreamy goodies — including a coquette phone case (select bundles), dainty earrings, cute charms, a charming keychain, pretty bracelets, a hypoallergenic fashion necklace, cute socks, and fun stickers. Everything you need to carry a little magic everywhere you go. 🌸
     </p>
 </div>
 
@@ -606,43 +613,73 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
 </footer>
 
 <script>
-const ORDER_URL  = "https://forms.gle/ZmBc8ktV6CuZMy7q7";
-const SALE_PRICE = 479;
-const ORIG_PRICE = 656;
+const ORDER_URL = "https://forms.gle/ZmBc8ktV6CuZMy7q7";
 
+// Original prices calculated from sale price + 37% off
+// sale = orig * (1 - 0.37)  =>  orig = sale / 0.63
 const products = [
-    {id:1,  name:"iPhone 17 Pro Max",    qty:1, image:"placeholder.jpg", samples:[]},
-    {id:2,  name:"iPhone 17",            qty:1, image:"placeholder.jpg", samples:[]},
-    {id:3,  name:"iPhone 16 Pro Max",    qty:1, image:"placeholder.jpg", samples:[]},
-    {id:4,  name:"iPhone 16 Plus",       qty:2, image:"placeholder.jpg", samples:[]},
-    {id:5,  name:"iPhone 16",            qty:1, image:"placeholder.jpg", samples:[]},
-    {id:6,  name:"iPhone 15 Pro Max",    qty:2, image:"placeholder.jpg", samples:[]},
-    {id:7,  name:"iPhone 15",            qty:1, image:"placeholder.jpg", samples:[]},
-    {id:8,  name:"iPhone 13/14 (Mixed)", qty:5, image:"Iphone 13.jpg",   samples:["Iphone 13.jpg"]},
-    {id:9,  name:"iPhone 13 Pro Max",    qty:1, image:"placeholder.jpg", samples:[]},
-    {id:10, name:"iPhone 12 Pro Max",    qty:2, image:"placeholder.jpg", samples:[]},
+    {
+        id: 1,
+        name: "Garela Whimsy & Wonders\nLimited Edition Bundle",
+        salePrice: 639,
+        origPrice: Math.round(639 / 0.63),
+        image: "placeholder.jpg",
+        samples: [],
+        includes: "Phone Case · 3 Pairs Earrings · Moon Charm · Inside Out Charm · Cartoon Chains · Mini Keychain Stapler · Fashion Necklace · Fashion Bracelet · FREE 2 Pairs of Socks",
+        tag: "🎀 With Phone Case"
+    },
+    {
+        id: 2,
+        name: "Whimsy & Wonders:\nInside Out Charm Collection",
+        salePrice: 739,
+        origPrice: Math.round(739 / 0.63),
+        image: "placeholder.jpg",
+        samples: [],
+        includes: "9 Inside Out Charms · 3 Pairs Earrings · Moon Charm · Cartoon Chains · Mini Keychain Stapler · Fashion Bracelet · FREE Pair of Socks",
+        tag: "✨ Charm Special"
+    },
+    {
+        id: 3,
+        name: "Ultimate Combo Deal!\nBoth Bundles Together",
+        salePrice: 1199,
+        origPrice: Math.round(1199 / 0.63),
+        image: "placeholder.jpg",
+        samples: [],
+        includes: "Everything in Bundle 1 + Everything in Bundle 2 — Best Value!",
+        tag: "🔥 Best Value"
+    },
+    {
+        id: 4,
+        name: "Stud Collection\n30 Pairs Mix & Match",
+        salePrice: 599,
+        origPrice: Math.round(599 / 0.63),
+        image: "placeholder.jpg",
+        samples: [],
+        includes: "30 Pairs of Studs — Mix and Match your way!",
+        tag: "💎 Earring Set"
+    },
 ];
 
 function renderProducts() {
     const grid = document.getElementById('catalog');
     grid.innerHTML = products.map((p, i) => {
-        const soldOut = p.qty === 0;
-        const qtyLabel = p.qty === 1 ? 'Last 1 left!' : `Last ${p.qty} left!`;
+        const nameLines = p.name.split('\n');
         return `
-        <div class="product-card${soldOut ? ' sold-out' : ''}" style="animation-delay:${i * 0.04}s">
-            <div class="sale-badge"><span class="pct">−27% OFF</span>Opening Sale</div>
-            <div class="product-img-wrap" onclick="${soldOut ? '' : `openModal(${i})`}">
-                <img src="${p.image}" alt="${p.name}" class="product-img"
-                     onerror="this.parentElement.innerHTML=\`<div class='img-placeholder'><div class='ph-icon'>📱</div><div class='ph-text'>Preview Soon</div></div>\`">
+        <div class="product-card" style="animation-delay:${i * 0.07}s" onclick="openModal(${i})">
+            <div class="sale-badge"><span class="pct">−37% OFF</span>On Sale!</div>
+            <div class="product-img-wrap">
+                <img src="${p.image}" alt="${nameLines[0]}" class="product-img"
+                     onerror="this.parentElement.innerHTML=\`<div class='img-placeholder'><div class='ph-icon'>🎀</div><div class='ph-text'>Preview Soon</div></div>\`">
             </div>
-            <div class="product-details" onclick="${soldOut ? '' : `openModal(${i})`}">
-                <div class="product-name">${p.name}<br>Bundle</div>
+            <div class="product-details">
+                <div class="product-name">${nameLines.map(l => l).join('<br>')}</div>
+                <div class="product-includes">${p.includes}</div>
                 <div class="price-row">
                     <div class="price-box">
-                        <div class="price-now">₱${SALE_PRICE.toFixed(2)}</div>
+                        <div class="price-now">₱${p.salePrice.toFixed(2)}</div>
                     </div>
-                    <span class="price-orig">₱${ORIG_PRICE.toFixed(2)}</span>
-                    ${!soldOut ? `<div class="qty-tag"><span>🔥</span> ${qtyLabel}</div>` : ''}
+                    <span class="price-orig">₱${p.origPrice.toFixed(2)}</span>
+                    <div class="qty-tag"><span>✨</span> ${p.tag}</div>
                 </div>
             </div>
         </div>`;
@@ -651,7 +688,8 @@ function renderProducts() {
 
 function openModal(idx) {
     const p = products[idx];
-    document.getElementById('modalTitle').textContent = p.name + ' Bundle';
+    const nameLines = p.name.split('\n');
+    document.getElementById('modalTitle').textContent = nameLines[0];
     const imgs = (p.samples && p.samples.length) ? p.samples : [p.image];
     document.getElementById('modalMainImg').src = imgs[0];
     document.getElementById('modalThumbs').innerHTML = imgs.map((src, i) => `
