@@ -519,6 +519,9 @@ header{
 .modal-title{font-family:'Cinzel',serif;font-size:clamp(0.95rem,2.4vw,1.22rem);color:var(--text);margin-bottom:8px;padding:0 18px;}
 .modal-subtitle{font-size:clamp(0.62rem,1.6vw,0.74rem);color:var(--rose);font-weight:700;margin-bottom:4px;}
 .modal-img-wrap{width:100%;height:clamp(210px,46vw,305px);border-radius:16px;overflow:hidden;margin:10px 0;background:var(--pink-lt);border:1px solid rgba(255,192,203,0.35);position:relative;}
+.modal-img-wrap.portrait-modal{height:clamp(380px,86vw,600px);}
+.modal-img-wrap.bundle-modal{height:clamp(320px,78vw,540px);}
+.modal-img-wrap.bundle-modal .modal-main-img{object-fit:contain;}
 .modal-main-img{width:100%;height:100%;object-fit:cover;transition:opacity 0.2s;}
 .modal-nav{
     position:absolute;top:50%;transform:translateY(-50%);
@@ -703,7 +706,7 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
         <span class="modal-close" onclick="closeModal()">&times;</span>
         <div class="modal-subtitle" id="modalSubtitle"></div>
         <h3 class="modal-title" id="modalTitle">Product Preview</h3>
-        <div class="modal-img-wrap">
+        <div class="modal-img-wrap" id="modalImgWrap">
             <img id="modalMainImg" src="" alt="Preview" class="modal-main-img">
             <div class="modal-nav prev" id="modalPrev" onclick="navModal(-1);event.stopPropagation();">&#8249;</div>
             <div class="modal-nav next" id="modalNext" onclick="navModal(1);event.stopPropagation();">&#8250;</div>
@@ -729,7 +732,7 @@ const products = [
         name: "Garela Whimsy & Wonders\nLimited Edition Bundle",
         salePrice: 639,
         origPrice: Math.round(639 / 0.63),
-        image: "placeholder.jpg",
+        image: "Garela Whimsy & Wonders.png",
         samples: [],
         includes: "Phone Case · 3 Pairs Earrings · Moon Charm · Inside Out Charm · Cartoon Chains · Mini Keychain Stapler · Fashion Necklace · Fashion Bracelet · FREE 2 Pairs of Socks",
         tag: "🎀Only 17 Left!🎀",
@@ -740,7 +743,7 @@ const products = [
         name: "Whimsy & Wonders:\nInside Out Charm Collection",
         salePrice: 739,
         origPrice: Math.round(739 / 0.63),
-        image: "placeholder.jpg",
+        image: "Whimsy & Wonders- Inside Out Charm Collection.png",
         samples: [],
         includes: "9 Inside Out Charms · 3 Pairs Earrings · Moon Charm · Cartoon Chains · Mini Keychain Stapler · Fashion Bracelet · FREE Pair of Socks",
         tag: "✨ Only 3 Left — Grab Yours! ✨",
@@ -751,7 +754,7 @@ const products = [
         name: "Ultimate Combo Deal!\nBoth Bundles Together",
         salePrice: 1199,
         origPrice: Math.round(1199 / 0.63),
-        image: "placeholder.jpg",
+        image: "Ultimate Combo Deal! Both Bundles Together.png",
         samples: [],
         includes: "Everything in Bundle 1 + Everything in Bundle 2 — Best Bundle!",
         tag: "🔥LAST 1 REMAINING!🔥",
@@ -762,7 +765,7 @@ const products = [
         name: "Stud Collection\n30 Pairs Mix & Match",
         salePrice: 599,
         origPrice: Math.round(599 / 0.63),
-        image: "placeholder.jpg",
+        image: "Stud Collection30 Pairs Mix & Match.png",
         samples: [],
         includes: "Socks — Different Designs to Mix and Match!",
         tag: "🧦Last 12 Available Set!🧦",
@@ -789,7 +792,7 @@ const caseDesigns = [
     { name: "iPhone 12 Pro Max", stock: "2pcs", images: ["Iphone 12ProMax.jpg"] },
 ];
  
-let activeGallery = { images: [], index: 0 };
+let activeGallery = { images: [], index: 0, type: 'product' };
  
 function renderProducts() {
     const grid = document.getElementById('catalog');
@@ -842,6 +845,16 @@ function renderCaseDesigns() {
     }).join('');
 }
  
+function setModalImgWrapMode(type) {
+    const wrap = document.getElementById('modalImgWrap');
+    wrap.classList.remove('portrait-modal', 'bundle-modal');
+    if (type === 'case') {
+        wrap.classList.add('portrait-modal');
+    } else if (type === 'bundle') {
+        wrap.classList.add('bundle-modal');
+    }
+}
+ 
 function openModal(idx) {
     const p = products[idx];
     const nameLines = p.name.split('\n');
@@ -849,7 +862,8 @@ function openModal(idx) {
     document.getElementById('modalTitle').textContent = nameLines[0];
     document.getElementById('modalOrderBtn').style.display = 'block';
     const imgs = (p.samples && p.samples.length) ? p.samples : [p.image];
-    activeGallery = { images: imgs, index: 0 };
+    activeGallery = { images: imgs, index: 0, type: 'bundle' };
+    setModalImgWrapMode('bundle');
     showGalleryImage();
     renderThumbs();
     document.getElementById('galleryModal').style.display = 'flex';
@@ -860,7 +874,8 @@ function openCaseModal(idx) {
     document.getElementById('modalSubtitle').textContent = `${c.stock} available`;
     document.getElementById('modalTitle').textContent = c.name;
     document.getElementById('modalOrderBtn').style.display = 'block';
-    activeGallery = { images: c.images, index: 0 };
+    activeGallery = { images: c.images, index: 0, type: 'case' };
+    setModalImgWrapMode('case');
     showGalleryImage();
     renderThumbs();
     document.getElementById('galleryModal').style.display = 'flex';
