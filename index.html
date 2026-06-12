@@ -234,8 +234,11 @@ header{
     width:100%;height:clamp(100px,22vw,175px);
     object-fit:cover;display:block;
 }
+.bundle-img-item.portrait{
+    flex-basis:100%;max-width:280px;
+}
 .bundle-img-item.portrait img{
-    height:clamp(180px,42vw,320px);
+    height:clamp(280px,68vw,460px);
     object-position:center top;
 }
 .bundle-img-caption{
@@ -439,6 +442,9 @@ header{
     transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;
 }
 .case-card:hover{transform:translateY(-4px);box-shadow:var(--chover);border-color:var(--gold);}
+.case-card.wide{
+    grid-column:span 2;
+}
 .case-card-imgwrap{
     height:clamp(120px,26vw,190px);
     background:linear-gradient(180deg,rgba(255,232,238,0.5) 0%,rgba(255,195,208,0.12) 100%);
@@ -447,6 +453,11 @@ header{
 }
 .case-card-imgwrap img{width:100%;height:100%;object-fit:cover;flex:1;}
 .case-card-imgwrap.split img{width:50%;}
+.case-card-imgwrap.multi{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+}
+.case-card-imgwrap.multi img{width:100%;height:100%;}
 .case-card-info{
     padding:8px 9px 10px;text-align:center;
     background:linear-gradient(to bottom,#fff,var(--bg-soft));
@@ -461,6 +472,10 @@ header{
     font-weight:700;color:var(--rose);
     background:var(--pink-lt);border-radius:14px;
     padding:3px 10px;display:inline-block;margin:0 auto;
+}
+.case-card-note{
+    font-size:clamp(0.54rem,1.3vw,0.62rem);
+    color:var(--muted);font-style:italic;
 }
  
 /* TRIVIA */
@@ -529,7 +544,7 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
 .footer-sub{font-size:clamp(0.56rem,1.5vw,0.66rem);letter-spacing:2px;text-transform:uppercase;color:var(--rose);}
  
 /* RESPONSIVE */
-@media(max-width:480px){.products-grid{grid-template-columns:repeat(2,1fr);gap:10px;}}
+@media(max-width:480px){.products-grid{grid-template-columns:repeat(2,1fr);gap:10px;}.case-card-imgwrap.multi{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);}}
 @media(max-width:320px){.products-grid{grid-template-columns:1fr;}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;}}
 </style>
@@ -734,7 +749,13 @@ const caseDesigns = [
     { name: "iPhone 16", stock: "1pc", images: ["Iphone 16 Case1.jpg"] },
     { name: "iPhone 15 Pro Max", stock: "2pcs", images: ["Iphone 15ProMax.jpg"] },
     { name: "iPhone 15", stock: "1pc", images: ["Iphone 15.jpg"] },
-    { name: "iPhone 13 / 14 (Mixed)", stock: "5pcs", images: ["Iphone 13-14 Case1.jpg", "Iphone 13-14 Case2.png", "Iphone 13-14 Case3.jpg", "Iphone 13-14 Case4.jpg"] },
+    {
+        name: "iPhone 13 / 14 (Mixed)",
+        stock: "5pcs",
+        images: ["Iphone 13-14 Case1.jpg", "Iphone 13-14 Case2.png", "Iphone 13-14 Case3.jpg", "Iphone 13-14 Case4.jpg"],
+        note: "4 different designs available",
+        wide: true
+    },
     { name: "iPhone 13 Pro Max", stock: "1pc", images: ["Iphone 13ProMax.jpg"] },
     { name: "iPhone 12 Pro Max", stock: "2pcs", images: ["Iphone 12ProMax.jpg"] },
 ];
@@ -768,15 +789,20 @@ function renderProducts() {
 function renderCaseDesigns() {
     const grid = document.getElementById('caseGrid');
     grid.innerHTML = caseDesigns.map((c, i) => {
-        const splitClass = c.images.length > 1 ? ' split' : '';
+        let wrapClass = '';
+        if (c.images.length === 2) wrapClass = ' split';
+        if (c.images.length >= 3) wrapClass = ' multi';
+        const cardClass = c.wide ? ' wide' : '';
         const imgsHtml = c.images.map(src =>
             `<img src="${src}" alt="${c.name}" onerror="this.style.background='var(--pink-lt)'">`
         ).join('');
+        const noteHtml = c.note ? `<div class="case-card-note">${c.note}</div>` : '';
         return `
-        <div class="case-card" style="animation-delay:${i * 0.04}s">
-            <div class="case-card-imgwrap${splitClass}">${imgsHtml}</div>
+        <div class="case-card${cardClass}" style="animation-delay:${i * 0.04}s">
+            <div class="case-card-imgwrap${wrapClass}">${imgsHtml}</div>
             <div class="case-card-info">
                 <div class="case-card-name">${c.name}</div>
+                ${noteHtml}
                 <div class="case-card-stock">${c.stock} left</div>
             </div>
         </div>`;
