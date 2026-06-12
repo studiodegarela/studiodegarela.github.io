@@ -234,6 +234,10 @@ header{
     width:100%;height:clamp(100px,22vw,175px);
     object-fit:cover;display:block;
 }
+.bundle-img-item.portrait img{
+    height:clamp(180px,42vw,320px);
+    object-position:center top;
+}
 .bundle-img-caption{
     font-size:clamp(0.58rem,1.4vw,0.68rem);
     font-weight:700;color:var(--rose);
@@ -415,6 +419,50 @@ header{
 .urgency-strip p{font-size:clamp(0.68rem,1.8vw,0.8rem);color:var(--red);font-weight:700;line-height:1.6;}
 .urgency-strip span{font-weight:400;color:var(--muted);}
  
+/* CASE GALLERY SECTION */
+.case-section{
+    max-width:1000px;margin:0 auto 42px;
+    position:relative;z-index:1;
+}
+.case-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(clamp(110px,24vw,160px),1fr));
+    gap:clamp(8px,2vw,14px);
+}
+.case-card{
+    background:var(--white);
+    border-radius:16px;overflow:hidden;
+    border:1.5px solid rgba(255,192,203,0.32);
+    box-shadow:var(--cshadow);
+    display:flex;flex-direction:column;
+    animation:fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) both;
+    transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;
+}
+.case-card:hover{transform:translateY(-4px);box-shadow:var(--chover);border-color:var(--gold);}
+.case-card-imgwrap{
+    height:clamp(120px,26vw,190px);
+    background:linear-gradient(180deg,rgba(255,232,238,0.5) 0%,rgba(255,195,208,0.12) 100%);
+    overflow:hidden;border-bottom:1px dashed rgba(255,192,203,0.38);
+    display:flex;
+}
+.case-card-imgwrap img{width:100%;height:100%;object-fit:cover;flex:1;}
+.case-card-imgwrap.split img{width:50%;}
+.case-card-info{
+    padding:8px 9px 10px;text-align:center;
+    background:linear-gradient(to bottom,#fff,var(--bg-soft));
+    flex-grow:1;display:flex;flex-direction:column;justify-content:center;gap:4px;
+}
+.case-card-name{
+    font-family:'Cinzel',serif;font-size:clamp(0.62rem,1.6vw,0.76rem);
+    font-weight:700;color:var(--text);letter-spacing:0.3px;line-height:1.3;
+}
+.case-card-stock{
+    font-size:clamp(0.58rem,1.4vw,0.68rem);
+    font-weight:700;color:var(--rose);
+    background:var(--pink-lt);border-radius:14px;
+    padding:3px 10px;display:inline-block;margin:0 auto;
+}
+ 
 /* TRIVIA */
 .trivia-card{
     max-width:720px;margin:28px auto;
@@ -551,7 +599,7 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
                  onerror="this.style.background='var(--pink-lt)';this.style.minHeight='100px'">
             <div class="bundle-img-caption">Inside Out Set</div>
         </div>
-        <div class="bundle-img-item" style="animation-delay:0.3s">
+        <div class="bundle-img-item portrait" style="animation-delay:0.3s">
             <img src="Earrings.png" alt="Earrings"
                  onerror="this.style.background='var(--pink-lt)';this.style.minHeight='100px'">
             <div class="bundle-img-caption">Dainty Earrings</div>
@@ -569,7 +617,18 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
     </div>
  
     <div class="products-grid" id="catalog"></div>
+</div>
  
+<!-- Phone Case Designs -->
+<div class="container" style="padding-top:0;">
+    <h2 class="section-heading">Available Phone Case Designs</h2>
+    <p class="section-sub">Limited stock per design — first come, first served 🎀</p>
+    <div class="case-section">
+        <div class="case-grid" id="caseGrid"></div>
+    </div>
+</div>
+ 
+<div class="container" style="padding-top:0;">
     <div class="order-section">
         <div class="floating-bows"><span>🎀</span><span>🎀</span></div>
         <button class="order-btn" onclick="goToOrder()">Order Now!</button>
@@ -620,31 +679,14 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
 <script>
 const ORDER_URL = "https://forms.gle/ZmBc8ktV6CuZMy7q7";
  
-const phoneCaseSamples = [
-    "Iphone 12ProMax.jpg",
-    "Iphone 13ProMax.jpg",
-    "Iphone 13-14 Case1.jpg",
-    "Iphone 13-14 Case2.png",
-    "Iphone 13-14 Case3.jpg",
-    "Iphone 13-14 Case4.jpg",
-    "Iphone 15.jpg",
-    "Iphone 15ProMax.jpg",
-    "Iphone 16 Case1.jpg",
-    "Iphone 16Plus.jpg",
-    "Iphone 16Plus Case2.jpg",
-    "Iphone 16ProMax.jpg",
-    "Iphone 17.jpg",
-    "Iphone 17ProMax.jpg"
-];
- 
 const products = [
     {
         id: 1,
         name: "Garela Whimsy & Wonders\nLimited Edition Bundle",
         salePrice: 639,
         origPrice: Math.round(639 / 0.63),
-        image: "Iphone 12ProMax.jpg",
-        samples: phoneCaseSamples,
+        image: "placeholder.jpg",
+        samples: [],
         includes: "Phone Case · 3 Pairs Earrings · Moon Charm · Inside Out Charm · Cartoon Chains · Mini Keychain Stapler · Fashion Necklace · Fashion Bracelet · FREE 2 Pairs of Socks",
         tag: "🎀Only 17 Left!🎀",
         stock: 17
@@ -665,8 +707,8 @@ const products = [
         name: "Ultimate Combo Deal!\nBoth Bundles Together",
         salePrice: 1199,
         origPrice: Math.round(1199 / 0.63),
-        image: "Iphone 12ProMax.jpg",
-        samples: phoneCaseSamples,
+        image: "placeholder.jpg",
+        samples: [],
         includes: "Everything in Bundle 1 + Everything in Bundle 2 — Best Bundle!",
         tag: "🔥LAST 1 REMAINING!🔥",
         stock: 1
@@ -682,6 +724,19 @@ const products = [
         tag: "🧦Last 12 Available Set!🧦",
         stock: 12
     },
+];
+ 
+const caseDesigns = [
+    { name: "iPhone 17 Pro Max", stock: "1pc", images: ["Iphone 17ProMax.jpg"] },
+    { name: "iPhone 17", stock: "1pc", images: ["Iphone 17.jpg"] },
+    { name: "iPhone 16 Pro Max", stock: "1pc", images: ["Iphone 16ProMax.jpg"] },
+    { name: "iPhone 16 Plus", stock: "2pcs", images: ["Iphone 16Plus.jpg", "Iphone 16Plus Case2.jpg"] },
+    { name: "iPhone 16", stock: "1pc", images: ["Iphone 16 Case1.jpg"] },
+    { name: "iPhone 15 Pro Max", stock: "2pcs", images: ["Iphone 15ProMax.jpg"] },
+    { name: "iPhone 15", stock: "1pc", images: ["Iphone 15.jpg"] },
+    { name: "iPhone 13 / 14 (Mixed)", stock: "5pcs", images: ["Iphone 13-14 Case1.jpg", "Iphone 13-14 Case2.png", "Iphone 13-14 Case3.jpg", "Iphone 13-14 Case4.jpg"] },
+    { name: "iPhone 13 Pro Max", stock: "1pc", images: ["Iphone 13ProMax.jpg"] },
+    { name: "iPhone 12 Pro Max", stock: "2pcs", images: ["Iphone 12ProMax.jpg"] },
 ];
  
 function renderProducts() {
@@ -705,6 +760,24 @@ function renderProducts() {
                     <span class="price-orig">₱${p.origPrice.toFixed(2)}</span>
                     <div class="qty-tag"><span></span> ${p.tag}</div>
                 </div>
+            </div>
+        </div>`;
+    }).join('');
+}
+ 
+function renderCaseDesigns() {
+    const grid = document.getElementById('caseGrid');
+    grid.innerHTML = caseDesigns.map((c, i) => {
+        const splitClass = c.images.length > 1 ? ' split' : '';
+        const imgsHtml = c.images.map(src =>
+            `<img src="${src}" alt="${c.name}" onerror="this.style.background='var(--pink-lt)'">`
+        ).join('');
+        return `
+        <div class="case-card" style="animation-delay:${i * 0.04}s">
+            <div class="case-card-imgwrap${splitClass}">${imgsHtml}</div>
+            <div class="case-card-info">
+                <div class="case-card-name">${c.name}</div>
+                <div class="case-card-stock">${c.stock} left</div>
             </div>
         </div>`;
     }).join('');
@@ -757,7 +830,7 @@ function spawnPetals() {
     }
 }
  
-document.addEventListener('DOMContentLoaded', () => { renderProducts(); spawnPetals(); });
+document.addEventListener('DOMContentLoaded', () => { renderProducts(); spawnPetals(); renderCaseDesigns(); });
 </script>
 </body>
 </html>
