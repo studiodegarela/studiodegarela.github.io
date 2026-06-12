@@ -438,9 +438,11 @@ header{
     border:1.5px solid rgba(255,192,203,0.32);
     box-shadow:var(--cshadow);
     display:flex;flex-direction:column;
+    cursor:pointer;position:relative;
     animation:fadeUp 0.5s cubic-bezier(0.16,1,0.3,1) both;
     transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;
 }
+.case-card:active{transform:scale(0.97);}
 .case-card:hover{transform:translateY(-4px);box-shadow:var(--chover);border-color:var(--gold);}
 .case-card.wide{
     grid-column:span 2;
@@ -477,6 +479,11 @@ header{
     font-size:clamp(0.54rem,1.3vw,0.62rem);
     color:var(--muted);font-style:italic;
 }
+.case-card-tap{
+    font-size:clamp(0.52rem,1.2vw,0.6rem);
+    color:var(--gold);font-weight:700;letter-spacing:0.5px;
+    text-transform:uppercase;margin-top:1px;
+}
  
 /* TRIVIA */
 .trivia-card{
@@ -510,8 +517,26 @@ header{
 }
 .modal-close{position:absolute;top:10px;right:15px;font-size:2.1rem;cursor:pointer;color:var(--rose);font-weight:300;line-height:1;z-index:10;}
 .modal-title{font-family:'Cinzel',serif;font-size:clamp(0.95rem,2.4vw,1.22rem);color:var(--text);margin-bottom:8px;padding:0 18px;}
-.modal-img-wrap{width:100%;height:clamp(210px,46vw,305px);border-radius:16px;overflow:hidden;margin:10px 0;background:var(--pink-lt);border:1px solid rgba(255,192,203,0.35);}
+.modal-subtitle{font-size:clamp(0.62rem,1.6vw,0.74rem);color:var(--rose);font-weight:700;margin-bottom:4px;}
+.modal-img-wrap{width:100%;height:clamp(210px,46vw,305px);border-radius:16px;overflow:hidden;margin:10px 0;background:var(--pink-lt);border:1px solid rgba(255,192,203,0.35);position:relative;}
 .modal-main-img{width:100%;height:100%;object-fit:cover;transition:opacity 0.2s;}
+.modal-nav{
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:clamp(32px,8vw,40px);height:clamp(32px,8vw,40px);
+    border-radius:50%;background:rgba(255,255,255,0.85);
+    border:1.5px solid var(--pink-mid);color:var(--rose);
+    display:flex;align-items:center;justify-content:center;
+    font-size:1.2rem;font-weight:700;cursor:pointer;user-select:none;
+    box-shadow:var(--cshadow);
+}
+.modal-nav.prev{left:8px;}
+.modal-nav.next{right:8px;}
+.modal-counter{
+    position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
+    background:rgba(61,44,48,0.55);color:#fff;
+    font-size:0.66rem;font-weight:700;letter-spacing:1px;
+    padding:3px 11px;border-radius:14px;
+}
 .modal-thumbs{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 8px;scrollbar-width:none;}
 .modal-thumbs::-webkit-scrollbar{display:none;}
 .thumb-img{width:clamp(56px,13vw,70px);height:clamp(56px,13vw,70px);object-fit:cover;border-radius:10px;border:2px solid transparent;flex-shrink:0;cursor:pointer;transition:border-color 0.2s,transform 0.2s;}
@@ -637,7 +662,7 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
 <!-- Phone Case Designs -->
 <div class="container" style="padding-top:0;">
     <h2 class="section-heading">Available Phone Case Designs</h2>
-    <p class="section-sub">Limited stock per design — first come, first served 🎀</p>
+    <p class="section-sub">Tap any design to view it up close · Limited stock per design 🎀</p>
     <div class="case-section">
         <div class="case-grid" id="caseGrid"></div>
     </div>
@@ -676,12 +701,16 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
 <div id="galleryModal" class="modal-overlay" onclick="onOverlayClick(event)">
     <div class="modal-card">
         <span class="modal-close" onclick="closeModal()">&times;</span>
+        <div class="modal-subtitle" id="modalSubtitle"></div>
         <h3 class="modal-title" id="modalTitle">Product Preview</h3>
         <div class="modal-img-wrap">
             <img id="modalMainImg" src="" alt="Preview" class="modal-main-img">
+            <div class="modal-nav prev" id="modalPrev" onclick="navModal(-1);event.stopPropagation();">&#8249;</div>
+            <div class="modal-nav next" id="modalNext" onclick="navModal(1);event.stopPropagation();">&#8250;</div>
+            <div class="modal-counter" id="modalCounter"></div>
         </div>
         <div class="modal-thumbs" id="modalThumbs"></div>
-        <a href="javascript:void(0)" class="modal-order-btn" onclick="goToOrder()">Order Now! 🎀</a>
+        <a href="javascript:void(0)" class="modal-order-btn" id="modalOrderBtn" onclick="goToOrder()">Order Now! 🎀</a>
     </div>
 </div>
  
@@ -752,13 +781,15 @@ const caseDesigns = [
     {
         name: "iPhone 13 / 14 (Mixed)",
         stock: "5pcs",
-        images: ["Iphone 13-14 Case1.jpg", "Iphone 13-14 Case2.png", "Iphone 13-14 Case3.jpg", "Iphone 13-14 Case4.jpg", "Iphone 13-14 Case5.jpg"],
+        images: ["Iphone 13-14 Case1.jpg", "Iphone 13-14 Case2.png", "Iphone 13-14 Case3.jpg", "Iphone 13-14 Case4.jpg", "Iphone 13ProMax.jpg"],
         note: "5 different designs available",
         wide: true
     },
     { name: "iPhone 13 Pro Max", stock: "1pc", images: ["Iphone 13ProMax.jpg"] },
     { name: "iPhone 12 Pro Max", stock: "2pcs", images: ["Iphone 12ProMax.jpg"] },
 ];
+ 
+let activeGallery = { images: [], index: 0 };
  
 function renderProducts() {
     const grid = document.getElementById('catalog');
@@ -797,13 +828,15 @@ function renderCaseDesigns() {
             `<img src="${src}" alt="${c.name}" onerror="this.style.background='var(--pink-lt)'">`
         ).join('');
         const noteHtml = c.note ? `<div class="case-card-note">${c.note}</div>` : '';
+        const tapHtml = c.images.length > 1 ? `<div class="case-card-tap">Tap to view each design</div>` : `<div class="case-card-tap">Tap to view</div>`;
         return `
-        <div class="case-card${cardClass}" style="animation-delay:${i * 0.04}s">
+        <div class="case-card${cardClass}" style="animation-delay:${i * 0.04}s" onclick="openCaseModal(${i})">
             <div class="case-card-imgwrap${wrapClass}">${imgsHtml}</div>
             <div class="case-card-info">
                 <div class="case-card-name">${c.name}</div>
                 ${noteHtml}
                 <div class="case-card-stock">${c.stock} left</div>
+                ${tapHtml}
             </div>
         </div>`;
     }).join('');
@@ -812,23 +845,67 @@ function renderCaseDesigns() {
 function openModal(idx) {
     const p = products[idx];
     const nameLines = p.name.split('\n');
+    document.getElementById('modalSubtitle').textContent = '';
     document.getElementById('modalTitle').textContent = nameLines[0];
+    document.getElementById('modalOrderBtn').style.display = 'block';
     const imgs = (p.samples && p.samples.length) ? p.samples : [p.image];
-    document.getElementById('modalMainImg').src = imgs[0];
-    document.getElementById('modalThumbs').innerHTML = imgs.map((src, i) => `
-        <img src="${src}" alt="Sample ${i+1}"
-             class="thumb-img${i===0?' active':''}"
-             onclick="switchThumb(this,'${src}');event.stopPropagation();"
-             onerror="this.style.display='none'">`).join('');
+    activeGallery = { images: imgs, index: 0 };
+    showGalleryImage();
+    renderThumbs();
     document.getElementById('galleryModal').style.display = 'flex';
 }
  
-function switchThumb(el, src) {
+function openCaseModal(idx) {
+    const c = caseDesigns[idx];
+    document.getElementById('modalSubtitle').textContent = `${c.stock} available`;
+    document.getElementById('modalTitle').textContent = c.name;
+    document.getElementById('modalOrderBtn').style.display = 'block';
+    activeGallery = { images: c.images, index: 0 };
+    showGalleryImage();
+    renderThumbs();
+    document.getElementById('galleryModal').style.display = 'flex';
+}
+ 
+function showGalleryImage() {
     const main = document.getElementById('modalMainImg');
     main.style.opacity = '0';
-    setTimeout(() => { main.src = src; main.style.opacity = '1'; }, 120);
-    document.querySelectorAll('.thumb-img').forEach(t => t.classList.remove('active'));
-    el.classList.add('active');
+    setTimeout(() => {
+        main.src = activeGallery.images[activeGallery.index];
+        main.style.opacity = '1';
+    }, 100);
+    const counter = document.getElementById('modalCounter');
+    const total = activeGallery.images.length;
+    if (total > 1) {
+        counter.textContent = `${activeGallery.index + 1} / ${total}`;
+        counter.style.display = 'block';
+    } else {
+        counter.style.display = 'none';
+    }
+    const showNav = total > 1;
+    document.getElementById('modalPrev').style.display = showNav ? 'flex' : 'none';
+    document.getElementById('modalNext').style.display = showNav ? 'flex' : 'none';
+}
+ 
+function renderThumbs() {
+    document.getElementById('modalThumbs').innerHTML = activeGallery.images.map((src, i) => `
+        <img src="${src}" alt="Sample ${i+1}"
+             class="thumb-img${i===activeGallery.index?' active':''}"
+             onclick="selectThumb(${i});event.stopPropagation();"
+             onerror="this.style.display='none'">`).join('');
+}
+ 
+function selectThumb(i) {
+    activeGallery.index = i;
+    showGalleryImage();
+    document.querySelectorAll('.thumb-img').forEach((t, idx) => t.classList.toggle('active', idx === i));
+}
+ 
+function navModal(dir) {
+    const total = activeGallery.images.length;
+    if (total <= 1) return;
+    activeGallery.index = (activeGallery.index + dir + total) % total;
+    showGalleryImage();
+    document.querySelectorAll('.thumb-img').forEach((t, idx) => t.classList.toggle('active', idx === activeGallery.index));
 }
  
 function onOverlayClick(e) { if (e.target.id === 'galleryModal') closeModal(); }
