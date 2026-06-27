@@ -1630,6 +1630,31 @@ function spawnPetals() {
         container.appendChild(el);
     }
 }
+    function sendDataToSheet() {
+    // Collect the data from your HTML elements
+    // Ensure these IDs exist in your HTML
+    const data = {
+        fullName: document.getElementById('nameInputId').value, // Change 'nameInputId' to your actual HTML element ID
+        contactNumber: document.getElementById('mobileInputId').value,
+        email: document.getElementById('emailInputId').value,
+        address: document.getElementById('addressInputId').value,
+        selectedBundles: "Items Selected", // Replace with your logic
+        phoneCase: "Phone Case Value",     // Replace with your logic
+        totalAmount: document.getElementById('rTotal').textContent,
+        paymentMethod: "Gcash",            // Replace with your logic
+        referenceNumber: "12345",          // Replace with your logic
+        notes: "No notes"                  // Replace with your logic
+    };
+
+    fetch("YOUR_WEB_APP_URL_HERE", {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(data).toString()
+    })
+    .then(() => alert("Order Sent!"))
+    .catch(err => console.error(err));
+}
 </script>
     <script>
 const SCRIPT_URL = "YOUR_NEW_DEPLOYMENT_URL_HERE"; // Put your URL here
