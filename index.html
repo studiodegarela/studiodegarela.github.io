@@ -1660,22 +1660,25 @@ function spawnPetals() {
 const SCRIPT_URL = "AKfycbxwo-tKY14dgYSON5PHnNu2RH3gcvysXYF5sa35LU1FK4CLkM1gGTwDMnPLAyEz8MBmWQ"; // Put your URL here
 
 function placeOrder() {
-    // 1. Gather data from your form fields
-    // Ensure these IDs match your HTML input IDs
+    // We are pulling data from the IDs that your code already populates for the receipt
     const formData = {
-        fullName: document.getElementById('nameInputId').value,
-        contactNumber: document.getElementById('mobileInputId').value,
-        email: document.getElementById('emailInputId').value,
-        address: document.getElementById('addressInputId').value,
-        // ... add other fields as necessary
-        totalAmount: document.getElementById('rTotal').textContent
+        fullName: document.getElementById('rName').textContent,
+        contactNumber: document.getElementById('rMobile').textContent,
+        email: "Not Provided", 
+        address: document.getElementById('rAddress').textContent,
+        selectedBundles: "See Receipt", 
+        phoneCase: "N/A",
+        totalAmount: document.getElementById('rTotal').textContent,
+        paymentMethod: "Gcash",
+        referenceNumber: document.getElementById('rProof').textContent,
+        notes: "N/A"
     };
 
-    // 2. Send data to Google Sheets
     fetch(SCRIPT_URL, {
         method: 'POST',
-        mode: 'no-cors', // Essential for cross-origin requests
-        body: new URLSearchParams(formData)
+        mode: 'no-cors',
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString()
     })
     .then(() => {
         alert("Order placed successfully!");
@@ -1685,7 +1688,6 @@ function placeOrder() {
         alert("There was an error placing your order.");
     });
 }
-
 // Attach to your button
 document.getElementById('placeOrderBtn').addEventListener('click', placeOrder);
 </script>
