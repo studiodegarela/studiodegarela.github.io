@@ -476,6 +476,58 @@ header{
 }
 .tray-cta:hover{transform:translateY(-2px);}
 
+/* TRAY CASE SELECTOR */
+.tray-case-block{
+    margin-top:14px;padding:14px 15px;
+    background:#fff;border:1.5px solid rgba(195,106,122,0.28);
+    border-radius:16px;
+}
+.tray-case-label{
+    font-family:'Cinzel',serif;font-size:clamp(0.62rem,1.6vw,0.74rem);
+    letter-spacing:2px;text-transform:uppercase;color:var(--rose);
+    font-weight:700;margin-bottom:4px;
+}
+.tray-case-hint{
+    font-size:clamp(0.6rem,1.5vw,0.7rem);color:var(--muted);
+    font-style:italic;margin-bottom:10px;line-height:1.4;
+}
+.tray-case-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(clamp(88px,22vw,120px),1fr));
+    gap:8px;
+}
+.tray-case-opt{
+    border:2px solid rgba(243,145,161,0.3);border-radius:12px;
+    overflow:hidden;cursor:pointer;
+    transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;
+    background:var(--bg-soft);
+}
+.tray-case-opt:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:var(--cshadow);}
+.tray-case-opt.chosen{
+    border-color:var(--rose);
+    box-shadow:0 0 0 2px rgba(195,106,122,0.18);
+}
+.tray-case-opt img{
+    width:100%;height:clamp(72px,18vw,100px);
+    object-fit:cover;display:block;
+}
+.tray-case-opt .co-name{
+    font-size:clamp(0.52rem,1.3vw,0.62rem);font-weight:700;
+    color:var(--text);padding:5px 6px 3px;text-align:center;line-height:1.3;
+}
+.tray-case-opt .co-stock{
+    font-size:clamp(0.48rem,1.1vw,0.56rem);color:var(--rose);
+    font-weight:700;text-align:center;padding-bottom:5px;
+}
+.tray-case-opt.chosen .co-name{color:var(--rose);}
+.tray-case-chosen-tag{
+    margin-top:9px;padding:7px 11px;
+    background:var(--pink-lt);border-radius:10px;
+    font-size:clamp(0.62rem,1.5vw,0.72rem);color:var(--rose);font-weight:700;
+    text-align:center;display:none;
+}
+.tray-case-chosen-tag.visible{display:block;}
+
 /* CASE GALLERY SECTION */
 .case-section{
     max-width:1000px;margin:0 auto 42px;
@@ -867,6 +919,15 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
             <span>Total</span>
             <span id="trayTotal">₱0.00</span>
         </div>
+
+        <!-- Phone case selector — shown only when bundle id:1 or id:3 is in cart -->
+        <div class="tray-case-block" id="trayCaseBlock" style="display:none;">
+            <div class="tray-case-label">📱 Choose Your Phone Case Design <span style="color:var(--red);font-size:0.8em;">*</span></div>
+            <div class="tray-case-hint">Included with the Garela Whimsy &amp; Wonders Limited Edition Bundle (₱639) 🎀</div>
+            <div class="tray-case-grid" id="trayCaseGrid"></div>
+            <div class="tray-case-chosen-tag" id="trayCaseChosenTag"></div>
+        </div>
+
         <button class="tray-cta" onclick="scrollToForm()">Proceed to Order Form 🎀</button>
     </div>
 </div>
@@ -954,9 +1015,18 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
                 <div class="go-pick-btn" onclick="scrollToGrid()">⬆ Go back and select a bundle</div>
             </div>
 
-            <div class="field" id="caseField">
-                <label>Select Phone Case for GARELA WHIMSY &amp; WONDERS LIMITED EDITION BUNDLE (17pcs left!)</label>
-                <select id="f_case"><option value="">— Select a design —</option></select>
+            <!-- Phone case — only shown when ₱639 bundle is in cart; value is synced from tray selection -->
+            <div class="field" id="caseField" style="display:none;">
+                <label>Phone Case Design <span class="required-star">*</span>
+                    <span class="hint">For the Garela Whimsy &amp; Wonders Limited Edition Bundle — select above in your bundle tray 🎀</span>
+                </label>
+                <div class="form-bundles-display" style="padding:10px 14px;">
+                    <div id="formCaseDisplay" style="font-size:0.82rem;font-weight:700;color:var(--rose);text-align:center;padding:6px 0;">
+                        No case selected yet — pick one in your bundle tray above ⬆
+                    </div>
+                </div>
+                <!-- hidden input carries the actual value to the payload -->
+                <input type="hidden" id="f_case" value="">
             </div>
 
             <div class="field">
@@ -1126,6 +1196,7 @@ const caseDesigns = [
 
 // ── Cart state ──────────────────────────────────────────────────────────────
 let cart = []; // { id, name, salePrice }
+let selectedCase = ''; // phone case chosen in the tray
 let activeGallery = { images: [], index: 0, type: 'product', productIdx: null };
 
 // ── Cart helpers ─────────────────────────────────────────────────────────────
@@ -1135,6 +1206,10 @@ function toggleCart(productIdx) {
     const p = products[productIdx];
     if (isInCart(p.id)) {
         cart = cart.filter(c => c.id !== p.id);
+        // if this bundle had a case and no other case-bundle remains, clear case selection
+        if (p.hasCase && !cart.some(c => { const x=products.find(pp=>pp.id===c.id); return x&&x.hasCase; })) {
+            selectedCase = '';
+        }
     } else {
         cart.push({ id: p.id, name: p.name.replace('\n',' '), salePrice: p.salePrice });
     }
@@ -1144,16 +1219,66 @@ function toggleCart(productIdx) {
 
 function removeFromCart(id) {
     cart = cart.filter(c => c.id !== id);
+    const p = products.find(x => x.id === id);
+    if (p && p.hasCase && !cart.some(c => { const x=products.find(pp=>pp.id===c.id); return x&&x.hasCase; })) {
+        selectedCase = '';
+    }
     refreshCart();
     refreshCardStates();
 }
 
 function cartTotal() { return cart.reduce((s, c) => s + c.salePrice, 0); }
 
+function needsCaseSelection() {
+    return cart.some(c => { const p = products.find(x => x.id === c.id); return p && p.hasCase; });
+}
+
+// Render the case grid inside the tray
+function renderTrayCases() {
+    const grid = document.getElementById('trayCaseGrid');
+    grid.innerHTML = caseDesigns.map((c, i) => {
+        const chosen = selectedCase === c.name;
+        return `<div class="tray-case-opt${chosen?' chosen':''}" onclick="pickTrayCase(${i})">
+            <img src="${c.images[0]}" alt="${c.name}"
+                 onerror="this.style.background='var(--pink-lt)';this.style.height='60px'">
+            <div class="co-name">${c.name}</div>
+            <div class="co-stock">${c.stock} left</div>
+        </div>`;
+    }).join('');
+    // Chosen tag
+    const tag = document.getElementById('trayCaseChosenTag');
+    if (selectedCase) {
+        tag.textContent = '✓ Selected: ' + selectedCase;
+        tag.classList.add('visible');
+    } else {
+        tag.textContent = '';
+        tag.classList.remove('visible');
+    }
+}
+
+function pickTrayCase(idx) {
+    selectedCase = caseDesigns[idx].name;
+    renderTrayCases();
+    syncCaseToForm();
+}
+
+function syncCaseToForm() {
+    document.getElementById('f_case').value = selectedCase;
+    const disp = document.getElementById('formCaseDisplay');
+    if (selectedCase) {
+        disp.textContent = '✓ ' + selectedCase;
+        disp.style.color = 'var(--rose)';
+    } else {
+        disp.textContent = 'No case selected yet — pick one in your bundle tray above ⬆';
+        disp.style.color = 'var(--muted)';
+    }
+}
+
 function refreshCart() {
     const tray = document.getElementById('selectedTray');
     const trayItems = document.getElementById('trayItems');
     const trayTotal = document.getElementById('trayTotal');
+    const caseBlock = document.getElementById('trayCaseBlock');
 
     if (cart.length === 0) {
         tray.classList.remove('visible');
@@ -1166,16 +1291,22 @@ function refreshCart() {
                 <button class="tray-item-remove" onclick="removeFromCart(${c.id})" title="Remove">✕</button>
             </div>`).join('');
         trayTotal.textContent = '₱' + cartTotal().toFixed(2);
+
+        // Show/hide case selector in tray
+        if (needsCaseSelection()) {
+            caseBlock.style.display = 'block';
+            renderTrayCases();
+        } else {
+            caseBlock.style.display = 'none';
+        }
     }
+
+    // Show/hide case field in form
+    document.getElementById('caseField').style.display = needsCaseSelection() ? 'block' : 'none';
+    syncCaseToForm();
 
     // Sync form summary
     refreshFormSummary();
-    // Show/hide case select
-    const needsCase = cart.some(c => {
-        const p = products.find(x => x.id === c.id);
-        return p && p.hasCase;
-    });
-    document.getElementById('caseField').style.display = needsCase ? 'block' : 'none';
 }
 
 function refreshCardStates() {
@@ -1263,14 +1394,6 @@ function renderProducts() {
 
 function renderCaseDesigns() {
     const grid = document.getElementById('caseGrid');
-    // Populate case select too
-    const sel = document.getElementById('f_case');
-    caseDesigns.forEach(c => {
-        const opt = document.createElement('option');
-        opt.value = c.name;
-        opt.textContent = `${c.name} (${c.stock} left)`;
-        sel.appendChild(opt);
-    });
 
     grid.innerHTML = caseDesigns.map((c, i) => {
         let wrapClass = '';
@@ -1422,12 +1545,18 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        if (needsCaseSelection() && !selectedCase) {
+            errEl.textContent = 'Please choose a phone case design for your bundle! Scroll up to your bundle tray 🎀';
+            errEl.style.display = 'block';
+            document.getElementById('selectedTray').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+
         const btn = document.getElementById('orderSubmitBtn');
         btn.classList.add('loading');
         btn.disabled = true;
 
         const bundleSummary = cart.map(c => `${c.name} (₱${c.salePrice.toFixed(2)})`).join(' + ');
-        const selectedCase = document.getElementById('f_case').value || 'N/A';
 
         const payload = {
             timestamp: new Date().toLocaleString('en-PH', { timeZone: 'Asia/Manila' }),
@@ -1438,7 +1567,7 @@ document.addEventListener('DOMContentLoaded', () => {
             address: document.getElementById('f_address').value.trim(),
             postal: document.getElementById('f_postal').value.trim(),
             bundles: bundleSummary,
-            phoneCase: selectedCase,
+            phoneCase: selectedCase || 'N/A',
             total: '₱' + cartTotal().toFixed(2),
             shipping: document.getElementById('f_shipping').value,
             notes: document.getElementById('f_notes').value.trim(),
@@ -1448,11 +1577,12 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
+            const form = new FormData();
+            Object.entries(payload).forEach(([k, v]) => form.append(k, v));
             await fetch(ORDER_URL, {
                 method: 'POST',
                 mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
+                body: form
             });
             showReceipt(payload);
         } catch (err) {
