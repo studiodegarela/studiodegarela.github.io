@@ -1660,8 +1660,7 @@ function spawnPetals() {
 const SCRIPT_URL = "AKfycbxwo-tKY14dgYSON5PHnNu2RH3gcvysXYF5sa35LU1FK4CLkM1gGTwDMnPLAyEz8MBmWQ"; // Put your URL here
 
 function placeOrder() {
-    // These IDs (rName, rMobile, etc.) match exactly what is in your 
-    // code that displays the receipt preview.
+    // 1. Pull the values from the elements where your receipt displays the data
     const formData = {
         fullName: document.getElementById('rName').textContent,
         contactNumber: document.getElementById('rMobile').textContent,
@@ -1675,7 +1674,8 @@ function placeOrder() {
         notes: "N/A"
     };
 
-    // Use the SCRIPT_URL already defined in your index (4).html
+    // 2. Send the data
+    // Ensure SCRIPT_URL at the top of your file is correct (starting with https://script.google.com/...)
     fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -1683,11 +1683,11 @@ function placeOrder() {
         body: new URLSearchParams(formData).toString()
     })
     .then(() => {
-        alert("Order placed successfully!");
+        alert("Order successfully sent to Google Sheets!");
     })
     .catch(error => {
         console.error('Error:', error);
-        alert("There was an error placing your order.");
+        alert("Failed to send order. Check browser console for details.");
     });
 }
 // Attach to your button
