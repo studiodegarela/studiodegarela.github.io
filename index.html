@@ -1558,41 +1558,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const bundleSummary = cart.map(c => `${c.name} (₱${c.salePrice.toFixed(2)})`).join(' + ');
 
+        // --- Collect all form values ---
+        const fName     = document.getElementById('f_name').value.trim();
+        const fMobile   = document.getElementById('f_mobile').value.trim();
+        const fIg       = document.getElementById('f_ig').value.trim();
+        const fAddress  = document.getElementById('f_address').value.trim();
+        const fPostal   = document.getElementById('f_postal').value.trim();
+        const fShipping = document.getElementById('f_shipping').value;
+        const fProof    = document.getElementById('f_proof').value.trim();
+        const fNotes    = document.getElementById('f_notes').value.trim();
+        const fSuggest  = document.getElementById('f_suggest').value.trim();
+        const fNext     = document.getElementById('f_next').value.trim();
+
         const payload = {
-            timestamp: new Date().toLocaleString('en-PH', { timeZone: 'Asia/Manila' }),
-            orderId: 'SDG-' + Date.now().toString().slice(-6),
-            // Fields matching Apps Script doPost parameters
-            fullName: document.getElementById('f_name').value.trim(),
-            contactNumber: document.getElementById('f_mobile').value.trim(),
-            email: document.getElementById('f_ig').value.trim() || 'Not provided',
-            address: [document.getElementById('f_address').value.trim(), document.getElementById('f_postal').value.trim()].filter(Boolean).join(', '),
+            // --- Sheet columns (match Apps Script doPost exactly) ---
+            fullName:        fName,
+            contactNumber:   fMobile,
+            email:           fIg || 'Not provided',
+            address:         [fAddress, fPostal].filter(Boolean).join(', '),
             selectedBundles: bundleSummary,
-            phoneCase: selectedCase || 'N/A',
-            totalAmount: '₱' + cartTotal().toFixed(2),
-            paymentMethod: 'GCash',
-            referenceNumber: document.getElementById('f_proof').value.trim(),
-            notes: [
-                document.getElementById('f_notes').value.trim(),
-                document.getElementById('f_suggest').value.trim() ? 'Suggestion: ' + document.getElementById('f_suggest').value.trim() : '',
-                document.getElementById('f_next').value.trim() ? 'Next product: ' + document.getElementById('f_next').value.trim() : '',
-                'Shipping: ' + document.getElementById('f_shipping').value
-            ].filter(Boolean).join(' | '),
-            // Extra fields used only for receipt display
-            name: document.getElementById('f_name').value.trim(),
-            instagram: document.getElementById('f_ig').value.trim(),
-            mobile: document.getElementById('f_mobile').value.trim(),
-            total: '₱' + cartTotal().toFixed(2),
-            shipping: document.getElementById('f_shipping').value,
-            proof: document.getElementById('f_proof').value.trim(),
+            phoneCase:       selectedCase || 'N/A',
+            totalAmount:     '₱' + cartTotal().toFixed(2),
+            paymentMethod:   'GCash',
+            referenceNumber: fProof,
+            notes:           [fNotes, fSuggest ? 'Suggestion: ' + fSuggest : '', fNext ? 'Next product: ' + fNext : '', 'Shipping: ' + fShipping].filter(Boolean).join(' | '),
+
+            // --- Extra fields for receipt display only (not sent to sheet) ---
+            orderId:   'SDG-' + Date.now().toString().slice(-6),
+            timestamp: new Date().toLocaleString('en-PH', { timeZone: 'Asia/Manila' }),
+            name:      fName,
+            instagram: fIg,
+            mobile:    fMobile,
+            total:     '₱' + cartTotal().toFixed(2),
+            shipping:  fShipping,
+            proof:     fProof,
         };
 
+        // Only send the fields the sheet needs (the first 10 keys)
+        const sheetFields = ['fullName','contactNumber','email','address','selectedBundles','phoneCase','totalAmount','paymentMethod','referenceNumber','notes'];
+
         try {
-            const form = new FormData();
-            Object.entries(payload).forEach(([k, v]) => form.append(k, v));
+            // Send only the sheet fields, URL-encoded (required for Apps Script e.parameter)
+            const encoded = sheetFields
+                .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(payload[k] != null ? payload[k] : ''))
+                .join('&');
+
             await fetch(ORDER_URL, {
                 method: 'POST',
                 mode: 'no-cors',
-                body: form
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: encoded
             });
             showReceipt(payload);
         } catch (err) {
