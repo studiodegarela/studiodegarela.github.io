@@ -35,7 +35,7 @@ body{
     overflow-x:hidden;
     -webkit-tap-highlight-color:transparent;
 }
- 
+
 /* PETALS */
 .petal-bg{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
 .petal{position:absolute;opacity:0;user-select:none;animation:petalFall linear infinite;}
@@ -45,7 +45,7 @@ body{
     92% {opacity:0.18;}
     100%{opacity:0;transform:translateY(108vh) rotate(400deg) scale(1.1);}
 }
- 
+
 /* KEYFRAMES */
 @keyframes flow{0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
 @keyframes logoFloat{
@@ -73,7 +73,7 @@ body{
     0%,100%{border-color:rgba(184,50,50,0.3);}
     50%{border-color:rgba(184,50,50,0.7);}
 }
- 
+
 /* BANNER */
 .top-banner{
     background:linear-gradient(90deg,var(--rose),var(--blush),var(--gold),var(--blush),var(--rose));
@@ -85,7 +85,7 @@ body{
     font-weight:700;letter-spacing:2px;text-transform:uppercase;
     position:sticky;top:0;z-index:1000;
 }
- 
+
 /* HEADER */
 header{
     background:linear-gradient(180deg,rgba(255,255,255,0.94) 0%,rgba(255,246,248,0.9) 100%);
@@ -126,7 +126,7 @@ header{
     font-family:'Cinzel',serif;font-size:clamp(0.56rem,1.7vw,0.7rem);
     letter-spacing:3.5px;text-transform:uppercase;color:var(--gold);font-weight:600;
 }
- 
+
 /* COLLECTION HERO */
 .collection-hero{
     background:linear-gradient(135deg,rgba(255,251,252,0.9) 0%,rgba(255,236,242,0.8) 55%,rgba(255,251,252,0.9) 100%);
@@ -173,7 +173,7 @@ header{
     color:var(--muted);font-style:italic;letter-spacing:0.3px;
     max-width:480px;line-height:1.55;
 }
- 
+
 /* WHAT'S INSIDE PILLS */
 .whats-inside-label{
     font-family:'Cinzel',serif;
@@ -195,7 +195,7 @@ header{
     animation:beat 2s ease-in-out infinite;
     margin-top:2px;
 }
- 
+
 /* BUNDLE CONTENTS SHOWCASE */
 .bundle-showcase{
     max-width:860px;margin:0 auto 10px;
@@ -248,7 +248,7 @@ header{
     letter-spacing:0.3px;
     background:linear-gradient(to bottom,#fff,var(--bg-soft));
 }
- 
+
 /* CONTAINER */
 .container{
     max-width:1100px;margin:0 auto;
@@ -264,7 +264,21 @@ header{
     text-align:center;font-size:clamp(0.65rem,1.8vw,0.78rem);
     color:var(--muted);font-style:italic;margin-bottom:26px;
 }
- 
+
+/* TRIVIA CARD — now inline above the grid */
+.trivia-card{
+    max-width:860px;margin:0 auto 28px;
+    padding:clamp(18px,4vw,30px);
+    background:rgba(255,255,255,0.76);
+    border:1px solid var(--pink-mid);border-radius:24px;text-align:center;
+    backdrop-filter:blur(10px);position:relative;z-index:1;animation:fadeUp 0.8s 0.2s both;
+}
+.trivia-title{
+    font-family:'Cinzel',serif;font-size:clamp(0.72rem,2vw,0.9rem);
+    text-transform:uppercase;letter-spacing:3px;color:var(--rose);font-weight:700;margin-bottom:10px;
+}
+.trivia-text{font-size:clamp(0.68rem,1.8vw,0.82rem);color:var(--muted);font-style:italic;line-height:1.85;}
+
 /* PRODUCT GRID */
 .products-grid{
     display:grid;
@@ -272,7 +286,7 @@ header{
     gap:clamp(10px,2.5vw,18px);
     margin-bottom:42px;
 }
- 
+
 /* CARD */
 .product-card{
     background:var(--white);
@@ -302,7 +316,20 @@ header{
     font-family:'Cinzel',serif;font-size:clamp(0.85rem,3vw,1.15rem);
     font-weight:700;color:#fff;letter-spacing:4px;border-radius:inherit;z-index:20;
 }
- 
+/* Selected card highlight */
+.product-card.selected-card{
+    border-color:var(--rose);
+    box-shadow:0 0 0 3px rgba(195,106,122,0.22), var(--chover);
+}
+.product-card.selected-card::after{
+    content:'✓ Added';position:absolute;
+    top:clamp(9px,2vw,15px);left:clamp(9px,2vw,15px);
+    background:var(--rose);color:#fff;
+    font-size:clamp(0.54rem,1.3vw,0.64rem);font-weight:800;
+    padding:4px 10px;border-radius:17px;z-index:10;
+    letter-spacing:0.5px;
+}
+
 /* SALE BADGE */
 .sale-badge{
     position:absolute;
@@ -314,7 +341,7 @@ header{
     animation:beat 2.2s ease-in-out infinite;line-height:1.5;
 }
 .sale-badge .pct{display:block;font-size:clamp(0.66rem,1.5vw,0.76rem);font-weight:900;}
- 
+
 /* IMAGE */
 .product-img-wrap{
     height:clamp(160px,37vw,285px);
@@ -330,7 +357,7 @@ header{
     font-size:clamp(0.56rem,1.3vw,0.66rem);letter-spacing:1px;
     font-weight:600;text-transform:uppercase;color:var(--gold);
 }
- 
+
 /* DETAILS */
 .product-details{
     padding:clamp(11px,2.2vw,19px) clamp(9px,1.8vw,15px);
@@ -347,7 +374,7 @@ header{
     color:var(--muted);line-height:1.55;margin-bottom:8px;
     font-style:italic;
 }
- 
+
 /* PRICE */
 .price-row{display:flex;flex-direction:column;align-items:center;gap:5px;margin-top:auto;width:100%;}
 .price-box{
@@ -378,40 +405,20 @@ header{
     animation:urgency 2.2s ease-in-out infinite, pulse-border 2.2s ease-in-out infinite;
     white-space:nowrap;
 }
- 
-/* ORDER SECTION */
-.order-section{
-    text-align:center;max-width:420px;margin:8px auto 0;padding:0 14px;position:relative;
+
+/* ADD TO ORDER BUTTON on card */
+.card-add-btn{
+    margin:10px clamp(9px,1.8vw,15px) clamp(11px,2.2vw,19px);
+    padding:9px 0;width:calc(100% - clamp(18px,3.6vw,30px));
+    background:linear-gradient(135deg,var(--blush),var(--rose));
+    color:#fff;border:none;border-radius:30px;
+    font-family:'Cinzel',serif;font-size:clamp(0.62rem,1.5vw,0.72rem);
+    letter-spacing:1.5px;text-transform:uppercase;font-weight:700;
+    cursor:pointer;transition:transform 0.15s,filter 0.15s;
 }
-.floating-bows{
-    display:flex;justify-content:space-between;padding:0 28px;margin-bottom:9px;
-    font-size:clamp(1.1rem,3vw,1.5rem);
-}
-.floating-bows span:first-child{animation:drift 2.4s ease-in-out infinite;}
-.floating-bows span:last-child{animation:drift 2.4s ease-in-out infinite 1.2s;}
-.order-btn{
-    display:flex;align-items:center;justify-content:center;gap:10px;
-    background:linear-gradient(135deg,var(--blush) 0%,var(--rose) 45%,var(--gold) 100%);
-    background-size:200% auto;
-    animation:flow 3.5s linear infinite,glow 2.5s ease-in-out infinite;
-    color:#fff;border:3px solid rgba(255,255,255,0.38);
-    padding:clamp(15px,3.2vw,21px) 36px;border-radius:50px;
-    font-family:'Cinzel',serif;font-size:clamp(0.92rem,2.4vw,1.08rem);
-    letter-spacing:2.5px;text-transform:uppercase;font-weight:700;
-    cursor:pointer;width:100%;text-decoration:none;
-    transition:transform 0.16s,filter 0.16s;
-    position:relative;overflow:hidden;
-}
-.order-btn::after{
-    content:'';position:absolute;top:0;left:-80%;width:58%;height:100%;
-    background:linear-gradient(to right,rgba(255,255,255,0) 0%,rgba(255,255,255,0.28) 50%,rgba(255,255,255,0) 100%);
-    transform:skewX(-18deg);animation:shimmer 3.2s ease-in-out infinite;
-}
-.order-btn:hover{transform:translateY(-3px) scale(1.018);filter:brightness(1.07);}
-.order-btn:active{transform:scale(0.97);}
-.bow-row{display:flex;justify-content:center;gap:5px;font-size:clamp(0.9rem,2.4vw,1.15rem);letter-spacing:3px;margin-top:11px;opacity:0.72;}
-.order-note{font-size:clamp(0.61rem,1.6vw,0.7rem);color:var(--gold);letter-spacing:0.7px;margin-top:6px;font-style:italic;}
- 
+.card-add-btn:hover{filter:brightness(1.08);}
+.card-add-btn.added{background:linear-gradient(135deg,#a0d490,#5aaa46);letter-spacing:1px;}
+
 /* URGENCY STRIP */
 .urgency-strip{
     background:linear-gradient(135deg,#fff0f2,#ffe0e5);
@@ -421,7 +428,54 @@ header{
 }
 .urgency-strip p{font-size:clamp(0.68rem,1.8vw,0.8rem);color:var(--red);font-weight:700;line-height:1.6;}
 .urgency-strip span{font-weight:400;color:var(--muted);}
- 
+
+/* SELECTED BUNDLE TRAY */
+.selected-tray{
+    max-width:860px;margin:0 auto 24px;
+    padding:0 clamp(12px,3.5vw,24px);
+    position:relative;z-index:1;
+}
+.tray-inner{
+    background:linear-gradient(135deg,var(--pink-lt),rgba(255,255,255,0.9));
+    border:2px solid rgba(195,106,122,0.28);
+    border-radius:20px;padding:16px 18px;
+    display:none;
+}
+.tray-inner.visible{display:block;}
+.tray-title{
+    font-family:'Cinzel',serif;font-size:clamp(0.7rem,1.8vw,0.84rem);
+    letter-spacing:2px;text-transform:uppercase;color:var(--rose);font-weight:700;
+    margin-bottom:10px;
+}
+.tray-items{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+.tray-item{
+    display:flex;justify-content:space-between;align-items:center;
+    background:#fff;border:1px solid rgba(243,145,161,0.25);
+    border-radius:12px;padding:9px 13px;gap:10px;
+}
+.tray-item-name{font-size:clamp(0.65rem,1.6vw,0.76rem);font-weight:600;color:var(--text);flex:1;}
+.tray-item-price{font-size:clamp(0.72rem,1.7vw,0.82rem);font-weight:800;color:var(--rose);flex-shrink:0;}
+.tray-item-remove{
+    background:none;border:none;color:var(--muted);font-size:1rem;cursor:pointer;
+    line-height:1;padding:0 2px;transition:color 0.2s;flex-shrink:0;
+}
+.tray-item-remove:hover{color:var(--red);}
+.tray-total{
+    display:flex;justify-content:space-between;
+    padding-top:10px;border-top:1px dashed rgba(195,106,122,0.3);
+    font-weight:800;font-size:clamp(0.82rem,2vw,0.96rem);color:var(--rose);
+}
+.tray-cta{
+    display:block;width:100%;margin-top:14px;padding:13px;text-align:center;
+    background:linear-gradient(135deg,var(--blush),var(--rose));
+    color:#fff;border:none;border-radius:40px;
+    font-family:'Cinzel',serif;font-size:clamp(0.76rem,1.8vw,0.88rem);
+    letter-spacing:2px;text-transform:uppercase;font-weight:700;
+    cursor:pointer;animation:glow 2.5s ease-in-out infinite;
+    transition:transform 0.15s;
+}
+.tray-cta:hover{transform:translateY(-2px);}
+
 /* CASE GALLERY SECTION */
 .case-section{
     max-width:1000px;margin:0 auto 42px;
@@ -444,9 +498,7 @@ header{
 }
 .case-card:active{transform:scale(0.97);}
 .case-card:hover{transform:translateY(-4px);box-shadow:var(--chover);border-color:var(--gold);}
-.case-card.wide{
-    grid-column:span 2;
-}
+.case-card.wide{grid-column:span 2;}
 .case-card-imgwrap{
     height:clamp(120px,26vw,190px);
     background:linear-gradient(180deg,rgba(255,232,238,0.5) 0%,rgba(255,195,208,0.12) 100%);
@@ -455,10 +507,7 @@ header{
 }
 .case-card-imgwrap img{width:100%;height:100%;object-fit:cover;flex:1;}
 .case-card-imgwrap.split img{width:50%;}
-.case-card-imgwrap.multi{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-}
+.case-card-imgwrap.multi{display:grid;grid-template-columns:repeat(4,1fr);}
 .case-card-imgwrap.multi img{width:100%;height:100%;}
 .case-card-info{
     padding:8px 9px 10px;text-align:center;
@@ -475,30 +524,13 @@ header{
     background:var(--pink-lt);border-radius:14px;
     padding:3px 10px;display:inline-block;margin:0 auto;
 }
-.case-card-note{
-    font-size:clamp(0.54rem,1.3vw,0.62rem);
-    color:var(--muted);font-style:italic;
-}
+.case-card-note{font-size:clamp(0.54rem,1.3vw,0.62rem);color:var(--muted);font-style:italic;}
 .case-card-tap{
     font-size:clamp(0.52rem,1.2vw,0.6rem);
     color:var(--gold);font-weight:700;letter-spacing:0.5px;
     text-transform:uppercase;margin-top:1px;
 }
- 
-/* TRIVIA */
-.trivia-card{
-    max-width:720px;margin:28px auto;
-    padding:clamp(18px,4vw,30px);
-    background:rgba(255,255,255,0.76);
-    border:1px solid var(--pink-mid);border-radius:24px;text-align:center;
-    backdrop-filter:blur(10px);position:relative;z-index:1;animation:fadeUp 0.8s 0.2s both;
-}
-.trivia-title{
-    font-family:'Cinzel',serif;font-size:clamp(0.72rem,2vw,0.9rem);
-    text-transform:uppercase;letter-spacing:3px;color:var(--rose);font-weight:700;margin-bottom:10px;
-}
-.trivia-text{font-size:clamp(0.68rem,1.8vw,0.82rem);color:var(--muted);font-style:italic;line-height:1.85;}
- 
+
 /* MODAL */
 .modal-overlay{
     display:none;position:fixed;inset:0;
@@ -556,7 +588,8 @@ header{
 }
 .modal-order-btn:hover{transform:scale(1.025);filter:brightness(1.06);}
 .modal-order-btn:active{transform:scale(0.97);}
- 
+.modal-order-btn.added-state{background:linear-gradient(135deg,#a0d490,#5aaa46);animation:none;}
+
 /* CHAT */
 .chat-widget{position:fixed;bottom:clamp(14px,3vw,24px);right:clamp(14px,3vw,24px);z-index:3000;display:flex;flex-direction:column;align-items:flex-end;}
 .chat-btn{width:clamp(50px,8vw,58px);height:clamp(50px,8vw,58px);border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--gold));display:flex;align-items:center;justify-content:center;font-size:clamp(1.3rem,2.5vw,1.45rem);cursor:pointer;box-shadow:0 8px 24px rgba(195,106,122,0.32);border:2.5px solid rgba(255,255,255,0.5);animation:glow 3s ease-in-out infinite;}
@@ -565,12 +598,12 @@ header{
 .drawer-msg{font-size:0.7rem;color:var(--muted);margin-bottom:10px;line-height:1.5;}
 .contact-link{display:flex;align-items:center;gap:8px;padding:8px 11px;background:var(--bg-soft);border-radius:10px;margin-bottom:6px;font-size:0.7rem;color:var(--text);text-decoration:none;font-weight:500;border:1px solid transparent;transition:border-color 0.2s,color 0.2s;}
 .contact-link:hover{border-color:var(--gold);color:var(--rose);}
- 
+
 /* FOOTER */
 footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed rgba(255,192,203,0.38);background:linear-gradient(to bottom,var(--bg-soft),#fff);position:relative;z-index:1;}
 .footer-logo{font-family:'Cinzel',serif;font-size:clamp(0.78rem,2vw,0.93rem);font-weight:600;letter-spacing:2px;color:var(--text);margin-bottom:5px;}
 .footer-sub{font-size:clamp(0.56rem,1.5vw,0.66rem);letter-spacing:2px;text-transform:uppercase;color:var(--rose);}
- 
+
 /* ===== EMBEDDED ORDER FORM ===== */
 .order-form-section{max-width:580px;margin:0 auto;padding:clamp(22px,4vw,46px) clamp(12px,3.5vw,24px) 10px;position:relative;z-index:1;}
 .order-form-card{
@@ -601,22 +634,34 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
 .order-form-card select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--rose) 50%),linear-gradient(135deg,var(--rose) 50%,transparent 50%);background-position:calc(100% - 18px) center,calc(100% - 13px) center;background-size:5px 5px,5px 5px;background-repeat:no-repeat;}
 .required-star{color:var(--red);}
 
-.bundle-list{display:flex;flex-direction:column;gap:9px;}
-.bundle-opt{
-    display:flex;align-items:center;gap:11px;padding:11px 13px;
+/* Selected Bundles in Form (read-only display) */
+.form-bundles-display{
     background:var(--bg-soft);border:1.5px solid rgba(243,145,161,0.28);
-    border-radius:14px;cursor:pointer;transition:border-color 0.2s,background 0.2s;
+    border-radius:14px;padding:12px 14px;
 }
-.bundle-opt:hover{border-color:var(--gold);}
-.bundle-opt input{width:auto;margin:0;accent-color:var(--rose);flex-shrink:0;transform:scale(1.15);}
-.bundle-opt .b-info{flex-grow:1;}
-.bundle-opt .b-name{font-size:0.8rem;font-weight:600;color:var(--text);line-height:1.3;}
-.bundle-opt .b-meta{display:flex;gap:8px;margin-top:3px;align-items:center;flex-wrap:wrap;}
-.bundle-opt .b-price{font-size:0.84rem;font-weight:800;color:var(--rose);}
-.bundle-opt .b-stock{
-    font-size:0.62rem;font-weight:700;color:var(--red);background:#fff0f1;
-    border:1px dashed rgba(184,50,50,0.35);border-radius:12px;padding:2px 8px;
+.form-bundles-empty{
+    font-size:0.78rem;color:var(--muted);font-style:italic;text-align:center;padding:8px 0;
 }
+.form-bundle-row{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:5px 0;border-bottom:1px dashed rgba(243,145,161,0.2);gap:8px;
+}
+.form-bundle-row:last-child{border-bottom:none;}
+.form-bundle-row .fb-name{font-size:0.76rem;font-weight:600;color:var(--text);flex:1;}
+.form-bundle-row .fb-price{font-size:0.8rem;font-weight:800;color:var(--rose);flex-shrink:0;}
+.form-bundles-note{
+    font-size:0.66rem;color:var(--gold);font-style:italic;
+    margin-top:8px;text-align:center;
+}
+.go-pick-btn{
+    display:block;margin-top:10px;padding:9px;text-align:center;
+    background:var(--pink-lt);border:1.5px dashed rgba(195,106,122,0.4);
+    border-radius:12px;font-size:0.72rem;font-weight:700;
+    color:var(--rose);cursor:pointer;letter-spacing:0.5px;
+    transition:border-color 0.2s;
+}
+.go-pick-btn:hover{border-color:var(--rose);}
+
 #caseField{display:none;}
 .combo-note{font-size:0.68rem;color:var(--gold);font-style:italic;margin-top:6px;padding:0 2px;}
 
@@ -721,14 +766,14 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
 </style>
 </head>
 <body>
- 
+
 <div class="petal-bg" id="petalBg"></div>
- 
+
 <!-- Banner -->
 <div class="top-banner">
     🎀 &nbsp; Grand Opening — 37% OFF &nbsp; 🎀 &nbsp; Limited Stocks Only! &nbsp; 🎀 &nbsp; While Supplies Last &nbsp; 🎀
 </div>
- 
+
 <!-- Header -->
 <header>
     <div class="logo-wrap">
@@ -739,7 +784,7 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
         <p class="tagline">timeless craft — beyond trends.</p>
     </div>
 </header>
- 
+
 <!-- Hero -->
 <div class="collection-hero">
     <div class="collection-hero-inner">
@@ -762,7 +807,7 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
         <div class="c-stock">⚡ Only 33 bundles available total — grab yours before they're gone!</div>
     </div>
 </div>
- 
+
 <!-- Bundle Contents Showcase -->
 <div class="bundle-showcase">
     <div class="bundle-showcase-label">
@@ -792,19 +837,40 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
         </div>
     </div>
 </div>
- 
+
 <!-- Products -->
 <div class="container">
+    <!-- TRIVIA / WHAT'S INSIDE — moved above the grid -->
+    <div class="trivia-card">
+        <div class="trivia-title">✨ The Enchanted Bundle — What's Inside? ✨</div>
+        <p class="trivia-text">
+            Every Whimsy &amp; Wonders bundle is packed with dreamy goodies — including a coquette phone case (select bundles), dainty earrings, cute charms, a charming keychain, pretty bracelets, a hypoallergenic fashion necklace, cute socks, and fun stickers. Everything you need to carry a little magic everywhere you go. 🌸
+        </p>
+    </div>
+
     <h2 class="section-heading">Choose Your Bundle</h2>
-    <p class="section-sub">Tap a card to preview · Tap Order Now to claim yours 🎀</p>
- 
+    <p class="section-sub">Tap a card to preview · Tap "Add to Order" to select a bundle 🎀</p>
+
     <div class="urgency-strip">
         <p>🔥 These are selling fast — <span>bundles are limited. Once gone, they're gone!</span></p>
     </div>
- 
+
     <div class="products-grid" id="catalog"></div>
 </div>
- 
+
+<!-- Selected Bundle Tray -->
+<div class="selected-tray">
+    <div class="tray-inner" id="selectedTray">
+        <div class="tray-title">🎀 Your Selected Bundles</div>
+        <div class="tray-items" id="trayItems"></div>
+        <div class="tray-total">
+            <span>Total</span>
+            <span id="trayTotal">₱0.00</span>
+        </div>
+        <button class="tray-cta" onclick="scrollToForm()">Proceed to Order Form 🎀</button>
+    </div>
+</div>
+
 <!-- Phone Case Designs -->
 <div class="container" style="padding-top:0;">
     <h2 class="section-heading">Available Phone Case Designs</h2>
@@ -813,24 +879,7 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
         <div class="case-grid" id="caseGrid"></div>
     </div>
 </div>
- 
-<div class="container" style="padding-top:0;">
-    <div class="order-section">
-        <div class="floating-bows"><span>🎀</span><span>🎀</span></div>
-        <button class="order-btn" onclick="goToOrder()">Order Now!</button>
-        <div class="bow-row">🎀 🌸 🎀 🌸 🎀</div>
-        <p class="order-note">Opening Sale — Limited Stocks, Order While Available!</p>
-    </div>
-</div>
- 
-<!-- Trivia -->
-<div class="trivia-card">
-    <div class="trivia-title">✨ The Enchanted Bundle — What's Inside? ✨</div>
-    <p class="trivia-text">
-        Every Whimsy &amp; Wonders bundle is packed with dreamy goodies — including a coquette phone case (select bundles), dainty earrings, cute charms, a charming keychain, pretty bracelets, a hypoallergenic fashion necklace, cute socks, and fun stickers. Everything you need to carry a little magic everywhere you go. 🌸
-    </p>
-</div>
- 
+
 <!-- Chat -->
 <div class="chat-widget">
     <div class="chat-drawer" id="chatDrawer">
@@ -842,7 +891,7 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
     </div>
     <div class="chat-btn" onclick="toggleChat()">🎀</div>
 </div>
- 
+
 <!-- Modal -->
 <div id="galleryModal" class="modal-overlay" onclick="onOverlayClick(event)">
     <div class="modal-card">
@@ -856,10 +905,10 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
             <div class="modal-counter" id="modalCounter"></div>
         </div>
         <div class="modal-thumbs" id="modalThumbs"></div>
-        <a href="javascript:void(0)" class="modal-order-btn" id="modalOrderBtn" onclick="goToOrder()">Order Now! 🎀</a>
+        <button class="modal-order-btn" id="modalAddBtn" onclick="addFromModal()">Add to Order 🎀</button>
     </div>
 </div>
- 
+
 <!-- Order Form -->
 <div class="order-form-section" id="orderFormSection">
     <h2 class="section-heading">Place Your Order</h2>
@@ -894,10 +943,15 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
                 <input type="text" id="f_postal" required>
             </div>
 
+            <!-- SELECTED BUNDLES DISPLAY -->
             <div class="field">
-                <label>Select your bundle(s) <span class="required-star">*</span></label>
-                <div class="bundle-list" id="bundleList"></div>
+                <label>Selected Bundle(s) <span class="required-star">*</span></label>
+                <div class="form-bundles-display" id="formBundlesDisplay">
+                    <div class="form-bundles-empty" id="formBundlesEmpty">No bundles selected yet — go pick one above!</div>
+                    <div id="formBundleRows"></div>
+                </div>
                 <div class="combo-note">💡 Picking the Ultimate Combo Deal already includes both Bundle 1 &amp; Bundle 2 — no need to select them separately.</div>
+                <div class="go-pick-btn" onclick="scrollToGrid()">⬆ Go back and select a bundle</div>
             </div>
 
             <div class="field" id="caseField">
@@ -907,9 +961,8 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
 
             <div class="field">
                 <label>Order Notes</label>
-                <span class="hint" style="margin-bottom:5px;">Tell us exactly what &amp; how many — for example:</span>
-                <textarea id="f_notes" placeholder="2x GARELA WHIMSY &amp; WONDERS LIMITED EDITION BUNDLE
-1x STUD COLLECTION 1x IPHONE 17 PRO MAX"></textarea>
+                <span class="hint" style="margin-bottom:5px;">Any special instructions or additional details?</span>
+                <textarea id="f_notes" placeholder="e.g. 2x GARELA WHIMSY &amp; WONDERS LIMITED EDITION BUNDLE&#10;1x STUD COLLECTION 1x IPHONE 17 PRO MAX"></textarea>
             </div>
 
             <div class="field">
@@ -1003,10 +1056,10 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
     <div class="footer-logo">Studio de Garela — Est. 2026</div>
     <div class="footer-sub">Whimsy &amp; Wonders &nbsp;·&nbsp; Coquette Bows</div>
 </footer>
- 
+
 <script>
 const ORDER_URL = "https://script.google.com/macros/s/AKfycbxg1a9eCkeOziiCCGL9W8GIJfjXLaN_mbsHYVTnwhESRPzETlKoWInh2S19LUEoZdKeJg/exec";
- 
+
 const products = [
     {
         id: 1,
@@ -1017,7 +1070,8 @@ const products = [
         samples: [],
         includes: "Phone Case · 3 Pairs Earrings · Moon Charm · Inside Out Charm · Cartoon Chains · Mini Keychain Stapler · Fashion Necklace · Fashion Bracelet · FREE 2 Pairs of Socks",
         tag: "🎀Only 15 Left!🎀",
-        stock: 17
+        stock: 17,
+        hasCase: true
     },
     {
         id: 2,
@@ -1028,7 +1082,8 @@ const products = [
         samples: [],
         includes: "9 Inside Out Charms · 3 Pairs Earrings · Moon Charm · Cartoon Chains · Mini Keychain Stapler · Fashion Bracelet · FREE Pair of Socks",
         tag: "✨ Only 3 Left — Grab Yours! ✨",
-        stock: 3
+        stock: 3,
+        hasCase: false
     },
     {
         id: 3,
@@ -1039,7 +1094,8 @@ const products = [
         samples: [],
         includes: "Everything in Bundle 1 + Everything in Bundle 2 — Best Bundle!",
         tag: "🔥LAST 1 REMAINING!🔥",
-        stock: 1
+        stock: 1,
+        hasCase: true
     },
     {
         id: 4,
@@ -1047,46 +1103,149 @@ const products = [
         salePrice: 599,
         origPrice: Math.round(599 / 0.63),
         image: "Stud Collection 30 Pairs Mix & Match.png",
-        samples: ["Stud Collection 30 Pairs Mix & Match.png", "Stud Collection 30 Pairs Mix & Match1.jpg", "Stud Collection 30 Pairs Mix & Match2.jpg", "Stud Collection 30 Pairs Mix & Match3.jpg"], 
+        samples: ["Stud Collection 30 Pairs Mix & Match.png","Stud Collection 30 Pairs Mix & Match1.jpg","Stud Collection 30 Pairs Mix & Match2.jpg","Stud Collection 30 Pairs Mix & Match3.jpg"],
         includes: "Socks — Different Designs to Mix and Match!",
         tag: "🧦Last 12 Available Set!🧦",
-        stock: 12
+        stock: 12,
+        hasCase: false
     },
 ];
- 
+
 const caseDesigns = [
     { name: "iPhone 17 Pro Max", stock: "1pc", images: ["Iphone 17ProMax.jpg"] },
     { name: "iPhone 17", stock: "1pc", images: ["Iphone 17.jpg"] },
     { name: "iPhone 16 Pro Max", stock: "1pc", images: ["Iphone 16ProMax.jpg"] },
-    { name: "iPhone 16 Plus", stock: "2pcs", images: ["Iphone 16Plus.jpg", "Iphone 16Plus Case2.jpg"] },
+    { name: "iPhone 16 Plus", stock: "2pcs", images: ["Iphone 16Plus.jpg","Iphone 16Plus Case2.jpg"] },
     { name: "iPhone 16", stock: "1pc", images: ["Iphone 16 Case1.jpg"] },
     { name: "iPhone 15 Pro Max", stock: "2pcs", images: ["Iphone 15ProMax.jpg"] },
     { name: "iPhone 15", stock: "1pc", images: ["Iphone 15.jpg"] },
-    {
-        name: "iPhone 13 / 14 (Mixed)",
-        stock: "5pcs",
-        images: ["Iphone 13-14 Case1.jpg", "Iphone 13-14 Case2.png", "Iphone 13-14 Case3.jpg", "Iphone 13-14 Case4.jpg", "Iphone 13ProMax.jpg"],
-        note: "5 different designs available",
-        wide: true
-    },
+    { name: "iPhone 13 / 14 (Mixed)", stock: "5pcs", images: ["Iphone 13-14 Case1.jpg","Iphone 13-14 Case2.png","Iphone 13-14 Case3.jpg","Iphone 13-14 Case4.jpg","Iphone 13ProMax.jpg"], note: "5 different designs available", wide: true },
     { name: "iPhone 13 Pro Max", stock: "1pc", images: ["Iphone 13ProMax.jpg"] },
     { name: "iPhone 12 Pro Max", stock: "2pcs", images: ["Iphone 12ProMax.jpg"] },
 ];
- 
-let activeGallery = { images: [], index: 0, type: 'product' };
- 
+
+// ── Cart state ──────────────────────────────────────────────────────────────
+let cart = []; // { id, name, salePrice }
+let activeGallery = { images: [], index: 0, type: 'product', productIdx: null };
+
+// ── Cart helpers ─────────────────────────────────────────────────────────────
+function isInCart(id) { return cart.some(c => c.id === id); }
+
+function toggleCart(productIdx) {
+    const p = products[productIdx];
+    if (isInCart(p.id)) {
+        cart = cart.filter(c => c.id !== p.id);
+    } else {
+        cart.push({ id: p.id, name: p.name.replace('\n',' '), salePrice: p.salePrice });
+    }
+    refreshCart();
+    refreshCardStates();
+}
+
+function removeFromCart(id) {
+    cart = cart.filter(c => c.id !== id);
+    refreshCart();
+    refreshCardStates();
+}
+
+function cartTotal() { return cart.reduce((s, c) => s + c.salePrice, 0); }
+
+function refreshCart() {
+    const tray = document.getElementById('selectedTray');
+    const trayItems = document.getElementById('trayItems');
+    const trayTotal = document.getElementById('trayTotal');
+
+    if (cart.length === 0) {
+        tray.classList.remove('visible');
+    } else {
+        tray.classList.add('visible');
+        trayItems.innerHTML = cart.map(c => `
+            <div class="tray-item">
+                <span class="tray-item-name">${c.name}</span>
+                <span class="tray-item-price">₱${c.salePrice.toFixed(2)}</span>
+                <button class="tray-item-remove" onclick="removeFromCart(${c.id})" title="Remove">✕</button>
+            </div>`).join('');
+        trayTotal.textContent = '₱' + cartTotal().toFixed(2);
+    }
+
+    // Sync form summary
+    refreshFormSummary();
+    // Show/hide case select
+    const needsCase = cart.some(c => {
+        const p = products.find(x => x.id === c.id);
+        return p && p.hasCase;
+    });
+    document.getElementById('caseField').style.display = needsCase ? 'block' : 'none';
+}
+
+function refreshCardStates() {
+    document.querySelectorAll('.product-card[data-pid]').forEach(card => {
+        const pid = parseInt(card.dataset.pid);
+        const btn = card.querySelector('.card-add-btn');
+        if (isInCart(pid)) {
+            card.classList.add('selected-card');
+            if (btn) { btn.textContent = '✓ Added to Order'; btn.classList.add('added'); }
+        } else {
+            card.classList.remove('selected-card');
+            if (btn) { btn.textContent = 'Add to Order 🎀'; btn.classList.remove('added'); }
+        }
+    });
+    // Sync modal btn if open
+    if (activeGallery.productIdx !== null) {
+        const btn = document.getElementById('modalAddBtn');
+        if (btn) {
+            const p = products[activeGallery.productIdx];
+            if (p && isInCart(p.id)) {
+                btn.textContent = '✓ Added — Remove?';
+                btn.classList.add('added-state');
+            } else {
+                btn.textContent = 'Add to Order 🎀';
+                btn.classList.remove('added-state');
+            }
+        }
+    }
+}
+
+function refreshFormSummary() {
+    const lines = document.getElementById('summaryLines');
+    const total = document.getElementById('summaryTotal');
+    const formRows = document.getElementById('formBundleRows');
+    const emptyMsg = document.getElementById('formBundlesEmpty');
+
+    if (cart.length === 0) {
+        lines.innerHTML = '<div class="summary-line muted">No bundle selected yet</div>';
+        total.textContent = '₱0.00';
+        formRows.innerHTML = '';
+        emptyMsg.style.display = 'block';
+    } else {
+        lines.innerHTML = cart.map(c =>
+            `<div class="summary-line"><span>${c.name}</span><span>₱${c.salePrice.toFixed(2)}</span></div>`
+        ).join('');
+        total.textContent = '₱' + cartTotal().toFixed(2);
+
+        formRows.innerHTML = cart.map(c =>
+            `<div class="form-bundle-row">
+                <span class="fb-name">${c.name}</span>
+                <span class="fb-price">₱${c.salePrice.toFixed(2)}</span>
+            </div>`
+        ).join('');
+        emptyMsg.style.display = 'none';
+    }
+}
+
+// ── Render products ──────────────────────────────────────────────────────────
 function renderProducts() {
     const grid = document.getElementById('catalog');
     grid.innerHTML = products.map((p, i) => {
         const nameLines = p.name.split('\n');
         return `
-        <div class="product-card" style="animation-delay:${i * 0.07}s" onclick="openModal(${i})">
+        <div class="product-card" data-pid="${p.id}" style="animation-delay:${i * 0.07}s">
             <div class="sale-badge"><span class="pct">−37% OFF</span>On Sale!</div>
-            <div class="product-img-wrap">
+            <div class="product-img-wrap" onclick="openModal(${i})">
                 <img src="${p.image}" alt="${nameLines[0]}" class="product-img"
                      onerror="this.parentElement.innerHTML=\`<div class='img-placeholder'><div class='ph-icon'>🎀</div><div class='ph-text'>Preview Soon</div></div>\`">
             </div>
-            <div class="product-details">
+            <div class="product-details" onclick="openModal(${i})">
                 <div class="product-name">${nameLines.map(l => l).join('<br>')}</div>
                 <div class="product-includes">${p.includes}</div>
                 <div class="price-row">
@@ -1097,12 +1256,22 @@ function renderProducts() {
                     <div class="qty-tag"><span></span> ${p.tag}</div>
                 </div>
             </div>
+            <button class="card-add-btn" onclick="toggleCart(${i});event.stopPropagation();">Add to Order 🎀</button>
         </div>`;
     }).join('');
 }
- 
+
 function renderCaseDesigns() {
     const grid = document.getElementById('caseGrid');
+    // Populate case select too
+    const sel = document.getElementById('f_case');
+    caseDesigns.forEach(c => {
+        const opt = document.createElement('option');
+        opt.value = c.name;
+        opt.textContent = `${c.name} (${c.stock} left)`;
+        sel.appendChild(opt);
+    });
+
     grid.innerHTML = caseDesigns.map((c, i) => {
         let wrapClass = '';
         if (c.images.length === 2) wrapClass = ' split';
@@ -1125,63 +1294,79 @@ function renderCaseDesigns() {
         </div>`;
     }).join('');
 }
- 
+
+// ── Modal ─────────────────────────────────────────────────────────────────────
 function setModalImgWrapMode(type) {
     const wrap = document.getElementById('modalImgWrap');
-    wrap.classList.remove('portrait-modal', 'bundle-modal');
-    if (type === 'case') {
-        wrap.classList.add('portrait-modal');
-    } else if (type === 'bundle') {
-        wrap.classList.add('bundle-modal');
-    }
+    wrap.classList.remove('portrait-modal','bundle-modal');
+    if (type === 'case') wrap.classList.add('portrait-modal');
+    else if (type === 'bundle') wrap.classList.add('bundle-modal');
 }
- 
+
 function openModal(idx) {
     const p = products[idx];
     const nameLines = p.name.split('\n');
     document.getElementById('modalSubtitle').textContent = '';
     document.getElementById('modalTitle').textContent = nameLines[0];
-    document.getElementById('modalOrderBtn').style.display = 'block';
     const imgs = (p.samples && p.samples.length) ? p.samples : [p.image];
-    activeGallery = { images: imgs, index: 0, type: 'bundle' };
+    activeGallery = { images: imgs, index: 0, type: 'bundle', productIdx: idx };
     setModalImgWrapMode('bundle');
     showGalleryImage();
     renderThumbs();
+    // Set add btn state
+    const btn = document.getElementById('modalAddBtn');
+    btn.style.display = 'block';
+    if (isInCart(p.id)) {
+        btn.textContent = '✓ Added — Remove?';
+        btn.classList.add('added-state');
+    } else {
+        btn.textContent = 'Add to Order 🎀';
+        btn.classList.remove('added-state');
+    }
     document.getElementById('galleryModal').style.display = 'flex';
 }
- 
+
 function openCaseModal(idx) {
     const c = caseDesigns[idx];
     document.getElementById('modalSubtitle').textContent = `${c.stock} available`;
     document.getElementById('modalTitle').textContent = c.name;
-    document.getElementById('modalOrderBtn').style.display = 'block';
-    activeGallery = { images: c.images, index: 0, type: 'case' };
+    activeGallery = { images: c.images, index: 0, type: 'case', productIdx: null };
     setModalImgWrapMode('case');
     showGalleryImage();
     renderThumbs();
+    const btn = document.getElementById('modalAddBtn');
+    btn.style.display = 'none'; // no add button for case modal
     document.getElementById('galleryModal').style.display = 'flex';
 }
- 
+
+function addFromModal() {
+    if (activeGallery.productIdx === null) return;
+    toggleCart(activeGallery.productIdx);
+    // update button
+    const p = products[activeGallery.productIdx];
+    const btn = document.getElementById('modalAddBtn');
+    if (isInCart(p.id)) {
+        btn.textContent = '✓ Added — Remove?';
+        btn.classList.add('added-state');
+    } else {
+        btn.textContent = 'Add to Order 🎀';
+        btn.classList.remove('added-state');
+    }
+}
+
 function showGalleryImage() {
     const main = document.getElementById('modalMainImg');
     main.style.opacity = '0';
-    setTimeout(() => {
-        main.src = activeGallery.images[activeGallery.index];
-        main.style.opacity = '1';
-    }, 100);
+    setTimeout(() => { main.src = activeGallery.images[activeGallery.index]; main.style.opacity = '1'; }, 100);
     const counter = document.getElementById('modalCounter');
     const total = activeGallery.images.length;
-    if (total > 1) {
-        counter.textContent = `${activeGallery.index + 1} / ${total}`;
-        counter.style.display = 'block';
-    } else {
-        counter.style.display = 'none';
-    }
+    if (total > 1) { counter.textContent = `${activeGallery.index + 1} / ${total}`; counter.style.display = 'block'; }
+    else { counter.style.display = 'none'; }
     const showNav = total > 1;
     document.getElementById('modalPrev').style.display = showNav ? 'flex' : 'none';
     document.getElementById('modalNext').style.display = showNav ? 'flex' : 'none';
 }
- 
+
 function renderThumbs() {
     document.getElementById('modalThumbs').innerHTML = activeGallery.images.map((src, i) => `
         <img src="${src}" alt="Sample ${i+1}"
@@ -1189,13 +1374,13 @@ function renderThumbs() {
              onclick="selectThumb(${i});event.stopPropagation();"
              onerror="this.style.display='none'">`).join('');
 }
- 
+
 function selectThumb(i) {
     activeGallery.index = i;
     showGalleryImage();
     document.querySelectorAll('.thumb-img').forEach((t, idx) => t.classList.toggle('active', idx === i));
 }
- 
+
 function navModal(dir) {
     const total = activeGallery.images.length;
     if (total <= 1) return;
@@ -1203,15 +1388,102 @@ function navModal(dir) {
     showGalleryImage();
     document.querySelectorAll('.thumb-img').forEach((t, idx) => t.classList.toggle('active', idx === activeGallery.index));
 }
- 
+
 function onOverlayClick(e) { if (e.target.id === 'galleryModal') closeModal(); }
 function closeModal() { document.getElementById('galleryModal').style.display = 'none'; }
 function toggleChat() {
     const d = document.getElementById('chatDrawer');
     d.style.display = d.style.display === 'block' ? 'none' : 'block';
 }
-function goToOrder() { window.open(ORDER_URL, '_blank'); }
- 
+
+function scrollToForm() {
+    document.getElementById('orderFormSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function scrollToGrid() {
+    document.getElementById('catalog').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ── Order form submit ─────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    renderProducts();
+    spawnPetals();
+    renderCaseDesigns();
+    refreshCart();
+
+    document.getElementById('orderForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const errEl = document.getElementById('orderErrorMsg');
+        errEl.style.display = 'none';
+
+        if (cart.length === 0) {
+            errEl.textContent = 'Please select at least one bundle before placing your order! 🎀';
+            errEl.style.display = 'block';
+            scrollToGrid();
+            return;
+        }
+
+        const btn = document.getElementById('orderSubmitBtn');
+        btn.classList.add('loading');
+        btn.disabled = true;
+
+        const bundleSummary = cart.map(c => `${c.name} (₱${c.salePrice.toFixed(2)})`).join(' + ');
+        const selectedCase = document.getElementById('f_case').value || 'N/A';
+
+        const payload = {
+            timestamp: new Date().toLocaleString('en-PH', { timeZone: 'Asia/Manila' }),
+            orderId: 'SDG-' + Date.now().toString().slice(-6),
+            name: document.getElementById('f_name').value.trim(),
+            instagram: document.getElementById('f_ig').value.trim(),
+            mobile: document.getElementById('f_mobile').value.trim(),
+            address: document.getElementById('f_address').value.trim(),
+            postal: document.getElementById('f_postal').value.trim(),
+            bundles: bundleSummary,
+            phoneCase: selectedCase,
+            total: '₱' + cartTotal().toFixed(2),
+            shipping: document.getElementById('f_shipping').value,
+            notes: document.getElementById('f_notes').value.trim(),
+            proof: document.getElementById('f_proof').value.trim(),
+            suggestions: document.getElementById('f_suggest').value.trim(),
+            nextProduct: document.getElementById('f_next').value.trim(),
+        };
+
+        try {
+            await fetch(ORDER_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+            showReceipt(payload);
+        } catch (err) {
+            errEl.textContent = 'Something went wrong. Please try again or reach out via Instagram. 💗';
+            errEl.style.display = 'block';
+            btn.classList.remove('loading');
+            btn.disabled = false;
+        }
+    });
+});
+
+function showReceipt(d) {
+    document.getElementById('orderFormCard').style.display = 'none';
+    const rec = document.getElementById('receiptCard');
+    rec.style.display = 'block';
+    document.getElementById('rOrderId').textContent = d.orderId;
+    document.getElementById('rStamp').textContent = d.timestamp;
+    document.getElementById('rItems').innerHTML = cart.map(c =>
+        `<div class="r-row"><span class="r-label">${c.name}</span><span class="r-value">₱${c.salePrice.toFixed(2)}</span></div>`
+    ).join('');
+    document.getElementById('rTotal').textContent = d.total;
+    document.getElementById('rName').textContent = d.name;
+    document.getElementById('rIg').textContent = d.instagram;
+    document.getElementById('rMobile').textContent = d.mobile;
+    document.getElementById('rAddress').textContent = d.address;
+    document.getElementById('rShipping').textContent = d.shipping;
+    document.getElementById('rProof').textContent = d.proof;
+    rec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ── Petals ────────────────────────────────────────────────────────────────────
 function spawnPetals() {
     const container = document.getElementById('petalBg');
     const symbols = ['🌸','🌷','✿','❀','🎀','🌺','💗'];
@@ -1228,8 +1500,6 @@ function spawnPetals() {
         container.appendChild(el);
     }
 }
- 
-document.addEventListener('DOMContentLoaded', () => { renderProducts(); spawnPetals(); renderCaseDesigns(); });
 </script>
 </body>
 </html>
