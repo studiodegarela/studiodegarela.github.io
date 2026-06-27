@@ -1631,5 +1631,38 @@ function spawnPetals() {
     }
 }
 </script>
+    <script>
+const SCRIPT_URL = "YOUR_NEW_DEPLOYMENT_URL_HERE"; // Put your URL here
+
+function placeOrder() {
+    // 1. Gather data from your form fields
+    // Ensure these IDs match your HTML input IDs
+    const formData = {
+        fullName: document.getElementById('nameInputId').value,
+        contactNumber: document.getElementById('mobileInputId').value,
+        email: document.getElementById('emailInputId').value,
+        address: document.getElementById('addressInputId').value,
+        // ... add other fields as necessary
+        totalAmount: document.getElementById('rTotal').textContent
+    };
+
+    // 2. Send data to Google Sheets
+    fetch(SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Essential for cross-origin requests
+        body: new URLSearchParams(formData)
+    })
+    .then(() => {
+        alert("Order placed successfully!");
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("There was an error placing your order.");
+    });
+}
+
+// Attach to your button
+document.getElementById('placeOrderBtn').addEventListener('click', placeOrder);
+</script>
 </body>
 </html>
