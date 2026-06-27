@@ -1128,7 +1128,7 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
 </footer>
 
 <script>
-const ORDER_URL = "https://script.google.com/macros/s/AKfycbxwo-tKY14dgYSON5PHnNu2RH3gcvysXYF5sa35LU1FK4CLkM1gGTwDMnPLAyEz8MBmWQ/exec";
+const ORDER_URL = "https://script.google.com/macros/s/AKfycbwgO0mILZK2wPQgGAdNADT7cu-_-p-tvT4mRK4kfnnlCxqewXrvD7T7VkX1r8jC7BR3Jg/exec";
 
 const products = [
     {
@@ -1561,19 +1561,29 @@ document.addEventListener('DOMContentLoaded', () => {
         const payload = {
             timestamp: new Date().toLocaleString('en-PH', { timeZone: 'Asia/Manila' }),
             orderId: 'SDG-' + Date.now().toString().slice(-6),
+            // Fields matching Apps Script doPost parameters
+            fullName: document.getElementById('f_name').value.trim(),
+            contactNumber: document.getElementById('f_mobile').value.trim(),
+            email: document.getElementById('f_ig').value.trim() || 'Not provided',
+            address: [document.getElementById('f_address').value.trim(), document.getElementById('f_postal').value.trim()].filter(Boolean).join(', '),
+            selectedBundles: bundleSummary,
+            phoneCase: selectedCase || 'N/A',
+            totalAmount: '₱' + cartTotal().toFixed(2),
+            paymentMethod: 'GCash',
+            referenceNumber: document.getElementById('f_proof').value.trim(),
+            notes: [
+                document.getElementById('f_notes').value.trim(),
+                document.getElementById('f_suggest').value.trim() ? 'Suggestion: ' + document.getElementById('f_suggest').value.trim() : '',
+                document.getElementById('f_next').value.trim() ? 'Next product: ' + document.getElementById('f_next').value.trim() : '',
+                'Shipping: ' + document.getElementById('f_shipping').value
+            ].filter(Boolean).join(' | '),
+            // Extra fields used only for receipt display
             name: document.getElementById('f_name').value.trim(),
             instagram: document.getElementById('f_ig').value.trim(),
             mobile: document.getElementById('f_mobile').value.trim(),
-            address: document.getElementById('f_address').value.trim(),
-            postal: document.getElementById('f_postal').value.trim(),
-            bundles: bundleSummary,
-            phoneCase: selectedCase || 'N/A',
             total: '₱' + cartTotal().toFixed(2),
             shipping: document.getElementById('f_shipping').value,
-            notes: document.getElementById('f_notes').value.trim(),
             proof: document.getElementById('f_proof').value.trim(),
-            suggestions: document.getElementById('f_suggest').value.trim(),
-            nextProduct: document.getElementById('f_next').value.trim(),
         };
 
         try {
@@ -1630,65 +1640,8 @@ function spawnPetals() {
         container.appendChild(el);
     }
 }
-    function sendDataToSheet() {
-    // Collect the data from your HTML elements
-    // Ensure these IDs exist in your HTML
-    const data = {
-        fullName: document.getElementById('nameInputId').value, // Change 'nameInputId' to your actual HTML element ID
-        contactNumber: document.getElementById('mobileInputId').value,
-        email: document.getElementById('emailInputId').value,
-        address: document.getElementById('addressInputId').value,
-        selectedBundles: "Items Selected", // Replace with your logic
-        phoneCase: "Phone Case Value",     // Replace with your logic
-        totalAmount: document.getElementById('rTotal').textContent,
-        paymentMethod: "Gcash",            // Replace with your logic
-        referenceNumber: "12345",          // Replace with your logic
-        notes: "No notes"                  // Replace with your logic
-    };
 
-    fetch("YOUR_WEB_APP_URL_HERE", {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(data).toString()
-    })
-    .then(() => alert("Order Sent!"))
-    .catch(err => console.error(err));
-}
 </script>
-    <script>
-const SCRIPT_URL = "AKfycbxwo-tKY14dgYSON5PHnNu2RH3gcvysXYF5sa35LU1FK4CLkM1gGTwDMnPLAyEz8MBmWQ"; // Put your URL here
 
-function placeOrder() {
-    const formData = {
-        fullName: document.getElementById('rName').textContent,
-        contactNumber: document.getElementById('rMobile').textContent,
-        email: "Not provided",
-        address: document.getElementById('rAddress').textContent,
-        selectedBundles: "See Receipt",
-        phoneCase: "N/A",
-        totalAmount: document.getElementById('rTotal').textContent,
-        paymentMethod: "Gcash",
-        referenceNumber: document.getElementById('rProof').textContent,
-        notes: "N/A"
-    };
-
-    fetch(SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData).toString()
-    })
-    .then(() => {
-        alert("Order sent to Google Sheets!");
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert("Failed. Check F12 Console for details.");
-    });
-}
-// Attach to your button
-document.getElementById('placeOrderBtn').addEventListener('click', placeOrder);
-</script>
 </body>
 </html>
