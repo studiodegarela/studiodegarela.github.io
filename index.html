@@ -1594,20 +1594,26 @@ document.addEventListener('DOMContentLoaded', () => {
             proof:     fProof,
         };
 
-        // Only send the fields the sheet needs (the first 10 keys)
-        const sheetFields = ['fullName','contactNumber','email','address','selectedBundles','phoneCase','totalAmount','paymentMethod','referenceNumber','notes'];
+        // Use GET request — most reliable method for Google Apps Script with no-cors
+        const params = new URLSearchParams({
+            fullName:        payload.fullName,
+            contactNumber:   payload.contactNumber,
+            email:           payload.email,
+            address:         payload.address,
+            selectedBundles: payload.selectedBundles,
+            phoneCase:       payload.phoneCase,
+            totalAmount:     payload.totalAmount,
+            paymentMethod:   payload.paymentMethod,
+            referenceNumber: payload.referenceNumber,
+            notes:           payload.notes,
+            instagram:       payload.instagram,
+            shipping:        payload.shipping,
+        });
 
         try {
-            // Send only the sheet fields, URL-encoded (required for Apps Script e.parameter)
-            const encoded = sheetFields
-                .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(payload[k] != null ? payload[k] : ''))
-                .join('&');
-
-            await fetch(ORDER_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: encoded
+            await fetch(ORDER_URL + '?' + params.toString(), {
+                method: 'GET',
+                mode: 'no-cors'
             });
             showReceipt(payload);
         } catch (err) {
