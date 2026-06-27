@@ -1660,13 +1660,14 @@ function spawnPetals() {
 const SCRIPT_URL = "AKfycbxwo-tKY14dgYSON5PHnNu2RH3gcvysXYF5sa35LU1FK4CLkM1gGTwDMnPLAyEz8MBmWQ"; // Put your URL here
 
 function placeOrder() {
-    // We are pulling data from the IDs that your code already populates for the receipt
+    // These IDs (rName, rMobile, etc.) match exactly what is in your 
+    // code that displays the receipt preview.
     const formData = {
         fullName: document.getElementById('rName').textContent,
         contactNumber: document.getElementById('rMobile').textContent,
-        email: "Not Provided", 
+        email: "N/A", 
         address: document.getElementById('rAddress').textContent,
-        selectedBundles: "See Receipt", 
+        selectedBundles: "See Cart", 
         phoneCase: "N/A",
         totalAmount: document.getElementById('rTotal').textContent,
         paymentMethod: "Gcash",
@@ -1674,6 +1675,7 @@ function placeOrder() {
         notes: "N/A"
     };
 
+    // Use the SCRIPT_URL already defined in your index (4).html
     fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
