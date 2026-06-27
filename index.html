@@ -571,6 +571,149 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
 .footer-logo{font-family:'Cinzel',serif;font-size:clamp(0.78rem,2vw,0.93rem);font-weight:600;letter-spacing:2px;color:var(--text);margin-bottom:5px;}
 .footer-sub{font-size:clamp(0.56rem,1.5vw,0.66rem);letter-spacing:2px;text-transform:uppercase;color:var(--rose);}
  
+/* ===== EMBEDDED ORDER FORM ===== */
+.order-form-section{max-width:580px;margin:0 auto;padding:clamp(22px,4vw,46px) clamp(12px,3.5vw,24px) 10px;position:relative;z-index:1;}
+.order-form-card{
+    background:var(--white);border-radius:26px;padding:clamp(20px,5vw,34px);
+    box-shadow:var(--cshadow);border:1.5px solid rgba(255,192,203,0.35);
+    animation:fadeUp 0.55s cubic-bezier(.16,1,.3,1) both;
+}
+.order-form-card .field{margin-bottom:16px;}
+.order-form-card .field label{
+    display:block;font-size:0.78rem;font-weight:700;color:var(--text);
+    margin-bottom:5px;letter-spacing:0.2px;
+}
+.order-form-card .field .hint{
+    display:block;font-size:0.68rem;color:var(--muted);font-style:italic;
+    font-weight:400;margin-top:2px;
+}
+.order-form-card input[type=text], .order-form-card input[type=tel],
+.order-form-card textarea, .order-form-card select{
+    width:100%;font-family:'Poppins',sans-serif;font-size:0.86rem;color:var(--text);
+    background:var(--bg-soft);border:1.5px solid rgba(243,145,161,0.3);
+    border-radius:12px;padding:11px 13px;outline:none;
+    transition:border-color 0.2s,box-shadow 0.2s;
+}
+.order-form-card input:focus, .order-form-card textarea:focus, .order-form-card select:focus{
+    border-color:var(--rose);box-shadow:0 0 0 3px rgba(195,106,122,0.12);
+}
+.order-form-card textarea{resize:vertical;min-height:64px;font-family:'Poppins',sans-serif;}
+.order-form-card select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--rose) 50%),linear-gradient(135deg,var(--rose) 50%,transparent 50%);background-position:calc(100% - 18px) center,calc(100% - 13px) center;background-size:5px 5px,5px 5px;background-repeat:no-repeat;}
+.required-star{color:var(--red);}
+
+.bundle-list{display:flex;flex-direction:column;gap:9px;}
+.bundle-opt{
+    display:flex;align-items:center;gap:11px;padding:11px 13px;
+    background:var(--bg-soft);border:1.5px solid rgba(243,145,161,0.28);
+    border-radius:14px;cursor:pointer;transition:border-color 0.2s,background 0.2s;
+}
+.bundle-opt:hover{border-color:var(--gold);}
+.bundle-opt input{width:auto;margin:0;accent-color:var(--rose);flex-shrink:0;transform:scale(1.15);}
+.bundle-opt .b-info{flex-grow:1;}
+.bundle-opt .b-name{font-size:0.8rem;font-weight:600;color:var(--text);line-height:1.3;}
+.bundle-opt .b-meta{display:flex;gap:8px;margin-top:3px;align-items:center;flex-wrap:wrap;}
+.bundle-opt .b-price{font-size:0.84rem;font-weight:800;color:var(--rose);}
+.bundle-opt .b-stock{
+    font-size:0.62rem;font-weight:700;color:var(--red);background:#fff0f1;
+    border:1px dashed rgba(184,50,50,0.35);border-radius:12px;padding:2px 8px;
+}
+#caseField{display:none;}
+.combo-note{font-size:0.68rem;color:var(--gold);font-style:italic;margin-top:6px;padding:0 2px;}
+
+.payment-card{
+    background:var(--bg-soft);border:1.5px dashed rgba(195,106,122,0.32);
+    border-radius:18px;padding:16px 16px 14px;margin-bottom:18px;text-align:center;
+}
+.payment-card-title{
+    font-family:'Cinzel',serif;font-size:0.78rem;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--rose);font-weight:700;margin-bottom:10px;
+}
+.payment-qr-wrap{
+    width:150px;height:150px;margin:0 auto 12px;border-radius:14px;overflow:hidden;
+    border:1.5px solid rgba(255,192,203,0.45);background:#fff;
+    display:flex;align-items:center;justify-content:center;
+}
+.payment-qr-wrap img{width:100%;height:100%;object-fit:contain;}
+.payment-detail{
+    display:flex;justify-content:space-between;font-size:0.78rem;padding:4px 6px;
+    max-width:270px;margin:0 auto;
+}
+.payment-detail span{color:var(--muted);}
+.payment-detail strong{color:var(--text);letter-spacing:0.3px;}
+.payment-note{font-size:0.7rem;color:var(--muted);font-style:italic;margin-top:8px;line-height:1.5;}
+
+.summary-box{
+    background:linear-gradient(135deg,var(--pink-lt),var(--bg-soft));
+    border:1.5px dashed rgba(195,106,122,0.32);border-radius:16px;
+    padding:14px 16px;margin:6px 0 20px;
+}
+.summary-title{
+    font-family:'Cinzel',serif;font-size:0.66rem;letter-spacing:2px;text-transform:uppercase;
+    color:var(--rose);font-weight:700;margin-bottom:8px;
+}
+.summary-line{display:flex;justify-content:space-between;gap:10px;font-size:0.78rem;color:var(--text);padding:3px 0;}
+.summary-line.muted{color:var(--muted);font-style:italic;}
+.summary-total{
+    display:flex;justify-content:space-between;margin-top:8px;padding-top:8px;
+    border-top:1px dashed rgba(195,106,122,0.3);font-weight:800;font-size:0.96rem;color:var(--rose);
+}
+
+.order-submit-btn{
+    display:flex;align-items:center;justify-content:center;gap:9px;width:100%;
+    background:linear-gradient(135deg,var(--blush) 0%,var(--rose) 45%,var(--gold) 100%);
+    background-size:200% auto;animation:flow 3.5s linear infinite, glow 2.5s ease-in-out infinite;
+    color:#fff;border:3px solid rgba(255,255,255,0.4);padding:16px 20px;border-radius:50px;
+    font-family:'Cinzel',serif;font-size:0.92rem;letter-spacing:2px;text-transform:uppercase;
+    font-weight:700;cursor:pointer;transition:transform 0.15s,filter 0.15s;
+}
+.order-submit-btn:hover{transform:translateY(-2px);filter:brightness(1.06);}
+.order-submit-btn:active{transform:scale(0.97);}
+.order-submit-btn:disabled{opacity:0.65;cursor:not-allowed;animation:none;transform:none;}
+.order-spinner{
+    width:15px;height:15px;border:2.5px solid rgba(255,255,255,0.4);
+    border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;display:none;
+}
+.order-submit-btn.loading .order-spinner{display:inline-block;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+.order-error-msg{
+    display:none;margin-top:12px;background:#fff0f1;border:1.5px solid rgba(184,50,50,0.3);
+    color:var(--red);font-size:0.76rem;font-weight:600;padding:10px 13px;border-radius:12px;text-align:center;
+}
+
+.receipt-card{display:none;}
+.r-check{
+    width:56px;height:56px;border-radius:50%;margin:0 auto 12px;
+    background:linear-gradient(135deg,var(--blush),var(--rose));
+    display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:#fff;
+    animation:beat 1.6s ease-in-out infinite;
+}
+.r-title{font-family:'Cinzel',serif;text-align:center;font-size:1.05rem;font-weight:700;color:var(--text);letter-spacing:0.5px;margin-bottom:2px;}
+.r-sub{text-align:center;font-size:0.74rem;color:var(--muted);font-style:italic;margin-bottom:18px;}
+.r-divider{border:none;border-top:1.5px dashed rgba(195,106,122,0.3);margin:14px 0;}
+.r-row{display:flex;justify-content:space-between;gap:10px;font-size:0.78rem;padding:5px 0;}
+.r-row .r-label{color:var(--muted);flex-shrink:0;}
+.r-row .r-value{color:var(--text);font-weight:600;text-align:right;}
+.r-orderid{
+    text-align:center;font-family:'Cinzel',serif;font-size:0.92rem;font-weight:700;
+    color:var(--rose);letter-spacing:1px;background:var(--pink-lt);border-radius:10px;padding:9px;margin-bottom:4px;
+}
+.r-stamp{text-align:center;font-size:0.72rem;color:var(--muted);margin-bottom:14px;}
+.r-section-label{
+    font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:2px;text-transform:uppercase;
+    color:var(--rose);font-weight:700;margin:14px 0 6px;
+}
+.r-total{display:flex;justify-content:space-between;font-size:1.05rem;font-weight:800;color:var(--rose);margin-top:10px;}
+.r-footer{text-align:center;margin-top:20px;font-size:0.76rem;color:var(--muted);line-height:1.7;}
+.r-bows{text-align:center;font-size:1.1rem;margin:10px 0;opacity:0.75;}
+.new-order-btn{
+    display:block;width:100%;text-align:center;margin-top:18px;padding:13px;
+    background:var(--bg-soft);border:1.5px solid var(--pink-mid);border-radius:40px;
+    font-family:'Cinzel',serif;font-size:0.8rem;letter-spacing:1.5px;text-transform:uppercase;
+    font-weight:700;color:var(--rose);cursor:pointer;transition:border-color 0.2s;
+}
+.new-order-btn:hover{border-color:var(--gold);}
+
 /* RESPONSIVE */
 @media(max-width:480px){.products-grid{grid-template-columns:repeat(2,1fr);gap:10px;}.case-card-imgwrap.multi{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);}}
 @media(max-width:320px){.products-grid{grid-template-columns:1fr;}}
@@ -717,6 +860,144 @@ footer{text-align:center;padding:clamp(30px,6vw,50px) 20px;border-top:1px dashed
     </div>
 </div>
  
+<!-- Order Form -->
+<div class="order-form-section" id="orderFormSection">
+    <h2 class="section-heading">Place Your Order</h2>
+    <p class="section-sub">Fill out the form below — no need to leave this page! 🎀</p>
+
+    <div class="order-form-card" id="orderFormCard">
+        <form id="orderForm">
+            <div class="field">
+                <label>Name <span class="required-star">*</span></label>
+                <input type="text" id="f_name" required>
+            </div>
+
+            <div class="field">
+                <label>Instagram Username
+                    <span class="hint">so we can contact you for your order!</span>
+                </label>
+                <input type="text" id="f_ig" placeholder="@yourusername" required>
+            </div>
+
+            <div class="field">
+                <label>Mobile Number <span class="required-star">*</span></label>
+                <input type="tel" id="f_mobile" placeholder="09XX XXX XXXX" required>
+            </div>
+
+            <div class="field">
+                <label>Shipping Address <span class="required-star">*</span></label>
+                <textarea id="f_address" placeholder="House/Unit No., Street, Barangay, City/Municipality, Province" required></textarea>
+            </div>
+
+            <div class="field">
+                <label>Postal Code <span class="required-star">*</span></label>
+                <input type="text" id="f_postal" required>
+            </div>
+
+            <div class="field">
+                <label>Select your bundle(s) <span class="required-star">*</span></label>
+                <div class="bundle-list" id="bundleList"></div>
+                <div class="combo-note">💡 Picking the Ultimate Combo Deal already includes both Bundle 1 &amp; Bundle 2 — no need to select them separately.</div>
+            </div>
+
+            <div class="field" id="caseField">
+                <label>Select Phone Case for GARELA WHIMSY &amp; WONDERS LIMITED EDITION BUNDLE (17pcs left!)</label>
+                <select id="f_case"><option value="">— Select a design —</option></select>
+            </div>
+
+            <div class="field">
+                <label>Order Notes</label>
+                <span class="hint" style="margin-bottom:5px;">Tell us exactly what &amp; how many — for example:</span>
+                <textarea id="f_notes" placeholder="2x GARELA WHIMSY &amp; WONDERS LIMITED EDITION BUNDLE
+1x STUD COLLECTION 1x IPHONE 17 PRO MAX"></textarea>
+            </div>
+
+            <div class="field">
+                <label>Shipping Method <span class="required-star">*</span></label>
+                <select id="f_shipping" required>
+                    <option value="">— Select shipping method —</option>
+                    <option value="J&T Express / LBC (Nationwide)">J&amp;T Express / LBC — Nationwide (3–7 business days)</option>
+                    <option value="Lalamove / Grab Express (Metro Manila, COD shipping fee)">Lalamove / Grab Express — Metro Manila (COD shipping fee)</option>
+                    <option value="Meet-up / Pickup">Meet-up / Pickup — by appointment</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Upload Proof of Payment
+                    <span class="hint">GCash screenshot link or reference number</span>
+                </label>
+
+                <div class="payment-card">
+                    <div class="payment-card-title">💸 Pay via GCash</div>
+                    <div class="payment-qr-wrap">
+                        <img src="GCash QR.jpg" alt="GCash QR Code"
+                             onerror="this.parentElement.innerHTML='<div class=\'img-placeholder\'><div class=\'ph-icon\'>📱</div><div class=\'ph-text\'>QR Coming Soon</div></div>'">
+                    </div>
+                    <div class="payment-detail"><span>GCash Number</span><strong>0998 480 2183</strong></div>
+                    <div class="payment-detail"><span>Account Name</span><strong>A** CA****A M.</strong></div>
+                    <div class="payment-note">Scan the QR or send your payment to the number above, then paste your reference number or screenshot link below 👇</div>
+                </div>
+
+                <input type="text" id="f_proof" placeholder="Paste your GCash reference no. or screenshot link" required>
+            </div>
+
+            <div class="field">
+                <label>💭 What should we sell next?</label>
+                <textarea id="f_next"></textarea>
+            </div>
+
+            <div class="field">
+                <label>✨ Any suggestions or improvements?</label>
+                <textarea id="f_suggest"></textarea>
+            </div>
+
+            <div class="summary-box">
+                <div class="summary-title">Order Summary</div>
+                <div id="summaryLines"><div class="summary-line muted">No bundle selected yet</div></div>
+                <div class="summary-total"><span>Total</span><span id="summaryTotal">₱0.00</span></div>
+            </div>
+
+            <button type="submit" class="order-submit-btn" id="orderSubmitBtn">
+                <span class="order-spinner"></span><span class="order-btn-label">Place My Order 🎀</span>
+            </button>
+            <div class="order-error-msg" id="orderErrorMsg"></div>
+        </form>
+    </div>
+
+    <div class="order-form-card receipt-card" id="receiptCard">
+        <div class="r-check">✓</div>
+        <div class="r-title">Order Confirmed!</div>
+        <div class="r-sub">Thank you for shopping with Studio de Garela 🌸</div>
+
+        <div class="r-orderid" id="rOrderId"></div>
+        <div class="r-stamp" id="rStamp"></div>
+
+        <hr class="r-divider">
+
+        <div class="r-section-label">Items Ordered</div>
+        <div id="rItems"></div>
+        <div class="r-total"><span>Total</span><span id="rTotal"></span></div>
+
+        <hr class="r-divider">
+
+        <div class="r-section-label">Customer Details</div>
+        <div class="r-row"><span class="r-label">Name</span><span class="r-value" id="rName"></span></div>
+        <div class="r-row"><span class="r-label">Instagram</span><span class="r-value" id="rIg"></span></div>
+        <div class="r-row"><span class="r-label">Mobile</span><span class="r-value" id="rMobile"></span></div>
+        <div class="r-row"><span class="r-label">Address</span><span class="r-value" id="rAddress"></span></div>
+        <div class="r-row"><span class="r-label">Shipping</span><span class="r-value" id="rShipping"></span></div>
+        <div class="r-row"><span class="r-label">Payment Ref.</span><span class="r-value" id="rProof"></span></div>
+
+        <div class="r-bows">🎀 🌸 🎀</div>
+        <div class="r-footer">
+            We'll reach out via Instagram or your mobile number to confirm your order.<br>
+            Please screenshot this confirmation for your reference. 💗
+        </div>
+
+        <div class="new-order-btn" onclick="location.reload()">Place Another Order</div>
+    </div>
+</div>
+
 <footer>
     <div class="header-bows" style="margin-bottom:10px;font-size:1.3rem;">🌸 🎀 🌸</div>
     <div class="footer-logo">Studio de Garela — Est. 2026</div>
