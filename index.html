@@ -1660,13 +1660,12 @@ function spawnPetals() {
 const SCRIPT_URL = "AKfycbxwo-tKY14dgYSON5PHnNu2RH3gcvysXYF5sa35LU1FK4CLkM1gGTwDMnPLAyEz8MBmWQ"; // Put your URL here
 
 function placeOrder() {
-    // 1. Pull the values from the elements where your receipt displays the data
     const formData = {
         fullName: document.getElementById('rName').textContent,
         contactNumber: document.getElementById('rMobile').textContent,
-        email: "N/A", 
+        email: "Not provided",
         address: document.getElementById('rAddress').textContent,
-        selectedBundles: "See Cart", 
+        selectedBundles: "See Receipt",
         phoneCase: "N/A",
         totalAmount: document.getElementById('rTotal').textContent,
         paymentMethod: "Gcash",
@@ -1674,8 +1673,6 @@ function placeOrder() {
         notes: "N/A"
     };
 
-    // 2. Send the data
-    // Ensure SCRIPT_URL at the top of your file is correct (starting with https://script.google.com/...)
     fetch(SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -1683,11 +1680,11 @@ function placeOrder() {
         body: new URLSearchParams(formData).toString()
     })
     .then(() => {
-        alert("Order successfully sent to Google Sheets!");
+        alert("Order sent to Google Sheets!");
     })
     .catch(error => {
         console.error('Error:', error);
-        alert("Failed to send order. Check browser console for details.");
+        alert("Failed. Check F12 Console for details.");
     });
 }
 // Attach to your button
